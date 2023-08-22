@@ -41,7 +41,9 @@ export const Home = () => {
         const encodedTicketColor = encodeURIComponent(ticketColor);
         const encodedMessage = encodeURIComponent(giftMessage);
         const encodeGifterName = encodeURIComponent(gifterName);
-        navigate(`/results/${showConfetti}/${encodedName}/${encodedSubtitle}/${encodedEventNumber}/${encodedDescription}/${encodedEventDate}/${encodedTime}/${encodedVenue}/${encodedSection}/${encodedRow}/${encodedSeat}/${encodedImgUrl}/${encodedTicketColor}/${encodeGifterName}/${encodedMessage}`);
+        const longURL = `/results/${showConfetti}/${encodedName}/${encodedSubtitle}/${encodedEventNumber}/${encodedDescription}/${encodedEventDate}/${encodedTime}/${encodedVenue}/${encodedSection}/${encodedRow}/${encodedSeat}/${encodedImgUrl}/${encodedTicketColor}/${encodeGifterName}/${encodedMessage}`;
+        sessionStorage.setItem('longURL', JSON.stringify({ longURL }));
+        navigate(longURL);
     };
 
     return (

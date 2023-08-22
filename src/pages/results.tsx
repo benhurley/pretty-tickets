@@ -23,6 +23,8 @@ export const Results = () => {
     } = useParams();
     const [showMessage, setShowMessage] = useState(false)
     const [shareBtnCopy, setShareBtnCopy] = useState("Share")
+    const [tinyURL, setTinyURL] = useState(sessionStorage.getItem('tinyURL'));
+    const [longURL] = useState(sessionStorage.getItem('longURL'));
 
     const shortenUrl = async () => {
         const requestBody = {
@@ -41,8 +43,9 @@ export const Results = () => {
 
             if (response.ok) {
                 const data = await response.json();
+                setTinyURL(data.data.tiny_url)
                 navigator.clipboard.writeText(data.data.tiny_url);
-                setShareBtnCopy("Copied")
+                setShareBtnCopy("Link Created")
             } else {
                 console.error('Error shortening URL:', response.status);
             }
@@ -83,20 +86,20 @@ export const Results = () => {
                 {showMessage && (
                     <>
                         <h1 className="text-1xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-gray-800 my-4 animate-in fade-in zoom-in mx-auto">{gifterName} sent you some tickets!</h1>
-                        <div className='rounded-xl shadow-2xl bg-white mt-10 md:mt-0 p-4 animate-in fade-in zoom-in mx-auto'>
+                        <div className='rounded-xl shadow-2xl bg-white p-4 animate-in fade-in zoom-in mx-auto'>
                             <p>{`${giftMessage} - ${gifterName}`}</p>
                         </div>
                     </>
                 )}
-                {showMessage && (
+                {showMessage && longURL && (
                     <div className='flex mx-auto mt-10'>
-                        <button style={{ background: '#c6ecd9' }} className="px-4 py-2 rounded-2xl text-md shadow-xl animate-in fade-in zoom-in" onClick={() => {
+                        <button disabled={!!tinyURL} style={{ background: '#c6ecd9' }} className="px-4 py-2 rounded-2xl text-md shadow-xl animate-in fade-in zoom-in" onClick={() => {
                             shortenUrl();
                         }}>
                             <div className='inline-block pr-2'>
-                                {shareBtnCopy.includes("Copied")
-                                ? <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.onlinewebfonts.com%2Fsvg%2Fimg_143278.png&f=1&nofb=1&ipt=478c24a8f8ef3658de10b939b7c7bd3a84d688db93bd7e8cdd5e9fcf824f06f3&ipo=images" className="-mb-1" width={25} alt="copied icon" />
-                                : <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpngimg.com%2Fuploads%2Fshare%2Fshare_PNG52.png&f=1&nofb=1&ipt=a194c632dab401ac1cec221e25326f23a661b5d8b8b3becd7275a809dad16023&ipo=images" className="-mb-1" width={20} alt="share icon" />}
+                                {shareBtnCopy.includes("Created")
+                                    ? <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.onlinewebfonts.com%2Fsvg%2Fimg_143278.png&f=1&nofb=1&ipt=478c24a8f8ef3658de10b939b7c7bd3a84d688db93bd7e8cdd5e9fcf824f06f3&ipo=images" className="-mb-1" width={25} alt="success icon" />
+                                    : <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpngimg.com%2Fuploads%2Fshare%2Fshare_PNG52.png&f=1&nofb=1&ipt=a194c632dab401ac1cec221e25326f23a661b5d8b8b3becd7275a809dad16023&ipo=images" className="-mb-1" width={20} alt="share icon" />}
                             </div>
                             <div className='inline-block'>
                                 <p className='text-lg'>{shareBtnCopy}</p>
@@ -105,6 +108,11 @@ export const Results = () => {
                         </button>
                     </div>
                 )}
+                {tinyURL &&
+                    <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white mt-6 -mb-6 p-4 animate-in fade-in zoom-in mx-auto'>
+                        <a target='_blank' rel="noreferrer" href={tinyURL}>{tinyURL}</a>
+                    </div>
+                }
             </div>
             <div className="flex-1 md:w-1/2">
                 <div className='md:pt-[60px] animate-in zoom-in-50 ease-in-out duration-1000'>
