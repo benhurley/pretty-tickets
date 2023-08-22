@@ -52,7 +52,7 @@ export const Home = () => {
                     <h2 className="text-[20px] font-bold">Share Your Tickets <i> with Style</i></h2>
                     <p className="mt-4 mb-8">Turn that stale, printed receipt of your upcoming event into customizable and easily-sharable online tickets in just a few clicks!</p>
                 </div>
-                <form className="rounded-xl grid md:grid-cols-2 gap-x-20 gap-y-4 justify-center max-h-[350px] overflow-y-scroll pb-10 bg-white bg-opacity-20 px-4 pt-4" onSubmit={handleSubmit}>
+                <form className="rounded-xl grid md:grid-cols-2 gap-x-20 gap-y-4 justify-center max-h-[190px] md:max-h-[350px] overflow-y-scroll pb-10 bg-white bg-opacity-20 px-4 pt-4" onSubmit={handleSubmit}>
                     <div >
                         <div>
                             <label className="font-bold pr-2">Title</label>
@@ -228,7 +228,7 @@ export const Home = () => {
                 </form>
             </div>
             <div className="flex-1 md:w-1/2 px-4 mt-12 sm:mt-0 animate-in slide-in-from-bottom">
-                <h2 className="text-1xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-center text-gray-800 mt-10">Live Preview</h2>
+                <h2 className="text-1xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-center text-gray-800 sm:mt-10">Live Preview</h2>
                 <div className="mt-4 mb-10">
                     <ExampleTicket
                         eventName={eventName}
