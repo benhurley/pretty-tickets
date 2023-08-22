@@ -6,3 +6,5 @@
 Turn that stale, printed receipt of your upcoming event into customizable and easily-sharable online tickets in just a few clicks!
 
 ![Homepage](./public/screenshot.png)
+
+Using [TinyURL] for url shortening since most of the state is powered by the url.
