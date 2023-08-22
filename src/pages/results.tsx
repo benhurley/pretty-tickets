@@ -22,7 +22,7 @@ export const Results = () => {
         giftMessage
     } = useParams();
     const [showMessage, setShowMessage] = useState(false)
-    const [shortenedUrl, setShortenedUrl] = useState(null);
+    const [shareBtnCopy, setShareBtnCopy] = useState("Share")
 
     const shortenUrl = async () => {
         const requestBody = {
@@ -41,24 +41,13 @@ export const Results = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                setShortenedUrl(data.tiny_url);
+                navigator.clipboard.writeText(data.data.tiny_url);
+                setShareBtnCopy("Copied")
             } else {
                 console.error('Error shortening URL:', response.status);
             }
         } catch (error) {
             console.error('Error:', error);
-        }
-    };
-
-    const copyToClipboard = () => {
-        if (shortenedUrl) {
-            navigator.clipboard.writeText(shortenedUrl)
-                .then(() => {
-                    console.log('Shortened URL copied to clipboard');
-                })
-                .catch((error) => {
-                    console.error('Error copying to clipboard:', error);
-                });
         }
     };
 
@@ -90,7 +79,7 @@ export const Results = () => {
                 ctx.fill();
                 ctx.closePath();
             }} />
-                        <div className="flex-1 md:w-1/2 flex flex-col items-center md:items-start justify-center p-10 z-20">
+            <div className="flex-1 md:w-1/2 flex flex-col items-center md:items-start justify-center p-10 z-20">
                 {showMessage && (
                     <>
                         <h1 className="text-1xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-gray-800 my-4 animate-in fade-in zoom-in mx-auto">{gifterName} sent you some tickets!</h1>
@@ -103,13 +92,14 @@ export const Results = () => {
                     <div className='flex mx-auto mt-10'>
                         <button style={{ background: '#c6ecd9' }} className="px-4 py-2 rounded-2xl text-md shadow-xl animate-in fade-in zoom-in" onClick={() => {
                             shortenUrl();
-                            copyToClipboard();
                         }}>
                             <div className='inline-block pr-2'>
-                                <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpngimg.com%2Fuploads%2Fshare%2Fshare_PNG52.png&f=1&nofb=1&ipt=a194c632dab401ac1cec221e25326f23a661b5d8b8b3becd7275a809dad16023&ipo=images" width={20} alt="share icon" />
+                                {shareBtnCopy.includes("Copied")
+                                ? <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.onlinewebfonts.com%2Fsvg%2Fimg_143278.png&f=1&nofb=1&ipt=478c24a8f8ef3658de10b939b7c7bd3a84d688db93bd7e8cdd5e9fcf824f06f3&ipo=images" className="-mb-1" width={25} alt="copied icon" />
+                                : <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpngimg.com%2Fuploads%2Fshare%2Fshare_PNG52.png&f=1&nofb=1&ipt=a194c632dab401ac1cec221e25326f23a661b5d8b8b3becd7275a809dad16023&ipo=images" className="-mb-1" width={20} alt="share icon" />}
                             </div>
                             <div className='inline-block'>
-                                <p className='text-lg'>Share</p>
+                                <p className='text-lg'>{shareBtnCopy}</p>
                             </div>
 
                         </button>
