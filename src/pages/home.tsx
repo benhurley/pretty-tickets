@@ -21,7 +21,7 @@ export const Home = () => {
     const [imgUrl, setImgUrl] = useState('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.squarespace-cdn.com%2Fcontent%2Fv1%2F513e03a1e4b00efcff5aa03d%2F1370532403248-B7JTN2CASB1LWM5YWSX1%2Fke17ZwdGBToddI8pDm48kNVjfR5kDa6jbBkrq_LoDDF7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3zXOvpZoLj-zrwUcoeghK_zqqXjS3CfNDSuuf31e0tVH8gayrKhTJ_a0qjpge_-3DaDV-2eBmFlp-ifSeZPc-_8SfgUBqPeJJSwQPE1X-OZQ%2FWorld_Champions_2009_Yankees.jpg&f=1&nofb=1&ipt=5f1b17a6d83003b9466b21e94cf8f41b4571bdf4097080dd18b10bbe3d77f0b1&ipo=images')
     const [ticketColor, setTicketColor] = useState('#EEEEEE')
     const [showConfetti, setShowConfetti] = useState(true);
-    const [gifterName, setGifterName] = useState("Someone Anonymous");
+    const [gifterName, setGifterName] = useState("Someone");
     const [giftMessage, setGiftMessage] = useState("Happy Birthday! Can't wait to celebrate in style with some awesome seats at the baseball game.");
 
     const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,9 +45,9 @@ export const Home = () => {
         const encodedImgUrl = encodeURIComponent(imgUrl) || emptyEncodedValue;
         const encodedTicketColor = encodeURIComponent(ticketColor) || emptyEncodedValue;
         const encodedMessage = encodeURIComponent(giftMessage) || emptyEncodedValue;
-        const encodeGifterName = encodeURIComponent(gifterName) || "Someone anonynmous";
+        const encodeGifterName = encodeURIComponent(gifterName) || "Someone";
         const encodeMode = 'creatorMode' // default to creator mode on submit
-        const longURL = `/results/${showConfetti}/${encodedName}/${encodedSubtitle}/${encodedEventNumber}/${encodedDescription}/${encodedEventDate}/${encodedTime}/${encodedVenue}/${encodedSection}/${encodedRow}/${encodedSeat}/${encodedImgUrl}/${encodedTicketColor}/${encodeGifterName}/${encodedMessage}/${encodeMode}`;
+        const longURL = `/results/${encodeMode}/${showConfetti}/${encodedName}/${encodedSubtitle}/${encodedEventNumber}/${encodedDescription}/${encodedEventDate}/${encodedTime}/${encodedVenue}/${encodedSection}/${encodedRow}/${encodedSeat}/${encodedImgUrl}/${encodedTicketColor}/${encodeGifterName}/${encodedMessage}`;
         navigate(longURL);
     };
 
@@ -150,7 +150,7 @@ export const Home = () => {
                                 onChangeFn={handleRadioChange}
                             />
                         </div>
-                        <div className="flex items-center justify-center md:col-span-2 pt-4 sm:pt-0">
+                        <div className="flex items-center justify-center md:col-span-2 pt-4 md:pt-0">
                             <button className="bg-white px-6 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300" type="submit">
                                 Submit
                             </button>

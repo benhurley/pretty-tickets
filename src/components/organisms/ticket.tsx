@@ -43,7 +43,7 @@ const Ticket = ({
                             <div className="absolute rounded-full w-9 h-9 bg-white -mt-11 -left-4"></div>
                             <div className="absolute rounded-full w-9 h-9 bg-white -mt-11 -right-4"></div>
                             <div className="flex items-center justify-between mb-4">
-                                <div className="text-2xl font-bold uppercase">{eventName}</div>
+                                <div className="text-2xl font-bold">{eventName}</div>
                                 {isValidInput(eventSubtitle) && <div className="text-sm text-gray-500 text-right">{eventSubtitle}</div>}
                             </div>
                             <div className="top --flex-column mb-4">
