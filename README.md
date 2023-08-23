@@ -1,11 +1,11 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/a81204a5-d6c4-4a7f-807b-3fcecda118ee/deploy-status)](https://app.netlify.com/sites/fancytickets/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a81204a5-d6c4-4a7f-807b-3fcecda118ee/deploy-status)](https://app.netlify.com/sites/prettytickets/deploys)
 
-# Fancy Tickets
+# Pretty Tickets
 
-## Share Your Tickets with Style
+## Elevate Your Ticketing Experience
 
-Turn that stale, printed receipt of your upcoming event into customizable and easily-sharable online tickets in just a few clicks!
+Transform that ordinary, printed proof of your event into an elegant, tailor-made online ticket that's perfect for gifting and sharing.
 
 ![Homepage](./public/screenshot.png)
 
-Using [TinyURL] for url shortening since most of the state is powered by the url.
+Using TinyURL for url shortening since most of the state is powered by the url.
