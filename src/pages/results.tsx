@@ -59,7 +59,7 @@ export const Results = () => {
 
     return (
         <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 px-2 py-10 sm:px-10">
-            <Confetti run={showConfetti === "true"} width={window.innerWidth} height={window.innerHeight} numberOfPieces={100} drawShape={ctx => {
+            <Confetti run={showConfetti === "true"} width={window.innerWidth} height={window.innerHeight} numberOfPieces={200} drawShape={ctx => {
                 ctx.beginPath();
                 for (let i = 0; i < 22; i++) {
                     const angle = 0.35 * i;
@@ -88,7 +88,7 @@ export const Results = () => {
                             <p className="text-xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-gray-800 my-4 animate-in fade-in zoom-in ease-in-out mx-auto text-center">Your ticket is ready!</p>
                             <p className="text-lg md:text-xl lg:text-2xl font-extrabold leading-tight text-gray-800 mb-4 animate-in fade-in zoom-in ease-in-out mx-auto text-center">Here's what they'll see <img className='inline-block' src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ficons.iconarchive.com%2Ficons%2Ficons8%2Fios7%2F512%2FArrows-Down-2-icon.png&f=1&nofb=1&ipt=0d2f8a912b61c9a6dac423ecfed6a60fb93011843d5a8226dab42c993f827c7b&ipo=images" alt="arrow-down" width={30} /></p>
                         </div>}
-                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight text-gray-800 my-4 animate-in fade-in zoom-in ease-in-out mx-auto text-center">{gifterName} sent you tickets for an upcoming event!</h1>
+                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight text-gray-800 my-6 animate-in fade-in zoom-in ease-in-out mx-auto text-center max-w-[400px]">{gifterName} sent you tickets for an upcoming event!</h1>
                     <div className='rounded-xl shadow-2xl bg-white p-4 animate-in fade-in zoom-in ease-in-out mx-auto'>
                         <p>{`${giftMessage} - ${gifterName}`}</p>
                     </div>
