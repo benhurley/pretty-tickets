@@ -74,7 +74,7 @@ export const Results = () => {
                             <ShareCTA />
                             {tinyURL && <p className="text-md md:text-lg lg:text-xl font-extrabold leading-tight text-gray-800 mt-2 mb-4 animate-in fade-in zoom-in ease-in-out mx-auto text-center">Thanks for using Pretty Tickets!</p>}
                         </div>}
-                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight text-gray-700 my-6 animate-in fade-in zoom-in ease-in-out mx-auto text-center max-w-[250px] md:max-w-[575px]">{gifterName} sent you tickets to an event!</h1>
+                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight text-gray-800 my-6 animate-in fade-in zoom-in ease-in-out mx-auto text-center max-w-[250px] md:max-w-[575px]">{gifterName} sent you tickets to an event!</h1>
                     {isValidInput(giftMessage) && isValidInput(giftMessage) && <div className='rounded-xl shadow-2xl bg-white p-4 animate-in fade-in zoom-in ease-in-out mx-auto'>
                         <p>{`${giftMessage} - ${gifterName}`}</p>
                     </div>}
