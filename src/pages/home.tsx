@@ -47,9 +47,9 @@ export const Home = () => {
     };
 
     return (
-        <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 p-5 lg:p-10 pb-20">
+        <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 lg:p-10 pb-20">
             <div className="flex-1 klg:w-1/2 px-4 lg:ml-10">
-                <div className="pl-4 mb-6 animate-in slide-in-from-left ease-in mt-12">
+                <div className="pl-4 mb-6 animate-in slide-in-from-left ease-in sm:mt-12 mt-16">
                     <h1 className="text-4xl lg:text-6xl font-extrabold leading-tight text-center text-white bg-gradient-to-r from-blue-300 to-pink-200 bg-opacity-50 p-2 mb-2 rounded-lg shadow-2xl inline-block">
                         Pretty Tickets
                     </h1>
@@ -62,7 +62,7 @@ export const Home = () => {
                     <p className="mb-1"><b>3. Share:</b> Create a unique link and send your beautiful ticket to its lucky recipient.</p>
 
                 </div>
-                <form className="rounded-xl grid md:grid-cols-2 gap-x-20 md:gap-x-5 gap-y-4 justify-center max-h-[190px] md:max-h-[350px] overflow-y-scroll pb-10 bg-white bg-opacity-20 px-4 pt-4 animate-in slide-in-from-left ease-in min-w-[250px]" onSubmit={handleSubmit}>
+                <form className="rounded-xl grid md:grid-cols-2 gap-x-20 md:gap-x-5 gap-y-4 justify-center max-h-[190px] md:max-h-[350px] overflow-y-scroll pb-10 bg-white bg-opacity-20 px-2 sm:px-4 pt-4 animate-in slide-in-from-left ease-in min-w-[250px]" onSubmit={handleSubmit}>
                     <div>
                         <div>
                             <label className="font-bold pr-2">Title</label>

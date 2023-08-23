@@ -42,7 +42,7 @@ const ExampleTicket = ({
                             <div className="absolute rounded-full w-9 h-9 bg-white -mt-11 -right-4"></div>
                             <div className="flex items-center justify-between mb-4">
                                 <div className="text-2xl font-semibold uppercase">{eventName}</div>
-                                <div className="text-sm text-gray-500">{eventSubtitle}</div>
+                                <div className="text-sm text-gray-500 text-right">{eventSubtitle}</div>
                             </div>
                             <div className="top --flex-column mb-4">
                                 {imgUrl && <img className="rounded-md shadow-2xl border-4 border-white" src={imgUrl} alt="venue" />}
