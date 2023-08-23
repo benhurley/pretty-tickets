@@ -5,7 +5,7 @@ export const IntroHero = () => {
                 <h1 className="text-4xl lg:text-6xl font-extrabold leading-tight text-center text-gray-700 mb-2 inline-block">
                     Pretty Tickets
                 </h1>
-                <img className="inline-block ml-1 sm:ml-2 -mt-10 animate-in spin-in ease-in-out duration-1000" width={75} src="/logo128.png" alt="ticket" />
+                <img className="inline-block ml-1 sm:ml-2 -mt-10 animate-in spin-in-90 ease-in-out duration-1000" width={75} src="/logo128.png" alt="ticket" />
             </div>
             <h2 className="text-[20px] text-gray-700 font-bold italic ">Elevate Your Ticketing Experience</h2>
             <p className="mt-4 mb-6 sm:my-6">Transform that ordinary event booking into an elegant, tailor-made online ticket that's perfect for gifting and sharing.</p>
