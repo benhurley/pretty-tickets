@@ -49,7 +49,7 @@ export const Home = () => {
     return (
         <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 lg:p-10 pb-20">
             <div className="flex-1 klg:w-1/2 px-4 lg:ml-10">
-                <div className="pl-4 mb-6 animate-in slide-in-from-left ease-in mt-20 sm:mt-16 sm:mb-8">
+                <div className="pl-4 mb-6 animate-in fade-in zoom-in ease-in-out mt-20 sm:mt-16 sm:mb-8">
                     <h1 className="text-4xl lg:text-6xl font-extrabold leading-tight text-center text-white bg-gradient-to-r from-blue-300 to-pink-200 bg-opacity-50 p-2 mb-2 rounded-lg shadow-2xl inline-block">
                         Pretty Tickets
                     </h1>
@@ -61,182 +61,184 @@ export const Home = () => {
                     <p className="mb-1"><b>3. Share:</b> Create a unique link and send your beautiful ticket to its lucky recipient.</p>
 
                 </div>
-                <form className="rounded-xl shadow-xl border border-white grid md:grid-cols-2 gap-x-20 md:gap-x-5 gap-y-4 justify-center max-h-[200px] md:max-h-[300px] overflow-y-scroll pb-10 bg-white bg-opacity-30 px-2 sm:px-4 pt-4 animate-in slide-in-from-left ease-in min-w-[250px]" onSubmit={handleSubmit}>
-                    <div>
-                        <div>
-                            <label className="font-bold pr-2">Title</label>
+                <form className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[240px] md:max-h-[300px] overflow-y-scroll pb-4 bg-white bg-opacity-30 px-3 pt-3 sm:px-4 sm:pt-4 animate-in fade-in zoom-in ease-in-out min-w-[250px]" onSubmit={handleSubmit}>
+                    <div className="flex-grow overflow-y-scroll">
+                        <div className="mb-2">
+                            <div>
+                                <label className="font-bold pr-2">Title</label>
+                            </div>
+                            <input
+                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                type="text"
+                                value={eventName}
+                                onChange={(e) => setEventName(e.target.value)}
+                            />
                         </div>
-                        <input
-                            className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                            type="text"
-                            value={eventName}
-                            onChange={(e) => setEventName(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <div>
-                            <label className="font-bold pr-2">Subtitle</label>
+                        <div className="mb-2">
+                            <div>
+                                <label className="font-bold pr-2">Subtitle</label>
+                            </div>
+                            <input
+                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                type="text"
+                                value={eventSubtitle}
+                                onChange={(e) => setEventSubtitle(e.target.value)}
+                            />
                         </div>
-                        <input
-                            className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                            type="text"
-                            value={eventSubtitle}
-                            onChange={(e) => setEventSubtitle(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <div>
-                            <label className="font-bold pr-2">Number (optional)</label>
+                        <div className="mb-2">
+                            <div>
+                                <label className="font-bold pr-2">Number (optional)</label>
+                            </div>
+                            <input
+                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                type="text"
+                                value={eventNumber}
+                                onChange={(e) => setEventNumber(e.target.value)}
+                            />
                         </div>
-                        <input
-                            className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                            type="text"
-                            value={eventNumber}
-                            onChange={(e) => setEventNumber(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <div>
-                            <label className="font-bold pr-2">Description</label>
+                        <div className="mb-2">
+                            <div>
+                                <label className="font-bold pr-2">Description</label>
+                            </div>
+                            <input
+                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                type="text"
+                                value={eventDescription}
+                                onChange={(e) => setEventDescription(e.target.value)}
+                            />
                         </div>
-                        <input
-                            className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                            type="text"
-                            value={eventDescription}
-                            onChange={(e) => setEventDescription(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <div>
-                            <label className="font-bold pr-2">Date</label>
+                        <div className="mb-2">
+                            <div>
+                                <label className="font-bold pr-2">Date</label>
+                            </div>
+                            <input
+                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                type="text"
+                                value={eventDate}
+                                onChange={(e) => setEventDate(e.target.value)}
+                            />
                         </div>
-                        <input
-                            className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                            type="text"
-                            value={eventDate}
-                            onChange={(e) => setEventDate(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <div>
-                            <label className="font-bold pr-2">Time</label>
+                        <div className="mb-2">
+                            <div>
+                                <label className="font-bold pr-2">Time</label>
+                            </div>
+                            <input
+                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                type="text"
+                                value={eventTime}
+                                onChange={(e) => setEventTime(e.target.value)}
+                            />
                         </div>
-                        <input
-                            className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                            type="text"
-                            value={eventTime}
-                            onChange={(e) => setEventTime(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <div>
-                            <label className="font-bold pr-2">Venue</label>
+                        <div className="mb-2">
+                            <div>
+                                <label className="font-bold pr-2">Venue</label>
+                            </div>
+                            <input
+                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                type="text"
+                                value={eventVenue}
+                                onChange={(e) => setEventVenue(e.target.value)}
+                            />
                         </div>
-                        <input
-                            className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                            type="text"
-                            value={eventVenue}
-                            onChange={(e) => setEventVenue(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <div>
-                            <label className="font-bold pr-2">Section</label>
+                        <div className="mb-2">
+                            <div>
+                                <label className="font-bold pr-2">Section</label>
+                            </div>
+                            <input
+                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                type="text"
+                                value={eventSection}
+                                onChange={(e) => setEventSection(e.target.value)}
+                            />
                         </div>
-                        <input
-                            className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                            type="text"
-                            value={eventSection}
-                            onChange={(e) => setEventSection(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <div>
-                            <label className="font-bold pr-2">Row</label>
+                        <div className="mb-2">
+                            <div>
+                                <label className="font-bold pr-2">Row</label>
+                            </div>
+                            <input
+                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                type="text"
+                                value={eventRow}
+                                onChange={(e) => setEventRow(e.target.value)}
+                            />
                         </div>
-                        <input
-                            className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                            type="text"
-                            value={eventRow}
-                            onChange={(e) => setEventRow(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <div>
-                            <label className="font-bold pr-2">Seat(s)</label>
+                        <div className="mb-2">
+                            <div>
+                                <label className="font-bold pr-2">Seat(s)</label>
+                            </div>
+                            <input
+                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                type="text"
+                                value={eventSeat}
+                                onChange={(e) => setEventSeat(e.target.value)}
+                            />
                         </div>
-                        <input
-                            className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                            type="text"
-                            value={eventSeat}
-                            onChange={(e) => setEventSeat(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <div>
-                            <label className="font-bold pr-2">Image URL</label>
+                        <div className="mb-2">
+                            <div>
+                                <label className="font-bold pr-2">Image URL</label>
+                            </div>
+                            <input
+                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                type="text"
+                                value={imgUrl}
+                                onChange={(e) => setImgUrl(e.target.value)}
+                            />
                         </div>
-                        <input
-                            className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                            type="text"
-                            value={imgUrl}
-                            onChange={(e) => setImgUrl(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <div>
-                            <label className="font-bold pr-2">Ticket Color</label>
+                        <div className="mb-2">
+                            <div>
+                                <label className="font-bold pr-2">Ticket Color</label>
+                            </div>
+                            <input
+                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                type="text"
+                                value={ticketColor}
+                                onChange={(e) => setTicketColor(e.target.value)}
+                            />
                         </div>
-                        <input
-                            className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                            type="text"
-                            value={ticketColor}
-                            onChange={(e) => setTicketColor(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <div>
-                            <label className="font-bold pr-2">Your Name</label>
+                        <div className="mb-2">
+                            <div>
+                                <label className="font-bold pr-2">Your Name</label>
+                            </div>
+                            <input
+                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                type="text"
+                                value={gifterName}
+                                onChange={(e) => setGifterName(e.target.value)}
+                            />
                         </div>
-                        <input
-                            className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                            type="text"
-                            value={gifterName}
-                            onChange={(e) => setGifterName(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <div>
-                            <label className="font-bold pr-2">Gift Message</label>
+                        <div className="mb-2">
+                            <div>
+                                <label className="font-bold pr-2">Gift Message</label>
+                            </div>
+                            <input
+                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                type="text"
+                                value={giftMessage}
+                                onChange={(e) => setGiftMessage(e.target.value)}
+                            />
                         </div>
-                        <input
-                            className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                            type="text"
-                            value={giftMessage}
-                            onChange={(e) => setGiftMessage(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <div>
-                            <label className="font-bold pr-2">Show Confetti?</label>
+                        <div className="mb-2">
+                            <div>
+                                <label className="font-bold pr-2">Show Confetti?</label>
+                            </div>
+                            <input
+                                className="py-0.5 px-1 rounded shadow-xl"
+                                type="checkbox"
+                                name="confetti"
+                                value="show"
+                                checked={showConfetti}
+                                onChange={handleRadioChange}
+                            />
                         </div>
-                        <input
-                            className="py-0.5 px-1 rounded shadow-xl"
-                            type="checkbox"
-                            name="confetti"
-                            value="show"
-                            checked={showConfetti}
-                            onChange={handleRadioChange}
-                        />
                     </div>
-                    <div className="flex items-center justify-center md:col-span-2 mt-6">
-                        <button className="bg-white px-6 py-2 rounded-2xl text-xl shadow-xl transform hover:scale-105 transition-transform duration-300" type="submit">
+                    <div className="flex items-center justify-center md:col-span-2 pt-4">
+                        <button className="bg-white px-6 py-1 rounded-2xl text-xl shadow-xl transform hover:scale-105 transition-transform duration-300" type="submit">
                             Submit
                         </button>
                     </div>
                 </form>
             </div>
-            <div className="flex-1 md:w-1/2 px-4 mt-12 sm:mt-0 animate-in slide-in-from-bottom">
+            <div className="flex-1 md:w-1/2 px-4 mt-12 sm:mt-0 animate-in fade-in zoom-in ease-in-out">
                 <h2 className="text-xl lg:text-3xl font-extrabold leading-tight text-center text-gray-800 sm:mt-20">Preview</h2>
                 <div className="mt-4 mb-10">
                     <ExampleTicket
