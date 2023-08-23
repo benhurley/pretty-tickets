@@ -57,8 +57,8 @@ export const Home = () => {
                 <IntroHero />
             </div>
             <div className="flex flex-col md:flex-row items-center pb-20">
-                <div className="flex-1 klg:w-1/2 px-4 lg:ml-10 mt-6 sm:mt-11 max-w-full w-full">
-                    <form className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[300px] md:max-h-none overflow-y-scroll pb-4 bg-white bg-opacity-30 px-4 pt-3 sm:px-6 sm:pt-4 animate-in fade-in zoom-in ease-in-out min-w-[250px]" onSubmit={handleSubmit}>
+                <div className="flex-1 klg:w-1/2 px-4 lg:ml-10 mt-6 sm:mt-10 max-w-full w-full">
+                    <form className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[300px] md:max-h-none overflow-y-scroll pb-4 bg-white bg-opacity-30 px-4 pt-3 mx-2 sm:px-6 sm:pt-4 animate-in fade-in zoom-in ease-in-out min-w-[250px]" onSubmit={handleSubmit}>
                         <div className="flex-grow overflow-y-scroll">
                             <div className="mb-2">
                                 <div>
