@@ -84,7 +84,7 @@ export const Results = () => {
             <div className="flex-1 md:w-1/2 flex flex-col items-center md:items-start justify-center p-10 z-10">
                 <>
                     {mode === "creatorMode" &&
-                        <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white px-4 sm:px-10 animate-in fade-in zoom-in ease-in-out mx-auto mb-4 sm:mb-10 sm:-mt-10'>
+                        <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white px-4 sm:px-10 animate-in fade-in zoom-in ease-in-out mx-auto mb-4 sm:mb-10'>
                             <p className="text-xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-gray-800 my-4 animate-in fade-in zoom-in ease-in-out mx-auto text-center">Your ticket is ready!</p>
                             <p className="text-lg md:text-xl lg:text-2xl font-extrabold leading-tight text-gray-800 mb-4 animate-in fade-in zoom-in ease-in-out mx-auto text-center">Here's what they'll see <img className='inline-block' src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ficons.iconarchive.com%2Ficons%2Ficons8%2Fios7%2F512%2FArrows-Down-2-icon.png&f=1&nofb=1&ipt=0d2f8a912b61c9a6dac423ecfed6a60fb93011843d5a8226dab42c993f827c7b&ipo=images" alt="arrow-down" width={30} /></p>
                         </div>}
@@ -94,7 +94,7 @@ export const Results = () => {
                     </div>
                 </>
                 {mode === "creatorMode" && (
-                    <div className='flex mx-auto mt-6 sm:mt-10'>
+                    <div className='flex mx-auto mt-6 sm:mt-8'>
                         <button disabled={!!tinyURL} style={{ background: '#c6ecd9' }} className="px-6 py-2 rounded-2xl text-md shadow-xl animate-in fade-in zoom-in ease-in-out transform hover:scale-105 transition-transform duration-300" onClick={() => {
                             shortenUrl();
                         }}>

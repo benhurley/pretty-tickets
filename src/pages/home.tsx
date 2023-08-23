@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ExampleTicket from "../components/organisms/ticket";
+import { IntroHero } from "../components/organisms/introHero";
 
 export const Home = () => {
     const navigate = useNavigate();
@@ -46,216 +47,212 @@ export const Home = () => {
         navigate(longURL);
     };
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []); 
+
     return (
-        <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 lg:p-10 pb-20">
-            <div className="flex-1 klg:w-1/2 px-4 lg:ml-10">
-                <div className="pl-4 mb-6 animate-in fade-in zoom-in ease-in-out mt-20 sm:mt-16 sm:mb-8">
-                    <h1 className="text-4xl lg:text-6xl font-extrabold leading-tight text-center text-gray-700 mb-2 inline-block">
-                        Pretty Tickets
-                    </h1>
-                    <img className="inline-block ml-2 -mt-10" width={75} src="/logo128.png" alt="ticket" />
-                    <h2 className="text-[20px] text-gray-700 font-bold italic">Elevate Your Ticketing Experience</h2>
-                    <p className="my-6 sm:my-8">Transform that ordinary event booking into an elegant, tailor-made online ticket that's perfect for gifting and sharing.</p>
-
-                    <p className="mb-1"><b>1. Customize:</b> Input event details and add a personal touch.</p>
-                    <p className="mb-1"><b>2. Preview:</b> Get a real-time look at your stylish ticket before finalizing.</p>
-                    <p className="mb-1"><b>3. Share:</b> Create a unique link and send your beautiful ticket to its lucky recipient.</p>
-
-                </div>
-                <form className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[240px] md:max-h-[300px] overflow-y-scroll pb-4 bg-white bg-opacity-30 px-4 pt-3 sm:px-4 sm:pt-4 animate-in fade-in zoom-in ease-in-out min-w-[250px]" onSubmit={handleSubmit}>
-                    <div className="flex-grow overflow-y-scroll">
-                        <div className="mb-2">
-                            <div>
-                                <label className="font-bold pr-2">Title</label>
-                            </div>
-                            <input
-                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                                type="text"
-                                value={eventName}
-                                onChange={(e) => setEventName(e.target.value)}
-                            />
-                        </div>
-                        <div className="mb-2">
-                            <div>
-                                <label className="font-bold pr-2">Subtitle</label>
-                            </div>
-                            <input
-                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                                type="text"
-                                value={eventSubtitle}
-                                onChange={(e) => setEventSubtitle(e.target.value)}
-                            />
-                        </div>
-                        <div className="mb-2">
-                            <div>
-                                <label className="font-bold pr-2">Number (optional)</label>
-                            </div>
-                            <input
-                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                                type="text"
-                                value={eventNumber}
-                                onChange={(e) => setEventNumber(e.target.value)}
-                            />
-                        </div>
-                        <div className="mb-2">
-                            <div>
-                                <label className="font-bold pr-2">Description</label>
-                            </div>
-                            <input
-                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                                type="text"
-                                value={eventDescription}
-                                onChange={(e) => setEventDescription(e.target.value)}
-                            />
-                        </div>
-                        <div className="mb-2">
-                            <div>
-                                <label className="font-bold pr-2">Date</label>
-                            </div>
-                            <input
-                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                                type="text"
-                                value={eventDate}
-                                onChange={(e) => setEventDate(e.target.value)}
-                            />
-                        </div>
-                        <div className="mb-2">
-                            <div>
-                                <label className="font-bold pr-2">Time</label>
-                            </div>
-                            <input
-                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                                type="text"
-                                value={eventTime}
-                                onChange={(e) => setEventTime(e.target.value)}
-                            />
-                        </div>
-                        <div className="mb-2">
-                            <div>
-                                <label className="font-bold pr-2">Venue</label>
-                            </div>
-                            <input
-                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                                type="text"
-                                value={eventVenue}
-                                onChange={(e) => setEventVenue(e.target.value)}
-                            />
-                        </div>
-                        <div className="mb-2">
-                            <div>
-                                <label className="font-bold pr-2">Section</label>
-                            </div>
-                            <input
-                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                                type="text"
-                                value={eventSection}
-                                onChange={(e) => setEventSection(e.target.value)}
-                            />
-                        </div>
-                        <div className="mb-2">
-                            <div>
-                                <label className="font-bold pr-2">Row</label>
-                            </div>
-                            <input
-                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                                type="text"
-                                value={eventRow}
-                                onChange={(e) => setEventRow(e.target.value)}
-                            />
-                        </div>
-                        <div className="mb-2">
-                            <div>
-                                <label className="font-bold pr-2">Seat(s)</label>
-                            </div>
-                            <input
-                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                                type="text"
-                                value={eventSeat}
-                                onChange={(e) => setEventSeat(e.target.value)}
-                            />
-                        </div>
-                        <div className="mb-2">
-                            <div>
-                                <label className="font-bold pr-2">Image URL</label>
-                            </div>
-                            <input
-                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                                type="text"
-                                value={imgUrl}
-                                onChange={(e) => setImgUrl(e.target.value)}
-                            />
-                        </div>
-                        <div className="mb-2">
-                            <div>
-                                <label className="font-bold pr-2">Ticket Color</label>
-                            </div>
-                            <input
-                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                                type="text"
-                                value={ticketColor}
-                                onChange={(e) => setTicketColor(e.target.value)}
-                            />
-                        </div>
-                        <div className="mb-2">
-                            <div>
-                                <label className="font-bold pr-2">Your Name</label>
-                            </div>
-                            <input
-                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                                type="text"
-                                value={gifterName}
-                                onChange={(e) => setGifterName(e.target.value)}
-                            />
-                        </div>
-                        <div className="mb-2">
-                            <div>
-                                <label className="font-bold pr-2">Gift Message</label>
-                            </div>
-                            <input
-                                className="py-0.5 px-1 rounded shadow-xl w-[100%]"
-                                type="text"
-                                value={giftMessage}
-                                onChange={(e) => setGiftMessage(e.target.value)}
-                            />
-                        </div>
-                        <div className="mb-2">
-                            <div>
-                                <label className="font-bold pr-2">Show Confetti?</label>
-                            </div>
-                            <input
-                                className="py-0.5 px-1 rounded shadow-xl"
-                                type="checkbox"
-                                name="confetti"
-                                value="show"
-                                checked={showConfetti}
-                                onChange={handleRadioChange}
-                            />
-                        </div>
-                    </div>
-                    <div className="flex items-center justify-center md:col-span-2 pt-4">
-                        <button className="bg-white px-6 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300" type="submit">
-                            Submit
-                        </button>
-                    </div>
-                </form>
+        <div className="min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 lg:p-10">
+            <div className="grid justify-center mt-10">
+                <IntroHero />
             </div>
-            <div className="flex-1 md:w-1/2 px-4 mt-12 sm:mt-0 animate-in fade-in zoom-in ease-in-out">
-                <h2 className="text-xl lg:text-3xl font-extrabold leading-tight text-center text-gray-700 sm:mt-20">Preview</h2>
-                <div className="mt-4 mb-10">
-                    <ExampleTicket
-                        eventName={eventName}
-                        eventSubtitle={eventSubtitle}
-                        eventDescription={eventDescription}
-                        eventNumber={eventNumber}
-                        eventDate={eventDate}
-                        eventTime={eventTime}
-                        eventVenue={eventVenue}
-                        eventSection={eventSection}
-                        eventRow={eventRow}
-                        eventSeat={eventSeat}
-                        imgUrl={imgUrl}
-                        ticketColor={ticketColor}
-                    />
+            <div className="flex flex-col md:flex-row items-center pb-20">
+                <div className="flex-1 klg:w-1/2 px-4 lg:ml-10 mt-6 sm:mt-11 max-w-full w-full">
+                    <form className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[300px] md:max-h-none overflow-y-scroll pb-4 bg-white bg-opacity-30 px-4 pt-3 sm:px-6 sm:pt-4 animate-in fade-in zoom-in ease-in-out min-w-[250px]" onSubmit={handleSubmit}>
+                        <div className="flex-grow overflow-y-scroll">
+                            <div className="mb-2">
+                                <div>
+                                    <label className="font-bold pr-2">Title</label>
+                                </div>
+                                <input
+                                    className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                    type="text"
+                                    value={eventName}
+                                    onChange={(e) => setEventName(e.target.value)}
+                                />
+                            </div>
+                            <div className="mb-2">
+                                <div>
+                                    <label className="font-bold pr-2">Subtitle</label>
+                                </div>
+                                <input
+                                    className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                    type="text"
+                                    value={eventSubtitle}
+                                    onChange={(e) => setEventSubtitle(e.target.value)}
+                                />
+                            </div>
+                            <div className="mb-2">
+                                <div>
+                                    <label className="font-bold pr-2">Number (optional)</label>
+                                </div>
+                                <input
+                                    className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                    type="text"
+                                    value={eventNumber}
+                                    onChange={(e) => setEventNumber(e.target.value)}
+                                />
+                            </div>
+                            <div className="mb-2">
+                                <div>
+                                    <label className="font-bold pr-2">Description</label>
+                                </div>
+                                <input
+                                    className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                    type="text"
+                                    value={eventDescription}
+                                    onChange={(e) => setEventDescription(e.target.value)}
+                                />
+                            </div>
+                            <div className="mb-2">
+                                <div>
+                                    <label className="font-bold pr-2">Date</label>
+                                </div>
+                                <input
+                                    className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                    type="text"
+                                    value={eventDate}
+                                    onChange={(e) => setEventDate(e.target.value)}
+                                />
+                            </div>
+                            <div className="mb-2">
+                                <div>
+                                    <label className="font-bold pr-2">Time</label>
+                                </div>
+                                <input
+                                    className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                    type="text"
+                                    value={eventTime}
+                                    onChange={(e) => setEventTime(e.target.value)}
+                                />
+                            </div>
+                            <div className="mb-2">
+                                <div>
+                                    <label className="font-bold pr-2">Venue</label>
+                                </div>
+                                <input
+                                    className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                    type="text"
+                                    value={eventVenue}
+                                    onChange={(e) => setEventVenue(e.target.value)}
+                                />
+                            </div>
+                            <div className="mb-2">
+                                <div>
+                                    <label className="font-bold pr-2">Section</label>
+                                </div>
+                                <input
+                                    className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                    type="text"
+                                    value={eventSection}
+                                    onChange={(e) => setEventSection(e.target.value)}
+                                />
+                            </div>
+                            <div className="mb-2">
+                                <div>
+                                    <label className="font-bold pr-2">Row</label>
+                                </div>
+                                <input
+                                    className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                    type="text"
+                                    value={eventRow}
+                                    onChange={(e) => setEventRow(e.target.value)}
+                                />
+                            </div>
+                            <div className="mb-2">
+                                <div>
+                                    <label className="font-bold pr-2">Seat(s)</label>
+                                </div>
+                                <input
+                                    className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                    type="text"
+                                    value={eventSeat}
+                                    onChange={(e) => setEventSeat(e.target.value)}
+                                />
+                            </div>
+                            <div className="mb-2">
+                                <div>
+                                    <label className="font-bold pr-2">Image URL</label>
+                                </div>
+                                <input
+                                    className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                    type="text"
+                                    value={imgUrl}
+                                    onChange={(e) => setImgUrl(e.target.value)}
+                                />
+                            </div>
+                            <div className="mb-2">
+                                <div>
+                                    <label className="font-bold pr-2">Ticket Color</label>
+                                </div>
+                                <input
+                                    className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                    type="text"
+                                    value={ticketColor}
+                                    onChange={(e) => setTicketColor(e.target.value)}
+                                />
+                            </div>
+                            <div className="mb-2">
+                                <div>
+                                    <label className="font-bold pr-2">Your Name</label>
+                                </div>
+                                <input
+                                    className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                    type="text"
+                                    value={gifterName}
+                                    onChange={(e) => setGifterName(e.target.value)}
+                                />
+                            </div>
+                            <div className="mb-2">
+                                <div>
+                                    <label className="font-bold pr-2">Gift Message</label>
+                                </div>
+                                <input
+                                    className="py-0.5 px-1 rounded shadow-xl w-[100%]"
+                                    type="text"
+                                    value={giftMessage}
+                                    onChange={(e) => setGiftMessage(e.target.value)}
+                                />
+                            </div>
+                            <div className="mb-2">
+                                <div>
+                                    <label className="font-bold pr-2">Show Confetti?</label>
+                                </div>
+                                <input
+                                    className="py-0.5 px-1 rounded shadow-xl"
+                                    type="checkbox"
+                                    name="confetti"
+                                    value="show"
+                                    checked={showConfetti}
+                                    onChange={handleRadioChange}
+                                />
+                            </div>
+                        </div>
+                        <div className="flex items-center justify-center md:col-span-2 pt-4 sm:pt-0">
+                            <button className="bg-white px-6 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300" type="submit">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div className="flex-1 md:w-1/2 px-4 sm:mt-0 animate-in fade-in zoom-in ease-in-out mb-auto sticky top-4">
+                    <h2 className="sm:hidden text-xl lg:text-3xl font-extrabold leading-tight text-center text-gray-700 mt-10">Preview</h2>
+                    <div className="mt-4 sm:mt-10 mb-10">
+                        <ExampleTicket
+                            eventName={eventName}
+                            eventSubtitle={eventSubtitle}
+                            eventDescription={eventDescription}
+                            eventNumber={eventNumber}
+                            eventDate={eventDate}
+                            eventTime={eventTime}
+                            eventVenue={eventVenue}
+                            eventSection={eventSection}
+                            eventRow={eventRow}
+                            eventSeat={eventSeat}
+                            imgUrl={imgUrl}
+                            ticketColor={ticketColor}
+                        />
+                    </div>
                 </div>
             </div>
         </div>
