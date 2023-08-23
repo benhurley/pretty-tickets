@@ -41,21 +41,29 @@ export const Home = () => {
         const encodedTicketColor = encodeURIComponent(ticketColor);
         const encodedMessage = encodeURIComponent(giftMessage);
         const encodeGifterName = encodeURIComponent(gifterName);
-        const longURL = `/results/${showConfetti}/${encodedName}/${encodedSubtitle}/${encodedEventNumber}/${encodedDescription}/${encodedEventDate}/${encodedTime}/${encodedVenue}/${encodedSection}/${encodedRow}/${encodedSeat}/${encodedImgUrl}/${encodedTicketColor}/${encodeGifterName}/${encodedMessage}`;
-        sessionStorage.setItem('longURL', JSON.stringify({ longURL }));
+        const encodeMode = 'creatorMode' // default to creator mode on submit
+        const longURL = `/results/${showConfetti}/${encodedName}/${encodedSubtitle}/${encodedEventNumber}/${encodedDescription}/${encodedEventDate}/${encodedTime}/${encodedVenue}/${encodedSection}/${encodedRow}/${encodedSeat}/${encodedImgUrl}/${encodedTicketColor}/${encodeGifterName}/${encodedMessage}/${encodeMode}`;
         navigate(longURL);
     };
 
     return (
         <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 p-5 lg:p-10 pb-20">
             <div className="flex-1 klg:w-1/2 px-4 lg:ml-10">
-                <div className="pl-4">
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-left text-gray-800 mt-12 sm:mt-4 mb-2 animate-in slide-in-from-left ease-in">Fancy Tickets</h1>
-                    <h2 className="text-[20px] font-bold">Share Your Tickets <i> with Style</i></h2>
-                    <p className="mt-4 mb-8">Turn that stale, printed receipt of your upcoming event into customizable and easily-sharable online tickets in just a few clicks!</p>
+                <div className="pl-4 mb-6 animate-in slide-in-from-left ease-in mt-12">
+                    <h1 className="text-4xl lg:text-6xl font-extrabold leading-tight text-center text-white bg-gradient-to-r from-blue-300 to-pink-200 bg-opacity-50 p-2 mb-2 rounded-lg shadow-2xl inline-block">
+                        Pretty Tickets
+                    </h1>
+                    <h2 className="text-[20px] font-bold italic">Elevate Your Ticketing Experience</h2>
+                    <p className="mt-2 mb-6">Transform that ordinary, printed proof of your event into an elegant, tailor-made online ticket that's perfect for gifting and sharing.</p>
+
+                    <h2 className="text-[20px] font-bold mb-2">How It Works</h2>
+                    <p className="mb-1"><b>1. Customize Your Ticket:</b> Input details, select a theme, and add a personal touch.</p>
+                    <p className="mb-1"><b>2. Preview:</b> Get a real-time look at your stylish ticket before finalizing.</p>
+                    <p className="mb-1"><b>3. Share:</b> Create a unique link and send your beautiful ticket to its lucky recipient.</p>
+
                 </div>
-                <form className="rounded-xl grid md:grid-cols-2 gap-x-20 gap-y-4 justify-center max-h-[190px] md:max-h-[350px] overflow-y-scroll pb-10 bg-white bg-opacity-20 px-4 pt-4" onSubmit={handleSubmit}>
-                    <div >
+                <form className="rounded-xl grid md:grid-cols-2 gap-x-20 md:gap-x-5 gap-y-4 justify-center max-h-[190px] md:max-h-[350px] overflow-y-scroll pb-10 bg-white bg-opacity-20 px-4 pt-4 animate-in slide-in-from-left ease-in min-w-[250px]" onSubmit={handleSubmit}>
+                    <div>
                         <div>
                             <label className="font-bold pr-2">Title</label>
                         </div>
@@ -66,7 +74,7 @@ export const Home = () => {
                             onChange={(e) => setEventName(e.target.value)}
                         />
                     </div>
-                    <div >
+                    <div>
                         <div>
                             <label className="font-bold pr-2">Subtitle</label>
                         </div>
@@ -77,7 +85,7 @@ export const Home = () => {
                             onChange={(e) => setEventSubtitle(e.target.value)}
                         />
                     </div>
-                    <div >
+                    <div>
                         <div>
                             <label className="font-bold pr-2">Number (optional)</label>
                         </div>
@@ -88,7 +96,7 @@ export const Home = () => {
                             onChange={(e) => setEventNumber(e.target.value)}
                         />
                     </div>
-                    <div >
+                    <div>
                         <div>
                             <label className="font-bold pr-2">Description</label>
                         </div>
@@ -99,7 +107,7 @@ export const Home = () => {
                             onChange={(e) => setEventDescription(e.target.value)}
                         />
                     </div>
-                    <div >
+                    <div>
                         <div>
                             <label className="font-bold pr-2">Date</label>
                         </div>
@@ -110,7 +118,7 @@ export const Home = () => {
                             onChange={(e) => setEventDate(e.target.value)}
                         />
                     </div>
-                    <div >
+                    <div>
                         <div>
                             <label className="font-bold pr-2">Time</label>
                         </div>
@@ -121,7 +129,7 @@ export const Home = () => {
                             onChange={(e) => setEventTime(e.target.value)}
                         />
                     </div>
-                    <div >
+                    <div>
                         <div>
                             <label className="font-bold pr-2">Venue</label>
                         </div>
@@ -132,7 +140,7 @@ export const Home = () => {
                             onChange={(e) => setEventVenue(e.target.value)}
                         />
                     </div>
-                    <div >
+                    <div>
                         <div>
                             <label className="font-bold pr-2">Section</label>
                         </div>
@@ -143,7 +151,7 @@ export const Home = () => {
                             onChange={(e) => setEventSection(e.target.value)}
                         />
                     </div>
-                    <div >
+                    <div>
                         <div>
                             <label className="font-bold pr-2">Row</label>
                         </div>
@@ -154,7 +162,7 @@ export const Home = () => {
                             onChange={(e) => setEventRow(e.target.value)}
                         />
                     </div>
-                    <div >
+                    <div>
                         <div>
                             <label className="font-bold pr-2">Seat(s)</label>
                         </div>
@@ -165,7 +173,7 @@ export const Home = () => {
                             onChange={(e) => setEventSeat(e.target.value)}
                         />
                     </div>
-                    <div >
+                    <div>
                         <div>
                             <label className="font-bold pr-2">Image URL</label>
                         </div>
@@ -176,7 +184,7 @@ export const Home = () => {
                             onChange={(e) => setImgUrl(e.target.value)}
                         />
                     </div>
-                    <div >
+                    <div>
                         <div>
                             <label className="font-bold pr-2">Ticket Color</label>
                         </div>
@@ -187,7 +195,7 @@ export const Home = () => {
                             onChange={(e) => setTicketColor(e.target.value)}
                         />
                     </div>
-                    <div >
+                    <div>
                         <div>
                             <label className="font-bold pr-2">Your Name</label>
                         </div>
@@ -198,7 +206,7 @@ export const Home = () => {
                             onChange={(e) => setGifterName(e.target.value)}
                         />
                     </div>
-                    <div >
+                    <div>
                         <div>
                             <label className="font-bold pr-2">Gift Message</label>
                         </div>
@@ -209,7 +217,7 @@ export const Home = () => {
                             onChange={(e) => setGiftMessage(e.target.value)}
                         />
                     </div>
-                    <div >
+                    <div>
                         <div>
                             <label className="font-bold pr-2">Show Confetti?</label>
                         </div>
@@ -223,14 +231,14 @@ export const Home = () => {
                         />
                     </div>
                     <div className="flex items-center justify-center md:col-span-2 mt-6">
-                        <button className="bg-white px-6 py-2 rounded-2xl text-xl shadow-xl" type="submit">
+                        <button className="bg-white px-6 py-2 rounded-2xl text-xl shadow-xl transform hover:scale-105 transition-transform duration-300" type="submit">
                             Submit
                         </button>
                     </div>
                 </form>
             </div>
             <div className="flex-1 md:w-1/2 px-4 mt-12 sm:mt-0 animate-in slide-in-from-bottom">
-                <h2 className="text-1xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-center text-gray-800 sm:mt-10">Live Preview</h2>
+                <h2 className="text-1xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-center text-gray-800 sm:mt-10">Preview</h2>
                 <div className="mt-4 mb-10">
                     <ExampleTicket
                         eventName={eventName}
