@@ -49,20 +49,19 @@ export const Home = () => {
     return (
         <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 lg:p-10 pb-20">
             <div className="flex-1 klg:w-1/2 px-4 lg:ml-10">
-                <div className="pl-4 mb-6 animate-in slide-in-from-left ease-in sm:mt-12 mt-16">
+                <div className="pl-4 mb-6 animate-in slide-in-from-left ease-in mt-20 sm:mt-16 sm:mb-8">
                     <h1 className="text-4xl lg:text-6xl font-extrabold leading-tight text-center text-white bg-gradient-to-r from-blue-300 to-pink-200 bg-opacity-50 p-2 mb-2 rounded-lg shadow-2xl inline-block">
                         Pretty Tickets
                     </h1>
                     <h2 className="text-[20px] font-bold italic">Elevate Your Ticketing Experience</h2>
-                    <p className="mt-2 mb-6">Transform that ordinary, printed proof of your event into an elegant, tailor-made online ticket that's perfect for gifting and sharing.</p>
+                    <p className="my-6">Transform that ordinary, printed proof of your event into an elegant, tailor-made online ticket that's perfect for gifting and sharing.</p>
 
-                    <h2 className="text-[20px] font-bold mb-2">How It Works</h2>
                     <p className="mb-1"><b>1. Customize Your Ticket:</b> Input details, select a theme, and add a personal touch.</p>
                     <p className="mb-1"><b>2. Preview:</b> Get a real-time look at your stylish ticket before finalizing.</p>
                     <p className="mb-1"><b>3. Share:</b> Create a unique link and send your beautiful ticket to its lucky recipient.</p>
 
                 </div>
-                <form className="rounded-xl grid md:grid-cols-2 gap-x-20 md:gap-x-5 gap-y-4 justify-center max-h-[190px] md:max-h-[350px] overflow-y-scroll pb-10 bg-white bg-opacity-20 px-2 sm:px-4 pt-4 animate-in slide-in-from-left ease-in min-w-[250px]" onSubmit={handleSubmit}>
+                <form className="rounded-xl shadow-xl border border-white grid md:grid-cols-2 gap-x-20 md:gap-x-5 gap-y-4 justify-center max-h-[200px] md:max-h-[300px] overflow-y-scroll pb-10 bg-white bg-opacity-30 px-2 sm:px-4 pt-4 animate-in slide-in-from-left ease-in min-w-[250px]" onSubmit={handleSubmit}>
                     <div>
                         <div>
                             <label className="font-bold pr-2">Title</label>
@@ -238,7 +237,7 @@ export const Home = () => {
                 </form>
             </div>
             <div className="flex-1 md:w-1/2 px-4 mt-12 sm:mt-0 animate-in slide-in-from-bottom">
-                <h2 className="text-1xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-center text-gray-800 sm:mt-10">Preview</h2>
+                <h2 className="text-xl lg:text-3xl font-extrabold leading-tight text-center text-gray-800 sm:mt-20">Preview</h2>
                 <div className="mt-4 mb-10">
                     <ExampleTicket
                         eventName={eventName}
