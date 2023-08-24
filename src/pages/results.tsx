@@ -1,6 +1,6 @@
 import Confetti from 'react-confetti'
 import Ticket from "../components/organisms/ticket";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { fetchTinyURL } from '../helpers/fetchTinyURL';
 import { isValidInput } from '../helpers/isValidInput';
@@ -69,17 +69,24 @@ export const Results = () => {
         <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 px-2 py-10 sm:px-10">
             <Confetti run={showConfetti === "true"} width={window.innerWidth} height={window.innerHeight} numberOfPieces={200} />
             <div className="flex-1 md:w-1/2 flex flex-col items-center md:items-start justify-center px-4 py-10 sm:p-10 z-10">
+                <p className="absolute top-16 md:top-20 left-6 sm:left-10 text-sm mr-auto text-gray-800"><Link className="hover:underline" to="/">Home</Link> / Share</p>
                 <>
                     {mode === "creatorMode" &&
-                        <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white px-4 sm:px-10 animate-in fade-in zoom-in ease-in-out mx-auto mb-4 sm:mb-10'>
-                            <p className="text-xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-gray-800 my-4 animate-in fade-in zoom-in ease-in-out mx-auto text-center">{tinyURL ? "Your custom link:" : "Nice Work! Ready to Share?"}</p>
+                        <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white px-4 sm:px-10 animate-in fade-in zoom-in ease-in-out mx-auto mb-4 sm:mb-10 mt-10 sm:mt-0'>
+                            <p className="text-xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-gray-800 my-4 animate-in fade-in zoom-in ease-in-out mx-auto text-center">{tinyURL ? "Your TinyURL:" : "Nice Work! Ready to Share?"}</p>
                             <ShareCTA />
                             {tinyURL &&
                                 <>
-                                    <p className="text-md md:text-lg lg:text-xl font-extrabold leading-tight text-gray-800 mt-2 animate-in fade-in zoom-in ease-in-out mx-auto text-center">Thanks for supporting Pretty Tickets!</p>
-                                    <div className="flex items-center justify-center md:col-span-2 pt-4 md:pt-0 mt-2 mb-4">
-                                        <a className="bg-gradient-to-br from-blue-200 to-pink-100 bg-opacity-80 px-6 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/sponsors/benhurley" target="_blank" rel="noreferrer">
-                                            Donate to the project
+                                    <p className="text-lg lg:text-xl font-extrabold leading-tight text-gray-800 mt-2 animate-in fade-in zoom-in ease-in-out mx-auto text-center">Thanks for supporting Pretty Tickets!</p>
+                                    <div className="flex items-center justify-center md:col-span-2 pt-1 mt-2 mb-4">
+                                        <a className="bg-blue-100 px-6 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/benhurley/fancy-tickets" target="_blank" rel="noreferrer">
+                                            Contribute
+                                        </a>
+                                        <a className="bg-green-100 px-6 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/sponsors/benhurley" target="_blank" rel="noreferrer">
+                                            Donate
+                                        </a>
+                                        <a className="bg-pink-100 px-6 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/sponsors/benhurley" target="_blank" rel="noreferrer">
+                                            Sponsor
                                         </a>
                                     </div>
                                 </>

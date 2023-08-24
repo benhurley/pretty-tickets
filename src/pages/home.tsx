@@ -31,6 +31,26 @@ export const Home = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        const formData = {
+            eventName,
+            eventSubtitle,
+            eventNumber,
+            eventDescription,
+            eventDate,
+            eventTime,
+            eventVenue,
+            eventSection,
+            eventRow,
+            eventSeat,
+            imgUrl,
+            ticketColor,
+            giftMessage,
+            gifterName,
+            showConfetti,
+        };
+        sessionStorage.setItem('formData', JSON.stringify(formData));
+
         const queryParams = new URLSearchParams();
         queryParams.set('mode', 'creatorMode'); // default to creator mode on submit
         queryParams.set('showConfetti', showConfetti.toString());
@@ -50,16 +70,40 @@ export const Home = () => {
         queryParams.set('ticketColor', ticketColor || emptyValue);
         queryParams.set('giftMessage', giftMessage || emptyValue);
         queryParams.set('gifterName', gifterName || 'Someone');
-        
+
         const queryString = queryParams.toString();
         const longURL = `/results?${queryString}`;
-        
+
         navigate(longURL);
     };
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    useEffect(() => {
+        // Retrieve stored form data from sessionStorage
+        const storedFormData = sessionStorage.getItem('formData');
+        
+        if (storedFormData) {
+          const parsedFormData = JSON.parse(storedFormData);
+          setEventName(parsedFormData.eventName);
+          setEventSubtitle(parsedFormData.eventSubtitle);
+          setEventNumber(parsedFormData.eventNumber);
+          setEventDescription(parsedFormData.eventDescription);
+          setEventDate(parsedFormData.eventDate);
+          setEventTime(parsedFormData.eventTime);
+          setEventVenue(parsedFormData.eventVenue);
+          setEventSection(parsedFormData.eventSection);
+          setEventRow(parsedFormData.eventRow);
+          setEventSeat(parsedFormData.eventSeat);
+          setImgUrl(parsedFormData.imgUrl);
+          setTicketColor(parsedFormData.ticketColor);
+          setGiftMessage(parsedFormData.giftMessage);
+          setGifterName(parsedFormData.gifterName);
+          setShowConfetti(parsedFormData.showConfetti);
+        }
+      }, []);
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 lg:p-10">
