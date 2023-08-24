@@ -16,7 +16,7 @@ type TicketData = {
 };
 
 type TicketProps = {
-    [key in keyof TicketData]?: string;
+    [key in keyof TicketData]?: string | undefined | null;
 };
 
 const Ticket = ({
@@ -39,7 +39,7 @@ const Ticket = ({
             <div className="max-w-md w-full h-auto mx-auto z-10">
                 <div className="flex flex-col">
                     <div className="bg-white shadow-2xl rounded-2xl md:min-w-[365px]">
-                        <div style={{ background: ticketColor }} className="border-t border-b border-dashed border-b-4 border-t-4 border-white relative px-6 py-6 m-4">
+                        <div style={{ background: ticketColor || "" }} className="border-t border-b border-dashed border-b-4 border-t-4 border-white relative px-6 py-6 m-4">
                             <div className="absolute rounded-full w-9 h-9 bg-white -mt-11 -left-4"></div>
                             <div className="absolute rounded-full w-9 h-9 bg-white -mt-11 -right-4"></div>
                             <div className="flex items-center justify-between mb-4">
@@ -47,7 +47,7 @@ const Ticket = ({
                                 {isValidInput(eventSubtitle) && <div className="text-sm text-gray-500 text-right">{eventSubtitle}</div>}
                             </div>
                             <div className="top --flex-column mb-4">
-                                {isValidInput(imgUrl) && <img className="rounded-md shadow-2xl border-4 border-white" src={imgUrl} alt="venue" />}
+                                {isValidInput(imgUrl) && <img className="rounded-md shadow-2xl border-4 border-white" src={imgUrl || ""} alt="venue" />}
                             </div>
                             <div className="flex flex-col lg:flex-row md:space-y-0 md:justify-between">
                                 {isValidInput(eventNumber) && <h3 className="font-semibold text-lg pr-4 min-w-[100px]">{eventNumber}</h3>}

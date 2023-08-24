@@ -16,7 +16,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" Component={Home} />
-        <Route path="/results/:mode/:showConfetti?/:eventName?/:eventSubtitle?/:eventNumber?/:eventDescription?/:eventDate?/:eventTime?/:eventVenue?/:eventSection?/:eventRow?/:eventSeat?/:imgUrl?/:ticketColor?/:gifterName?/:giftMessage?" Component={Results} />
+        <Route path="/results" Component={Results} />
       </Routes>
       <Footer />
     </Router>

@@ -1,29 +1,31 @@
 import Confetti from 'react-confetti'
 import Ticket from "../components/organisms/ticket";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { fetchTinyURL } from '../helpers/fetchTinyURL';
 import { isValidInput } from '../helpers/isValidInput';
 
 export const Results = () => {
-    const {
-        showConfetti,
-        eventName,
-        eventSubtitle,
-        eventNumber,
-        eventDescription,
-        eventDate,
-        eventTime,
-        eventVenue,
-        eventSection,
-        eventRow,
-        eventSeat,
-        imgUrl,
-        ticketColor,
-        gifterName,
-        giftMessage,
-        mode
-    } = useParams();
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+
+    const mode = queryParams.get('mode');
+    const showConfetti = queryParams.get('showConfetti');
+    const eventName = queryParams.get('eventName');
+    const eventSubtitle = queryParams.get('eventSubtitle');
+    const eventNumber = queryParams.get('eventNumber');
+    const eventDescription = queryParams.get('eventDescription');
+    const eventDate = queryParams.get('eventDate');
+    const eventTime = queryParams.get('eventTime');
+    const eventVenue = queryParams.get('eventVenue');
+    const eventSection = queryParams.get('eventSection');
+    const eventRow = queryParams.get('eventRow');
+    const eventSeat = queryParams.get('eventSeat');
+    const imgUrl = queryParams.get('imgUrl');
+    const ticketColor = queryParams.get('ticketColor');
+    const gifterName = queryParams.get('gifterName');
+    const giftMessage = queryParams.get('giftMessage');
+
     const [shareBtnCopy, setShareBtnCopy] = useState("Share")
     const [tinyURL, setTinyURL] = useState(sessionStorage.getItem('tinyURL'));
 
@@ -72,7 +74,16 @@ export const Results = () => {
                         <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white px-4 sm:px-10 animate-in fade-in zoom-in ease-in-out mx-auto mb-4 sm:mb-10'>
                             <p className="text-xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-gray-800 my-4 animate-in fade-in zoom-in ease-in-out mx-auto text-center">{tinyURL ? "Your custom link:" : "Nice Work! Ready to Share?"}</p>
                             <ShareCTA />
-                            {tinyURL && <p className="text-md md:text-lg lg:text-xl font-extrabold leading-tight text-gray-800 mt-2 mb-4 animate-in fade-in zoom-in ease-in-out mx-auto text-center">Thanks for using Pretty Tickets!</p>}
+                            {tinyURL &&
+                                <>
+                                    <p className="text-md md:text-lg lg:text-xl font-extrabold leading-tight text-gray-800 mt-2 animate-in fade-in zoom-in ease-in-out mx-auto text-center">Thanks for supporting Pretty Tickets!</p>
+                                    <div className="flex items-center justify-center md:col-span-2 pt-4 md:pt-0 mt-2 mb-4">
+                                        <a className="bg-gradient-to-br from-blue-200 to-pink-100 bg-opacity-80 px-6 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/sponsors/benhurley" target="_blank" rel="noreferrer">
+                                            Donate to the project
+                                        </a>
+                                    </div>
+                                </>
+                            }
                         </div>}
                     <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight text-gray-800 my-6 animate-in fade-in zoom-in ease-in-out mx-auto text-center max-w-[250px] md:max-w-[575px]">{gifterName} sent you tickets to an event!</h1>
                     {isValidInput(giftMessage) && isValidInput(giftMessage) && <div className='rounded-xl shadow-2xl bg-white p-4 animate-in fade-in zoom-in ease-in-out mx-auto'>

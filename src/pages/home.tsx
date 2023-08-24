@@ -31,23 +31,29 @@ export const Home = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const emptyEncodedValue = encodeURIComponent(emptyValue); // for empty fields
-        const encodedName = encodeURIComponent(eventName) || emptyEncodedValue;
-        const encodedSubtitle = encodeURIComponent(eventSubtitle) || emptyEncodedValue;
-        const encodedEventNumber = encodeURIComponent(eventNumber) || emptyEncodedValue;
-        const encodedDescription = encodeURIComponent(eventDescription) || emptyEncodedValue;
-        const encodedEventDate = encodeURIComponent(eventDate) || emptyEncodedValue;
-        const encodedTime = encodeURIComponent(eventTime) || emptyEncodedValue;
-        const encodedVenue = encodeURIComponent(eventVenue) || emptyEncodedValue;
-        const encodedSection = encodeURIComponent(eventSection) || emptyEncodedValue;
-        const encodedRow = encodeURIComponent(eventRow) || emptyEncodedValue;
-        const encodedSeat = encodeURIComponent(eventSeat) || emptyEncodedValue;
-        const encodedImgUrl = encodeURIComponent(imgUrl) || emptyEncodedValue;
-        const encodedTicketColor = encodeURIComponent(ticketColor) || emptyEncodedValue;
-        const encodedMessage = encodeURIComponent(giftMessage) || emptyEncodedValue;
-        const encodeGifterName = encodeURIComponent(gifterName) || "Someone";
-        const encodeMode = 'creatorMode' // default to creator mode on submit
-        const longURL = `/results/${encodeMode}/${showConfetti}/${encodedName}/${encodedSubtitle}/${encodedEventNumber}/${encodedDescription}/${encodedEventDate}/${encodedTime}/${encodedVenue}/${encodedSection}/${encodedRow}/${encodedSeat}/${encodedImgUrl}/${encodedTicketColor}/${encodeGifterName}/${encodedMessage}`;
+        const queryParams = new URLSearchParams();
+        queryParams.set('mode', 'creatorMode'); // default to creator mode on submit
+        queryParams.set('showConfetti', showConfetti.toString());
+
+        queryParams.set('eventName', eventName || emptyValue);
+        queryParams.set('eventSubtitle', eventSubtitle || emptyValue);
+        queryParams.set('eventNumber', eventNumber || emptyValue);
+        queryParams.set('eventDescription', eventDescription || emptyValue);
+        queryParams.set('eventDate', eventDate || emptyValue);
+        queryParams.set('eventTime', eventTime || emptyValue);
+        queryParams.set('eventVenue', eventVenue || emptyValue);
+        queryParams.set('eventSection', eventSection || emptyValue);
+        queryParams.set('eventRow', eventRow || emptyValue);
+        queryParams.set('eventSeat', eventSeat || emptyValue);
+
+        queryParams.set('imgUrl', imgUrl || emptyValue);
+        queryParams.set('ticketColor', ticketColor || emptyValue);
+        queryParams.set('giftMessage', giftMessage || emptyValue);
+        queryParams.set('gifterName', gifterName || 'Someone');
+        
+        const queryString = queryParams.toString();
+        const longURL = `/results?${queryString}`;
+        
         navigate(longURL);
     };
 
