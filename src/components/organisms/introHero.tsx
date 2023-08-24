@@ -7,7 +7,7 @@ export const IntroHero = () => {
                 </h1>
                 <img className="inline-block ml-1 sm:ml-2 -mt-10 animate-in spin-in-90 ease-in-out duration-1000" width={75} src="/logo128.png" alt="ticket" />
             </div>
-            <h2 className="text-[20px] text-gray-800 font-bold italic ">Elevate Your Ticketing Experience</h2>
+            <h2 className="text-[20px] text-gray-800 font-bold">Elevate The Ticket-Sharing Experience<span className="text-sm absolute">™</span></h2>
             <p className="mt-4 mb-6 sm:my-6">Transform that ordinary event booking into an elegant, tailor-made online ticket that's perfect for gifting and sharing.</p>
             <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
                 <div className="bg-white p-4 rounded-lg shadow-md text-center sm:flex-grow md:w-[200px] md:h-[110px] w-full">

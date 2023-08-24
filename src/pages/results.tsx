@@ -77,7 +77,7 @@ export const Results = () => {
                             <ShareCTA />
                             {tinyURL &&
                                 <>
-                                    <p className="text-lg lg:text-xl font-extrabold leading-tight text-gray-800 mt-2 animate-in fade-in zoom-in ease-in-out mx-auto text-center">Thanks for supporting Pretty Tickets!</p>
+                                    <p className="text-lg lg:text-xl font-extrabold leading-tight text-gray-800 mt-2 animate-in fade-in zoom-in ease-in-out mx-auto text-center">Thanks for supporting Pretty Tickets™!</p>
                                     <div className="flex items-center justify-center md:col-span-2 pt-1 mt-2 mb-4">
                                         <a className="bg-blue-100 px-6 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/benhurley/fancy-tickets" target="_blank" rel="noreferrer">
                                             Contribute
@@ -99,7 +99,7 @@ export const Results = () => {
                 </>
             </div>
             <div className="flex-1 md:w-1/2">
-                <div className='md:pt-[60px] animate-in fade-in zoom-in ease-in-out'>
+                <div className='mx-4 md:pt-[60px] animate-in fade-in zoom-in ease-in-out'>
                     <Ticket
                         eventName={eventName}
                         eventSubtitle={eventSubtitle}

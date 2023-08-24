@@ -209,7 +209,7 @@ export const Home = () => {
                 </div>
                 <div className="flex-1 md:w-1/2 px-4 sm:mt-0 animate-in fade-in zoom-in ease-in-out mb-auto sticky top-4">
                     <h2 className="sm:hidden text-xl lg:text-3xl font-extrabold leading-tight text-center text-gray-800 mt-10">Preview</h2>
-                    <div className="mt-4 sm:mt-10 mb-10">
+                    <div className="mt-4 mx-2 sm:mt-10 mb-10">
                         <Ticket
                             eventName={eventName}
                             eventSubtitle={eventSubtitle}
