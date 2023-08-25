@@ -267,7 +267,7 @@ export const Home = () => {
                 </div>
             </div>
             <div className="flex items-center justify-center sm:py-12">
-                <button className="bg-white px-6 py-1 rounded-2xl text-xl shadow-xl transform hover:scale-105 transition-transform duration-300" onClick={handleSubmit}>
+                <button className="bg-green-100 font-bold px-6 py-1 rounded-2xl text-lg shadow-xl transform hover:scale-105 transition-transform duration-300" onClick={handleSubmit}>
                     Create Ticket
                 </button>
             </div>
