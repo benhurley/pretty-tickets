@@ -10,7 +10,7 @@ type InputTextFieldProps = {
     value: string,
 };
 
-export const InputTextFieldWithAI = ({ label, value, inputCallbackFn, aiCallbackFn, isLoading = false, required = true }: InputTextFieldProps) => {
+export const InputTextAreaFieldWithAI = ({ label, value, inputCallbackFn, aiCallbackFn, isLoading = false, required = true }: InputTextFieldProps) => {
     const [wasAIButtonClicked, setWasAIButtonClicked] = useState(false);
 
     const handleClick = (e: any) => {

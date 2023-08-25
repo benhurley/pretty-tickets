@@ -1,7 +1,6 @@
 type queryParams = {
     eventName: string,
     eventSubtitle: string,
-    eventNumber: string,
     eventDescription: string,
     eventDate: string,
     eventTime: string,
@@ -15,7 +14,6 @@ type fetchGiftMessageProps = {
 export async function fetchGiftMessage({
     eventName,
     eventSubtitle,
-    eventNumber,
     eventDescription,
     eventDate,
     eventTime,
@@ -27,7 +25,6 @@ export async function fetchGiftMessage({
     const queryParams = new URLSearchParams();
     queryParams.set('eventName', eventName || "");
     queryParams.set('eventSubtitle', eventSubtitle || "");
-    queryParams.set('eventNumber', eventNumber || "");
     queryParams.set('eventDescription', eventDescription || "");
     queryParams.set('eventDate', eventDate || "");
     queryParams.set('eventTime', eventTime || "");

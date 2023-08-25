@@ -3,7 +3,6 @@ import { isValidInput } from "../../helpers/isValidInput";
 type TicketData = {
     eventName: string;
     eventSubtitle: string;
-    eventNumber: string;
     eventDescription: string;
     eventDate: string;
     eventTime: string;
@@ -23,7 +22,6 @@ type TicketProps = {
 const Ticket = ({
     eventName,
     eventSubtitle,
-    eventNumber,
     eventDescription,
     eventDate,
     eventTime,
@@ -44,8 +42,8 @@ const Ticket = ({
                     <div className="bg-white shadow-2xl rounded-2xl md:min-w-[365px]">
                         <div
                             style={{
-                                backgroundColor: ticketColor || "#EEEEEE", // Background Color
-                                backgroundImage: `url(${backgroundImg})`, // Texture Image
+                                backgroundColor: ticketColor || "#EEEEEE",
+                                backgroundImage: `url(${backgroundImg})`,
                                 backgroundBlendMode: "multiply", // Blend the color and texture
                             }}
                             className="border-t border-b border-dashed border-b-4 border-t-4 border-white relative px-6 py-6 m-4"
@@ -60,7 +58,6 @@ const Ticket = ({
                                 {isValidInput(imgUrl) && <img className="rounded-md shadow-2xl border-4 border-white" src={imgUrl || ""} alt="venue" />}
                             </div>
                             <div className="flex flex-col lg:flex-row md:space-y-0 md:justify-between">
-                                {isValidInput(eventNumber) && <h3 style={{ color: textColor || "#000" }} className="font-semibold text-lg pr-4 min-w-[100px]">{eventNumber}</h3>}
                                 {isValidInput(eventDescription) && <p style={{ color: textColor || "#000" }} className="text-gray-600">{eventDescription}</p>}
                             </div>
                             <div style={{ color: textColor || "#000" }} className="flex flex-col space-y-2 lg:flex-row lg:space-y-0 lg:justify-between mt-4">

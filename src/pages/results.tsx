@@ -13,7 +13,6 @@ export const Results = () => {
     const showConfetti = queryParams.get('showConfetti');
     const eventName = queryParams.get('eventName');
     const eventSubtitle = queryParams.get('eventSubtitle');
-    const eventNumber = queryParams.get('eventNumber');
     const eventDescription = queryParams.get('eventDescription');
     const eventDate = queryParams.get('eventDate');
     const eventTime = queryParams.get('eventTime');
@@ -49,7 +48,7 @@ export const Results = () => {
         return (<>
             {mode === "creatorMode" && (
                 <div className='flex mx-auto my-2 pb-3'>
-                    <button disabled={!!tinyURL} className="bg-white mx-auto px-6 py-1 rounded-2xl text-md shadow-xl animate-in fade-in zoom-in ease-in-out transform hover:scale-105 transition-transform duration-300 disabled:scale-100" onClick={() => {
+                    <button disabled={!!tinyURL} className="bg-white mx-auto px-6 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 disabled:scale-100" onClick={() => {
                         handleFetchTinyURL();
                     }}>
                         <div className='inline-block pr-2'>
@@ -75,12 +74,12 @@ export const Results = () => {
                     <>
                         {mode === "creatorMode" &&
                             <>
-                                <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white px-4 animate-in fade-in zoom-in ease-in-out mx-auto mb-4 sm:mb-10 mt-10 sm:mt-0 lg:mt-8'>
-                                    <p className="text-xl md:text-2xl font-extrabold leading-tight text-gray-800 my-4 animate-in fade-in zoom-in ease-in-out mx-auto text-center lg:px-6">{tinyURL ? "Your Free URL:" : "Nice work! Lets share it."}</p>
+                                <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white px-4 mx-auto mb-4 sm:mb-10 mt-10 sm:mt-0 lg:mt-8'>
+                                    <p className="text-xl md:text-2xl font-extrabold leading-tight text-gray-800 my-4 mx-auto text-center lg:px-6">{tinyURL ? "Your Free URL:" : "Nice work! Lets share it."}</p>
                                     <ShareCTA />
                                     {tinyURL &&
                                         <>
-                                            <p className="text-md lg:text-lg font-extrabold leading-tight text-gray-800 mt-2 animate-in fade-in zoom-in ease-in-out mx-auto text-center">Thanks for using Pretty Tickets!</p>
+                                            <p className="text-md lg:text-lg font-extrabold leading-tight text-gray-800 mt-2 mx-auto text-center">Thanks for using Pretty Tickets!</p>
                                             <div className="inline-flex items-center justify-center md:col-span-2 pt-1 mt-2 mb-4">
                                                 <a className="bg-blue-100 px-4 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/benhurley/fancy-tickets" target="_blank" rel="noreferrer">
                                                     Contribute
@@ -95,21 +94,19 @@ export const Results = () => {
                                         </>
                                     }
                                 </div>
-                                <h2 className="text-md lg:text-lg font-extrabold leading-tight text-center text-gray-800 mx-auto italic">Your recipient will see:</h2>
                             </>
                         }
-                        <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight text-gray-800 mt-10 mb-6 sm:mt-4 animate-in fade-in zoom-in ease-in-out mx-auto text-center max-w-[250px] md:max-w-[575px]">{gifterName} sent you tickets to an event!</h1>
-                        {isValidInput(giftMessage) && isValidInput(giftMessage) && <div className='rounded-xl shadow-2xl bg-white p-4 animate-in fade-in zoom-in ease-in-out mx-auto max-w-[575px]'>
+                        <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight text-gray-800 mt-10 mb-6 sm:mt-4 mx-auto text-center max-w-[250px] md:max-w-[575px]">{gifterName} sent you tickets to an event!</h1>
+                        {isValidInput(giftMessage) && isValidInput(giftMessage) && <div className='rounded-xl shadow-2xl bg-white p-4 mx-auto max-w-[575px]'>
                             <p>{`${giftMessage} - ${gifterName}`}</p>
                         </div>}
                     </>
                 </div>
                 <div className="flex-1 md:w-1/2">
-                    <div className='mx-4 md:pt-[60px] animate-in fade-in zoom-in ease-in-out'>
+                    <div className='mx-4 md:pt-[60px]'>
                         <Ticket
                             eventName={eventName}
                             eventSubtitle={eventSubtitle}
-                            eventNumber={eventNumber}
                             eventDescription={eventDescription}
                             eventDate={eventDate}
                             eventTime={eventTime}
@@ -123,6 +120,9 @@ export const Results = () => {
                         />
                     </div>
                 </div>
+            </div>
+            <div>
+                <p className="text-xs px-6 pt-12 italic max-w-[1200px] mx-auto">Disclaimer: Pretty Tickets creates decorative online ticket replicas intended for gifting and sharing. These replicas are not valid for event entry. They hold no actual event admission value. Always refer to your official electronic ticket for event access. Pretty TicketsTicket's services are designed solely to enhance the presentation of your gift and share event details in a creative way.</p>
             </div>
         </div>
     )

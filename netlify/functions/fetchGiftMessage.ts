@@ -4,7 +4,6 @@ const handler: Handler = async (event: HandlerEvent) => {
     const apiKey = process.env.OPENAI_API_KEY;
     const eventName = event.queryStringParameters?.eventName
     const eventSubtitle = event.queryStringParameters?.subTitle || ""
-    const eventNumber = event.queryStringParameters?.eventNumber || ""
     const eventDescription = event.queryStringParameters?.eventDescription || ""
     const eventDate = event.queryStringParameters?.eventDate || ""
     const eventTime = event.queryStringParameters?.eventTime || ""
@@ -17,7 +16,7 @@ const handler: Handler = async (event: HandlerEvent) => {
         };
     }
 
-    const prompt = `Event Details: ${eventName} ${eventSubtitle} ${eventNumber} ${eventDescription} ${eventDate} ${eventTime} ${eventVenue}`
+    const prompt = `Event Details: ${eventName} ${eventSubtitle} ${eventDescription} ${eventDate} ${eventTime} ${eventVenue}`
 
     const requestBody = {
         model: "gpt-3.5-turbo",

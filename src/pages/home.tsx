@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, type MouseEventHandler } from "react";
 import { useNavigate } from "react-router-dom";
 import Ticket from "../components/organisms/ticket";
 import { IntroHero } from "../components/organisms/introHero";
 import { InputTextField } from "../components/molecules/inputTextField";
 import { InputCheckboxField } from "../components/molecules/inputCheckboxField";
 import { emptyValue } from "../helpers/globalConstants";
-import { InputTextFieldWithAI } from "../components/molecules/inputTextFieldWithAI";
+import { InputTextAreaFieldWithAI } from "../components/molecules/inputTextAreaFieldWithAI";
 import { fetchGiftMessage } from "../helpers/fetchOpenAI";
+import { InputColorField } from "../components/molecules/inputColorField";
+import { InputTextAreaField } from "../components/molecules/inputTextAreaField";
+import { isValidInput } from "../helpers/isValidInput";
 
 export const Home = () => {
     const navigate = useNavigate();
 
     const [eventName, setEventName] = useState('2023 US Open Tennis');
     const [eventSubtitle, setEventSubtitle] = useState('VIP Entry');
-    const [eventNumber, setEventNumber] = useState('Session 24');
-    const [eventDescription, setEventDescription] = useState(`Women's Final/Mixed Doubles Final`);
+    const [eventDescription, setEventDescription] = useState(`Session 24: Women's Final/Mixed Doubles Final`);
     const [eventDate, setEventDate] = useState('Sept 09, 2023');
     const [eventTime, setEventTime] = useState('12PM');
     const [eventVenue, setEventVenue] = useState('Arthur Ashe Stadium');
@@ -22,7 +24,7 @@ export const Home = () => {
     const [eventRow, setEventRow] = useState('J');
     const [eventSeat, setEventSeat] = useState('7');
 
-    const [imgUrl, setImgUrl] = useState('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.premierevents.co.uk%2Fuploads%2FSPORT%2FUS-OPEN-TICKETS.jpg&f=1&nofb=1&ipt=8ccc3e565c3de232fd6c07b21480dc8d62c0961bac1b70109dbdb347f5ad535a&ipo=images')
+    const [imgUrl, setImgUrl] = useState('https://prettytickets.com/logo512.png')
     const [ticketColor, setTicketColor] = useState('#e3ebe5')
     const [textColor, setTextColor] = useState('#000')
 
@@ -31,20 +33,12 @@ export const Home = () => {
     const [giftMessage, setGiftMessage] = useState(`"Happy Birthday! Can't wait to celebrate with you and finally see the pros face-off at The US Open."`);
     const [isLoadingAIGiftMessage, setIsLoadingAIGiftMessage] = useState(false);
 
-    const handleStyleReset = (e: any) => {
-        e.preventDefault();
-        setImgUrl("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.squarespace-cdn.com%2Fcontent%2Fv1%2F513e03a1e4b00efcff5aa03d%2F1370532403248-B7JTN2CASB1LWM5YWSX1%2Fke17ZwdGBToddI8pDm48kNVjfR5kDa6jbBkrq_LoDDF7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3zXOvpZoLj-zrwUcoeghK_zqqXjS3CfNDSuuf31e0tVH8gayrKhTJ_a0qjpge_-3DaDV-2eBmFlp-ifSeZPc-_8SfgUBqPeJJSwQPE1X-OZQ%2FWorld_Champions_2009_Yankees.jpg&f=1&nofb=1&ipt=5f1b17a6d83003b9466b21e94cf8f41b4571bdf4097080dd18b10bbe3d77f0b1&ipo=images")
-        setTicketColor('#EEEEEE')
-        setTextColor('#000')
-    }
-
     const handleGenerateMessageWithAI = async (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         setIsLoadingAIGiftMessage(true)
         const message = await fetchGiftMessage({
             eventName,
             eventSubtitle,
-            eventNumber,
             eventDescription,
             eventDate,
             eventTime,
@@ -63,13 +57,10 @@ export const Home = () => {
         setShowConfetti(isChecked);
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
+    const handleSubmit = (e: MouseEventHandler<HTMLButtonElement>) => {
         const formData = {
             eventName,
             eventSubtitle,
-            eventNumber,
             eventDescription,
             eventDate,
             eventTime,
@@ -92,7 +83,6 @@ export const Home = () => {
 
         queryParams.set('eventName', eventName || emptyValue);
         queryParams.set('eventSubtitle', eventSubtitle || emptyValue);
-        queryParams.set('eventNumber', eventNumber || emptyValue);
         queryParams.set('eventDescription', eventDescription || emptyValue);
         queryParams.set('eventDate', eventDate || emptyValue);
         queryParams.set('eventTime', eventTime || emptyValue);
@@ -125,7 +115,6 @@ export const Home = () => {
             const parsedFormData = JSON.parse(storedFormData);
             setEventName(parsedFormData.eventName);
             setEventSubtitle(parsedFormData.eventSubtitle);
-            setEventNumber(parsedFormData.eventNumber);
             setEventDescription(parsedFormData.eventDescription);
             setEventDate(parsedFormData.eventDate);
             setEventTime(parsedFormData.eventTime);
@@ -147,9 +136,9 @@ export const Home = () => {
             <div className="grid justify-center my-10">
                 <IntroHero />
             </div>
-            <div className="flex flex-col md:flex-row items-center pb-20 max-w-[1440px] mx-auto">
+            <div className="flex flex-col md:flex-row items-center max-w-[1200px] mx-auto">
                 <div className="flex-1 klg:w-1/2 px-4 lg:ml-10 mt-6 sm:mt-10 max-w-full w-full">
-                    <form className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[300px] md:max-h-none overflow-y-scroll pb-4 bg-white bg-opacity-30 px-4 pt-3 mx-2 sm:px-6 sm:pt-4 animate-in fade-in zoom-in ease-in-out min-w-[250px]" onSubmit={handleSubmit}>
+                    <form className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[400px] md:max-h-none overflow-y-scroll pb-4 bg-white bg-opacity-30 px-4 pt-3 mx-2 sm:px-6 sm:pt-4 min-w-[250px] max-w-[500px]" onSubmit={handleSubmit}>
                         <div className="flex-grow overflow-y-scroll">
                             <div className="mt-2">
                                 <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800">Event Information</h3>
@@ -163,12 +152,6 @@ export const Home = () => {
                                     required={false}
                                     value={eventSubtitle}
                                     callbackFn={setEventSubtitle}
-                                />
-                                <InputTextField
-                                    label="Event Number"
-                                    required={false}
-                                    value={eventNumber}
-                                    callbackFn={setEventNumber}
                                 />
                                 <InputTextField
                                     label="Description"
@@ -213,25 +196,24 @@ export const Home = () => {
                             </div>
                             <div className="my-8">
                                 <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800">Ticket Design</h3>
-                                <InputTextField
+                                <div className="inline-flex justify-around w-[100%] mt-4 mb-2">
+                                    <InputColorField
+                                        label="Background"
+                                        value={ticketColor}
+                                        callbackFn={setTicketColor}
+                                    />
+                                    <InputColorField
+                                        label="Font"
+                                        value={textColor}
+                                        callbackFn={setTextColor}
+                                    />
+                                </div>
+                                <InputTextAreaField
                                     label="Image URL"
                                     required={false}
                                     value={imgUrl}
                                     callbackFn={setImgUrl}
                                 />
-                                <InputTextField
-                                    label="Ticket Color*"
-                                    value={ticketColor}
-                                    callbackFn={setTicketColor}
-                                />
-                                <InputTextField
-                                    label="Font Color*"
-                                    value={textColor}
-                                    callbackFn={setTextColor}
-                                />
-                                <div className="flex justify-center">
-                                    <button className="bg-white mt-3 px-4 py-1 rounded-2xl text-sm shadow-xl transform hover:scale-105 transition-transform duration-300" onClick={handleStyleReset}>Reset Styles</button>
-                                </div>
                             </div>
 
                             <div className="mb-2">
@@ -242,7 +224,7 @@ export const Home = () => {
                                     value={gifterName}
                                     callbackFn={setGifterName}
                                 />
-                                <InputTextFieldWithAI
+                                <InputTextAreaFieldWithAI
                                     label="Gift Message"
                                     required={false}
                                     value={giftMessage}
@@ -257,21 +239,15 @@ export const Home = () => {
                                 />
                             </div>
                         </div>
-                        <div className="flex items-center justify-center md:col-span-2 pt-4">
-                            <button className="bg-white px-6 py-1 rounded-2xl text-lg shadow-xl transform hover:scale-105 transition-transform duration-300" type="submit">
-                                Create Ticket
-                            </button>
-                        </div>
                     </form>
                 </div>
-                <div className="flex-1 md:w-1/2 px-4 sm:mt-0 animate-in fade-in zoom-in ease-in-out mb-auto sticky top-4">
-                    <h2 className="sm:hidden text-xl lg:text-3xl font-extrabold leading-tight text-center text-gray-800 mt-10">Preview</h2>
+                <div className="flex-1 md:w-1/2 px-4 sm:mt-0 mb-auto sticky top-4">
                     <div className="mt-4 mx-2 sm:mt-10 mb-10">
+                        <h2 className="text-sm lg:text-md font-extrabold leading-tight text-center text-gray-800 mx-auto italic mt-12 mb-6 sm:my-6">Ticket Preview:</h2>
                         <Ticket
                             eventName={eventName}
                             eventSubtitle={eventSubtitle}
                             eventDescription={eventDescription}
-                            eventNumber={eventNumber}
                             eventDate={eventDate}
                             eventTime={eventTime}
                             eventVenue={eventVenue}
@@ -282,8 +258,21 @@ export const Home = () => {
                             ticketColor={ticketColor}
                             textColor={textColor}
                         />
+                        <h2 className="text-sm lg:text-md font-extrabold leading-tight text-center text-gray-800 mx-auto italic mt-6">Gift Preview:</h2>
+                        <h1 className="text-xl lg:text-2xl font-extrabold leading-tight text-gray-800 mt-10 mb-6 sm:mt-6 mx-auto text-center max-w-[250px] md:max-w-[400px]">{gifterName} sent you tickets to an event!</h1>
+                        {isValidInput(giftMessage) && isValidInput(giftMessage) && <div className='rounded-xl shadow-2xl bg-white p-4 mx-auto max-w-[575px]'>
+                            <p>{`${giftMessage} - ${gifterName}`}</p>
+                        </div>}
                     </div>
                 </div>
+            </div>
+            <div className="flex items-center justify-center sm:py-12">
+                <button className="bg-white px-6 py-1 rounded-2xl text-xl shadow-xl transform hover:scale-105 transition-transform duration-300" onClick={handleSubmit}>
+                    Create Ticket
+                </button>
+            </div>
+            <div>
+                <p className="text-xs pb-20 px-6 pt-12 italic max-w-[1200px] mx-auto">Disclaimer: Pretty Tickets creates decorative online ticket replicas intended for gifting and sharing. These replicas are not valid for event entry. They hold no actual event admission value. Always refer to your official electronic ticket for event access. Pretty TicketsTicket's services are designed solely to enhance the presentation of your gift and share event details in a creative way.</p>
             </div>
         </div>
     );
