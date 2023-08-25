@@ -35,13 +35,21 @@ const Ticket = ({
     ticketColor,
     textColor
 }: TicketProps) => {
+    const backgroundImg = "https://www.cutcardstock.com/cdn/shop/products/avon_white_916a83ea-9a9a-4e47-864f-cf185b64e338_600x.jpg?v=1614965878"
     return (
         <div className="flex flex-col items-center justify-center">
             <div className="absolute bg-green-500 z-0"></div>
             <div className="max-w-md w-full h-auto mx-auto z-10">
                 <div className="flex flex-col">
                     <div className="bg-white shadow-2xl rounded-2xl md:min-w-[365px]">
-                        <div style={{ background: ticketColor || "" }} className="border-t border-b border-dashed border-b-4 border-t-4 border-white relative px-6 py-6 m-4">
+                        <div
+                            style={{
+                                backgroundColor: ticketColor || "#EEEEEE", // Background Color
+                                backgroundImage: `url(${backgroundImg})`, // Texture Image
+                                backgroundBlendMode: "multiply", // Blend the color and texture
+                            }}
+                            className="border-t border-b border-dashed border-b-4 border-t-4 border-white relative px-6 py-6 m-4"
+                        >
                             <div className="absolute rounded-full w-9 h-9 bg-white -mt-11 -left-4"></div>
                             <div className="absolute rounded-full w-9 h-9 bg-white -mt-11 -right-4"></div>
                             <div className="flex items-center justify-between mb-4">

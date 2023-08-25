@@ -11,24 +11,24 @@ import { fetchGiftMessage } from "../helpers/fetchOpenAI";
 export const Home = () => {
     const navigate = useNavigate();
 
-    const [eventName, setEventName] = useState('2023 World Series');
-    const [eventSubtitle, setEventSubtitle] = useState('VIP Entry Ticket');
-    const [eventNumber, setEventNumber] = useState('Game 3');
-    const [eventDescription, setEventDescription] = useState(`New York Yankees vs Arizona Diamondbacks`);
-    const [eventDate, setEventDate] = useState('Oct 09, 2023');
-    const [eventTime, setEventTime] = useState('7PM');
-    const [eventVenue, setEventVenue] = useState('Yankee Stadium');
+    const [eventName, setEventName] = useState('2023 US Open Tennis');
+    const [eventSubtitle, setEventSubtitle] = useState('VIP Entry');
+    const [eventNumber, setEventNumber] = useState('Session 24');
+    const [eventDescription, setEventDescription] = useState(`Women's Final/Mixed Doubles Final`);
+    const [eventDate, setEventDate] = useState('Sept 09, 2023');
+    const [eventTime, setEventTime] = useState('12PM');
+    const [eventVenue, setEventVenue] = useState('Arthur Ashe Stadium');
     const [eventSection, setEventSection] = useState('415');
     const [eventRow, setEventRow] = useState('J');
     const [eventSeat, setEventSeat] = useState('7');
 
-    const [imgUrl, setImgUrl] = useState('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.squarespace-cdn.com%2Fcontent%2Fv1%2F513e03a1e4b00efcff5aa03d%2F1370532403248-B7JTN2CASB1LWM5YWSX1%2Fke17ZwdGBToddI8pDm48kNVjfR5kDa6jbBkrq_LoDDF7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3zXOvpZoLj-zrwUcoeghK_zqqXjS3CfNDSuuf31e0tVH8gayrKhTJ_a0qjpge_-3DaDV-2eBmFlp-ifSeZPc-_8SfgUBqPeJJSwQPE1X-OZQ%2FWorld_Champions_2009_Yankees.jpg&f=1&nofb=1&ipt=5f1b17a6d83003b9466b21e94cf8f41b4571bdf4097080dd18b10bbe3d77f0b1&ipo=images')
-    const [ticketColor, setTicketColor] = useState('#EEEEEE')
+    const [imgUrl, setImgUrl] = useState('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.premierevents.co.uk%2Fuploads%2FSPORT%2FUS-OPEN-TICKETS.jpg&f=1&nofb=1&ipt=8ccc3e565c3de232fd6c07b21480dc8d62c0961bac1b70109dbdb347f5ad535a&ipo=images')
+    const [ticketColor, setTicketColor] = useState('#e3ebe5')
     const [textColor, setTextColor] = useState('#000')
 
     const [showConfetti, setShowConfetti] = useState(true);
     const [gifterName, setGifterName] = useState("Someone secret");
-    const [giftMessage, setGiftMessage] = useState(`"Happy Birthday! Can't wait to celebrate in style with some awesome seats at the baseball game."`);
+    const [giftMessage, setGiftMessage] = useState(`"Happy Birthday! Can't wait to celebrate with you and finally see the pros face-off at The US Open."`);
     const [isLoadingAIGiftMessage, setIsLoadingAIGiftMessage] = useState(false);
 
     const handleStyleReset = (e: any) => {
