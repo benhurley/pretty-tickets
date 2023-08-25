@@ -19,7 +19,7 @@ export const IntroHero = () => {
                     <p className="text-sm text-gray-600 text-left">Get a real-time look at your new ticket before finalizing.</p>
                 </div>
                 <div className="bg-white p-4 rounded-lg shadow-md text-center mt-1 md:mt-0 md:flex-grow md:w-[200px] md:h-[110px] w-full">
-                    <h3 className="text-lg md:text-xl font-semibold mb-1 text-left">3. Submit & Share!</h3>
+                    <h3 className="text-lg md:text-xl font-semibold mb-1 text-left">3. Share!</h3>
                     <p className="text-sm text-gray-600 text-left">Create a unique ticket link for your lucky recipient.</p>
                 </div>
             </div>

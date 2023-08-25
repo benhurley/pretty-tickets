@@ -9,7 +9,7 @@ export const InputTextField = ({ label, value, callbackFn, required = true }: In
     return (
         <div className="mb-2">
             <div>
-                <label className="font-bold pr-2">{label}</label>
+                <label className="pr-2">{label}</label>
             </div>
             <input
                 required={required}

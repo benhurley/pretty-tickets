@@ -10,6 +10,7 @@ import { fetchGiftMessage } from "../helpers/fetchOpenAI";
 
 export const Home = () => {
     const navigate = useNavigate();
+
     const [eventName, setEventName] = useState('2023 World Series');
     const [eventSubtitle, setEventSubtitle] = useState('VIP Entry Ticket');
     const [eventNumber, setEventNumber] = useState('Game 3');
@@ -20,13 +21,22 @@ export const Home = () => {
     const [eventSection, setEventSection] = useState('415');
     const [eventRow, setEventRow] = useState('J');
     const [eventSeat, setEventSeat] = useState('7');
+
     const [imgUrl, setImgUrl] = useState('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.squarespace-cdn.com%2Fcontent%2Fv1%2F513e03a1e4b00efcff5aa03d%2F1370532403248-B7JTN2CASB1LWM5YWSX1%2Fke17ZwdGBToddI8pDm48kNVjfR5kDa6jbBkrq_LoDDF7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3zXOvpZoLj-zrwUcoeghK_zqqXjS3CfNDSuuf31e0tVH8gayrKhTJ_a0qjpge_-3DaDV-2eBmFlp-ifSeZPc-_8SfgUBqPeJJSwQPE1X-OZQ%2FWorld_Champions_2009_Yankees.jpg&f=1&nofb=1&ipt=5f1b17a6d83003b9466b21e94cf8f41b4571bdf4097080dd18b10bbe3d77f0b1&ipo=images')
     const [ticketColor, setTicketColor] = useState('#EEEEEE')
     const [textColor, setTextColor] = useState('#000')
+
     const [showConfetti, setShowConfetti] = useState(true);
     const [gifterName, setGifterName] = useState("Someone secret");
-    const [giftMessage, setGiftMessage] = useState("Happy Birthday! Can't wait to celebrate in style with some awesome seats at the baseball game.");
-    const [isLoadingAIGiftMessage,  setIsLoadingAIGiftMessage] = useState(false);
+    const [giftMessage, setGiftMessage] = useState(`"Happy Birthday! Can't wait to celebrate in style with some awesome seats at the baseball game."`);
+    const [isLoadingAIGiftMessage, setIsLoadingAIGiftMessage] = useState(false);
+
+    const handleStyleReset = (e: any) => {
+        e.preventDefault();
+        setImgUrl("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.squarespace-cdn.com%2Fcontent%2Fv1%2F513e03a1e4b00efcff5aa03d%2F1370532403248-B7JTN2CASB1LWM5YWSX1%2Fke17ZwdGBToddI8pDm48kNVjfR5kDa6jbBkrq_LoDDF7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3zXOvpZoLj-zrwUcoeghK_zqqXjS3CfNDSuuf31e0tVH8gayrKhTJ_a0qjpge_-3DaDV-2eBmFlp-ifSeZPc-_8SfgUBqPeJJSwQPE1X-OZQ%2FWorld_Champions_2009_Yankees.jpg&f=1&nofb=1&ipt=5f1b17a6d83003b9466b21e94cf8f41b4571bdf4097080dd18b10bbe3d77f0b1&ipo=images")
+        setTicketColor('#EEEEEE')
+        setTextColor('#000')
+    }
 
     const handleGenerateMessageWithAI = async (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -141,102 +151,115 @@ export const Home = () => {
                 <div className="flex-1 klg:w-1/2 px-4 lg:ml-10 mt-6 sm:mt-10 max-w-full w-full">
                     <form className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[300px] md:max-h-none overflow-y-scroll pb-4 bg-white bg-opacity-30 px-4 pt-3 mx-2 sm:px-6 sm:pt-4 animate-in fade-in zoom-in ease-in-out min-w-[250px]" onSubmit={handleSubmit}>
                         <div className="flex-grow overflow-y-scroll">
-                            <InputTextField
-                                label="Title *"
-                                value={eventName}
-                                callbackFn={setEventName}
-                            />
-                            <InputTextField
-                                label="Subtitle"
-                                required={false}
-                                value={eventSubtitle}
-                                callbackFn={setEventSubtitle}
-                            />
-                            <InputTextField
-                                label="Event Number"
-                                required={false}
-                                value={eventNumber}
-                                callbackFn={setEventNumber}
-                            />
-                            <InputTextField
-                                label="Description"
-                                required={false}
-                                value={eventDescription}
-                                callbackFn={setEventDescription}
-                            />
-                            <InputTextField
-                                label="Date *"
-                                value={eventDate}
-                                callbackFn={setEventDate}
-                            />
-                            <InputTextField
-                                label="Time"
-                                required={false}
-                                value={eventTime}
-                                callbackFn={setEventTime}
-                            />
-                            <InputTextField
-                                label="Venue *"
-                                value={eventVenue}
-                                callbackFn={setEventVenue}
-                            />
-                            <InputTextField
-                                label="Section"
-                                required={false}
-                                value={eventSection}
-                                callbackFn={setEventSection}
-                            />
-                            <InputTextField
-                                label="Row"
-                                required={false}
-                                value={eventRow}
-                                callbackFn={setEventRow}
-                            />
-                            <InputTextField
-                                label="Seat(s)"
-                                required={false}
-                                value={eventSeat}
-                                callbackFn={setEventSeat}
-                            />
-                            <InputTextField
-                                label="Image URL"
-                                required={false}
-                                value={imgUrl}
-                                callbackFn={setImgUrl}
-                            />
-                            <InputTextField
-                                label="Ticket Color *"
-                                value={ticketColor}
-                                callbackFn={setTicketColor}
-                            />
-                            <InputTextField
-                                label="Text Color *"
-                                value={textColor}
-                                callbackFn={setTextColor}
-                            />
-                            <InputTextField
-                                label="Your Name"
-                                required={false}
-                                value={gifterName}
-                                callbackFn={setGifterName}
-                            />
-                            <InputTextFieldWithAI
-                                label="Gift Message"
-                                required={false}
-                                value={giftMessage}
-                                inputCallbackFn={setGiftMessage}
-                                aiCallbackFn={handleGenerateMessageWithAI}
-                                isLoading={isLoadingAIGiftMessage}
-                            />
-                            <InputCheckboxField
-                                checked={showConfetti}
-                                label="Show Confetti?"
-                                onChangeFn={handleRadioChange}
-                            />
+                            <div className="mt-2">
+                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800">Event Information</h3>
+                                <InputTextField
+                                    label="Title*"
+                                    value={eventName}
+                                    callbackFn={setEventName}
+                                />
+                                <InputTextField
+                                    label="Subtitle"
+                                    required={false}
+                                    value={eventSubtitle}
+                                    callbackFn={setEventSubtitle}
+                                />
+                                <InputTextField
+                                    label="Event Number"
+                                    required={false}
+                                    value={eventNumber}
+                                    callbackFn={setEventNumber}
+                                />
+                                <InputTextField
+                                    label="Description"
+                                    required={false}
+                                    value={eventDescription}
+                                    callbackFn={setEventDescription}
+                                />
+                                <InputTextField
+                                    label="Date*"
+                                    value={eventDate}
+                                    callbackFn={setEventDate}
+                                />
+                                <InputTextField
+                                    label="Time"
+                                    required={false}
+                                    value={eventTime}
+                                    callbackFn={setEventTime}
+                                />
+                                <InputTextField
+                                    label="Venue*"
+                                    value={eventVenue}
+                                    callbackFn={setEventVenue}
+                                />
+                                <InputTextField
+                                    label="Section"
+                                    required={false}
+                                    value={eventSection}
+                                    callbackFn={setEventSection}
+                                />
+                                <InputTextField
+                                    label="Row"
+                                    required={false}
+                                    value={eventRow}
+                                    callbackFn={setEventRow}
+                                />
+                                <InputTextField
+                                    label="Seat(s)"
+                                    required={false}
+                                    value={eventSeat}
+                                    callbackFn={setEventSeat}
+                                />
+                            </div>
+                            <div className="my-8">
+                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800">Ticket Design</h3>
+                                <InputTextField
+                                    label="Image URL"
+                                    required={false}
+                                    value={imgUrl}
+                                    callbackFn={setImgUrl}
+                                />
+                                <InputTextField
+                                    label="Ticket Color*"
+                                    value={ticketColor}
+                                    callbackFn={setTicketColor}
+                                />
+                                <InputTextField
+                                    label="Font Color*"
+                                    value={textColor}
+                                    callbackFn={setTextColor}
+                                />
+                                <div className="flex justify-center">
+                                    <button className="bg-white mt-3 px-4 py-1 rounded-2xl text-sm shadow-xl transform hover:scale-105 transition-transform duration-300" onClick={handleStyleReset}>Reset Styles</button>
+                                </div>
+                            </div>
+
+                            <div className="mb-2">
+                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800">Gift Information</h3>
+                                <InputTextField
+                                    label="Your Name"
+                                    required={false}
+                                    value={gifterName}
+                                    callbackFn={setGifterName}
+                                />
+                                <InputTextFieldWithAI
+                                    label="Gift Message"
+                                    required={false}
+                                    value={giftMessage}
+                                    inputCallbackFn={setGiftMessage}
+                                    aiCallbackFn={handleGenerateMessageWithAI}
+                                    isLoading={isLoadingAIGiftMessage}
+                                />
+                                <InputCheckboxField
+                                    checked={showConfetti}
+                                    label="Show Confetti?"
+                                    onChangeFn={handleRadioChange}
+                                />
+                            </div>
                         </div>
-                        <div className="flex items-center justify-center md:col-span-2 pt-4 md:pt-0">
-                            <button className="bg-white px-6 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300" type="submit">
-                                Submit
+                        <div className="flex items-center justify-center md:col-span-2 pt-4">
+                            <button className="bg-white px-6 py-1 rounded-2xl text-lg shadow-xl transform hover:scale-105 transition-transform duration-300" type="submit">
+                                Create Ticket
                             </button>
                         </div>
                     </form>
