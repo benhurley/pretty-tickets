@@ -24,7 +24,7 @@ export const Home = () => {
     const [ticketColor, setTicketColor] = useState('#EEEEEE')
     const [textColor, setTextColor] = useState('#000')
     const [showConfetti, setShowConfetti] = useState(true);
-    const [gifterName, setGifterName] = useState("Someone");
+    const [gifterName, setGifterName] = useState("Someone secret");
     const [giftMessage, setGiftMessage] = useState("Happy Birthday! Can't wait to celebrate in style with some awesome seats at the baseball game.");
     const [isLoadingAIGiftMessage,  setIsLoadingAIGiftMessage] = useState(false);
 
@@ -95,7 +95,7 @@ export const Home = () => {
         queryParams.set('ticketColor', ticketColor || emptyValue);
         queryParams.set('textColor', textColor || emptyValue);
         queryParams.set('giftMessage', giftMessage || emptyValue);
-        queryParams.set('gifterName', gifterName || 'Someone');
+        queryParams.set('gifterName', gifterName || 'Someone secret');
 
         const queryString = queryParams.toString();
         const longURL = `/results?${queryString}`;

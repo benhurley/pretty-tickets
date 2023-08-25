@@ -15,6 +15,22 @@ Transform your electronic ticket receipt into a beautiful online ticket that's p
 
 ## Architecture
 
-- React CRA (Typescript, Tailwind css)
+- React create-react-app (using Typescript and Tailwind CSS)
 - Netlify serverless backend (functions)
 - Netlify hosting
+
+## Getting Started
+
+1. [Download Netlify CLI](https://docs.netlify.com/cli/get-started/)
+
+2. Install Packages:
+
+    ```bash
+    npm i
+    ```
+
+3. Run website and serverless backend locally (will be hosted on port 8888):
+
+    ```bash
+    netlify dev
+    ```
