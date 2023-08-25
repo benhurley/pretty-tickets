@@ -5,6 +5,8 @@ import { IntroHero } from "../components/organisms/introHero";
 import { InputTextField } from "../components/molecules/inputTextField";
 import { InputCheckboxField } from "../components/molecules/inputCheckboxField";
 import { emptyValue } from "../helpers/globalConstants";
+import { InputTextFieldWithAI } from "../components/molecules/inputTextFieldWithAI";
+import { fetchGiftMessage } from "../helpers/fetchOpenAI";
 
 export const Home = () => {
     const navigate = useNavigate();
@@ -20,9 +22,31 @@ export const Home = () => {
     const [eventSeat, setEventSeat] = useState('7');
     const [imgUrl, setImgUrl] = useState('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.squarespace-cdn.com%2Fcontent%2Fv1%2F513e03a1e4b00efcff5aa03d%2F1370532403248-B7JTN2CASB1LWM5YWSX1%2Fke17ZwdGBToddI8pDm48kNVjfR5kDa6jbBkrq_LoDDF7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3zXOvpZoLj-zrwUcoeghK_zqqXjS3CfNDSuuf31e0tVH8gayrKhTJ_a0qjpge_-3DaDV-2eBmFlp-ifSeZPc-_8SfgUBqPeJJSwQPE1X-OZQ%2FWorld_Champions_2009_Yankees.jpg&f=1&nofb=1&ipt=5f1b17a6d83003b9466b21e94cf8f41b4571bdf4097080dd18b10bbe3d77f0b1&ipo=images')
     const [ticketColor, setTicketColor] = useState('#EEEEEE')
+    const [textColor, setTextColor] = useState('#000')
     const [showConfetti, setShowConfetti] = useState(true);
     const [gifterName, setGifterName] = useState("Someone");
     const [giftMessage, setGiftMessage] = useState("Happy Birthday! Can't wait to celebrate in style with some awesome seats at the baseball game.");
+    const [isLoadingAIGiftMessage,  setIsLoadingAIGiftMessage] = useState(false);
+
+    const handleGenerateMessageWithAI = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
+        setIsLoadingAIGiftMessage(true)
+        const message = await fetchGiftMessage({
+            eventName,
+            eventSubtitle,
+            eventNumber,
+            eventDescription,
+            eventDate,
+            eventTime,
+            eventVenue,
+        })
+
+        setIsLoadingAIGiftMessage(false)
+
+        if (!!message) {
+            setGiftMessage(message)
+        }
+    }
 
     const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const isChecked = e.target.checked;
@@ -45,6 +69,7 @@ export const Home = () => {
             eventSeat,
             imgUrl,
             ticketColor,
+            textColor,
             giftMessage,
             gifterName,
             showConfetti,
@@ -68,6 +93,7 @@ export const Home = () => {
 
         queryParams.set('imgUrl', imgUrl || emptyValue);
         queryParams.set('ticketColor', ticketColor || emptyValue);
+        queryParams.set('textColor', textColor || emptyValue);
         queryParams.set('giftMessage', giftMessage || emptyValue);
         queryParams.set('gifterName', gifterName || 'Someone');
 
@@ -84,33 +110,34 @@ export const Home = () => {
     useEffect(() => {
         // Retrieve stored form data from sessionStorage
         const storedFormData = sessionStorage.getItem('formData');
-        
+
         if (storedFormData) {
-          const parsedFormData = JSON.parse(storedFormData);
-          setEventName(parsedFormData.eventName);
-          setEventSubtitle(parsedFormData.eventSubtitle);
-          setEventNumber(parsedFormData.eventNumber);
-          setEventDescription(parsedFormData.eventDescription);
-          setEventDate(parsedFormData.eventDate);
-          setEventTime(parsedFormData.eventTime);
-          setEventVenue(parsedFormData.eventVenue);
-          setEventSection(parsedFormData.eventSection);
-          setEventRow(parsedFormData.eventRow);
-          setEventSeat(parsedFormData.eventSeat);
-          setImgUrl(parsedFormData.imgUrl);
-          setTicketColor(parsedFormData.ticketColor);
-          setGiftMessage(parsedFormData.giftMessage);
-          setGifterName(parsedFormData.gifterName);
-          setShowConfetti(parsedFormData.showConfetti);
+            const parsedFormData = JSON.parse(storedFormData);
+            setEventName(parsedFormData.eventName);
+            setEventSubtitle(parsedFormData.eventSubtitle);
+            setEventNumber(parsedFormData.eventNumber);
+            setEventDescription(parsedFormData.eventDescription);
+            setEventDate(parsedFormData.eventDate);
+            setEventTime(parsedFormData.eventTime);
+            setEventVenue(parsedFormData.eventVenue);
+            setEventSection(parsedFormData.eventSection);
+            setEventRow(parsedFormData.eventRow);
+            setEventSeat(parsedFormData.eventSeat);
+            setImgUrl(parsedFormData.imgUrl);
+            setTicketColor(parsedFormData.ticketColor);
+            setTextColor(parsedFormData.textColor);
+            setGiftMessage(parsedFormData.giftMessage);
+            setGifterName(parsedFormData.gifterName);
+            setShowConfetti(parsedFormData.showConfetti);
         }
-      }, []);
+    }, []);
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 lg:p-10">
-            <div className="grid justify-center mt-10">
+            <div className="grid justify-center my-10">
                 <IntroHero />
             </div>
-            <div className="flex flex-col md:flex-row items-center pb-20">
+            <div className="flex flex-col md:flex-row items-center pb-20 max-w-[1440px] mx-auto">
                 <div className="flex-1 klg:w-1/2 px-4 lg:ml-10 mt-6 sm:mt-10 max-w-full w-full">
                     <form className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[300px] md:max-h-none overflow-y-scroll pb-4 bg-white bg-opacity-30 px-4 pt-3 mx-2 sm:px-6 sm:pt-4 animate-in fade-in zoom-in ease-in-out min-w-[250px]" onSubmit={handleSubmit}>
                         <div className="flex-grow overflow-y-scroll">
@@ -183,16 +210,23 @@ export const Home = () => {
                                 callbackFn={setTicketColor}
                             />
                             <InputTextField
+                                label="Text Color *"
+                                value={textColor}
+                                callbackFn={setTextColor}
+                            />
+                            <InputTextField
                                 label="Your Name"
                                 required={false}
                                 value={gifterName}
                                 callbackFn={setGifterName}
                             />
-                            <InputTextField
+                            <InputTextFieldWithAI
                                 label="Gift Message"
                                 required={false}
                                 value={giftMessage}
-                                callbackFn={setGiftMessage}
+                                inputCallbackFn={setGiftMessage}
+                                aiCallbackFn={handleGenerateMessageWithAI}
+                                isLoading={isLoadingAIGiftMessage}
                             />
                             <InputCheckboxField
                                 checked={showConfetti}
@@ -223,6 +257,7 @@ export const Home = () => {
                             eventSeat={eventSeat}
                             imgUrl={imgUrl}
                             ticketColor={ticketColor}
+                            textColor={textColor}
                         />
                     </div>
                 </div>
