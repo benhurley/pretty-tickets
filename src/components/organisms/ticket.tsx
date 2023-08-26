@@ -1,4 +1,5 @@
 import { isValidInput } from "../../helpers/isValidInput";
+import Linen from "../atoms/ticketTextures/linen.png";
 
 type TicketData = {
     eventName: string;
@@ -13,6 +14,7 @@ type TicketData = {
     imgUrl: string;
     ticketColor: string;
     textColor: string;
+    ticketTexture: string;
 };
 
 type TicketProps = {
@@ -31,9 +33,9 @@ const Ticket = ({
     eventSeat,
     imgUrl,
     ticketColor,
-    textColor
+    textColor,
+    ticketTexture
 }: TicketProps) => {
-    const backgroundImg = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmir-s3-cdn-cf.behance.net%2Fproject_modules%2Ffs%2Fa948d849671425.58bb77365e179.jpg&f=1&nofb=1&ipt=080027788443fd9d35e0a038aea4aafa3e8d6a97296b9caa1479fed35bb20bd4&ipo=images"
     return (
         <div className="flex flex-col items-center justify-center">
             <div className="absolute bg-green-500 z-0"></div>
@@ -43,7 +45,7 @@ const Ticket = ({
                         <div
                             style={{
                                 backgroundColor: ticketColor || "#EEEEEE",
-                                backgroundImage: `url(${backgroundImg})`,
+                                backgroundImage: ticketTexture ? `url(${ticketTexture})` : `url(${Linen})`,
                                 backgroundBlendMode: "multiply", // Blend the color and texture
                                 backgroundRepeat: "no-repeat"
                             }}

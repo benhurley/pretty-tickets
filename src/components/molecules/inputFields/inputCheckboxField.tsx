@@ -6,9 +6,9 @@ type InputTextFieldProps = {
 
 export const InputCheckboxField = ({ checked, label, onChangeFn }: InputTextFieldProps) => {
     return (
-        <div className="mb-2 inline-flex">
+        <div className="mb-2 inline-flex align-center px-2">
             <div>
-                <label className="pr-2">{label}</label>
+                <label className="pr-4">{label}</label>
             </div>
             <input
                 className="py-0.5 px-1 rounded shadow-xl"

@@ -19,7 +19,7 @@ export const InputTextAreaFieldWithAI = ({ label, value, inputCallbackFn, aiCall
     };
 
     return (
-        <div className="mb-2 pt-2">
+        <div className="mb-2 pt-2 px-2">
             <div className="flex items-center">
                 <label className="pr-3">{label}</label>
                 <button

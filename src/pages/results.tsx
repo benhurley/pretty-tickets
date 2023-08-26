@@ -22,22 +22,31 @@ export const Results = () => {
     const eventSeat = queryParams.get('eventSeat');
     const imgUrl = queryParams.get('imgUrl');
     const ticketColor = queryParams.get('ticketColor');
+    const ticketTexture = queryParams.get('ticketTexture');
     const textColor = queryParams.get('textColor');
     const gifterName = queryParams.get('gifterName');
     const giftMessage = queryParams.get('giftMessage');
+    const shareIconUrl = 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpngimg.com%2Fuploads%2Fshare%2Fshare_PNG52.png&f=1&nofb=1&ipt=a194c632dab401ac1cec221e25326f23a661b5d8b8b3becd7275a809dad16023&ipo=images';
 
     const [shareBtnCopy, setShareBtnCopy] = useState("Share")
     const [tinyURL, setTinyURL] = useState(sessionStorage.getItem('tinyURL'));
+    const [hasCopiedTinyUrl, setHasCopiedTinyURL] = useState(false);
 
     const handleFetchTinyURL = async () => {
         const res = await fetchTinyURL()
         if (res) {
             setTinyURL(res.data.tiny_url)
             navigator.clipboard.writeText(res.data.tiny_url);
-            setShareBtnCopy("TinyURL Created");
         } else {
             setShareBtnCopy("Error Creating TinyURL");
         }
+    }
+
+    const handleCopyClick = (tinyURL: string) => {
+        navigator.clipboard.writeText(tinyURL).then(() => setHasCopiedTinyURL(true)
+        );
+        setHasCopiedTinyURL(true)
+        console.log(`Copied to clipboard: ${tinyURL}`)
     }
 
     useEffect(() => {
@@ -45,23 +54,36 @@ export const Results = () => {
     }, []);
 
     const ShareCTA = () => {
-        return (<>
-            {mode === "creatorMode" && (
-                <div className='flex mx-auto my-2 pb-3'>
-                    <button disabled={!!tinyURL} className="bg-white mx-auto px-6 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 disabled:scale-100" onClick={() => {
-                        handleFetchTinyURL();
-                    }}>
-                        <div className='inline-block pr-2'>
-                            {shareBtnCopy.includes("Share") &&
-                                <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpngimg.com%2Fuploads%2Fshare%2Fshare_PNG52.png&f=1&nofb=1&ipt=a194c632dab401ac1cec221e25326f23a661b5d8b8b3becd7275a809dad16023&ipo=images" className="-mb-1" width={20} alt="share icon" />}
-                        </div>
+        return (
+            <div className='flex mx-auto my-2 pb-3'>
+                {!tinyURL
+                    ? <button disabled={!!tinyURL} className="bg-white mx-auto px-6 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 disabled:scale-100" onClick={() => { handleFetchTinyURL() }}>
+                        {shareBtnCopy.includes("Share") && <div className='inline-block pr-2'>
+                            <img src={shareIconUrl} className="-mb-1" width={20} alt="share icon" />
+                        </div>}
                         <div className='inline-block'>
-                            <p className='text-md'>{tinyURL ? <a className="py-2" target='_blank' rel="noreferrer" href={tinyURL}>{tinyURL}</a> : shareBtnCopy}</p>
+                            <p className='text-md'>{shareBtnCopy}</p>
                         </div>
                     </button>
-                </div>
+                    : <button className="bg-white mx-auto px-6 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 disabled:scale-100" onClick={() => handleCopyClick(tinyURL)}>{hasCopiedTinyUrl ? <span className='px-6'>Copied to clipboard ✔</span> : tinyURL}</button>}
+            </div>
+        )
+    }
 
-            )}
+    const ThankYouModule = () => {
+        return (<>
+            <p className="text-md lg:text-lg font-extrabold leading-tight text-gray-800 mt-2 mx-auto text-center">Thanks for using Pretty Tickets!</p>
+            <div className="inline-flex items-center justify-center md:col-span-2 pt-1 mt-2 mb-4">
+                <a className="bg-blue-100 px-4 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/benhurley/fancy-tickets" target="_blank" rel="noreferrer">
+                    Contribute
+                </a>
+                <a className="bg-green-100 px-4 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/sponsors/benhurley" target="_blank" rel="noreferrer">
+                    Donate
+                </a>
+                <a className="bg-pink-100 px-4 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/sponsors/benhurley" target="_blank" rel="noreferrer">
+                    Sponsor
+                </a>
+            </div>
         </>)
     }
 
@@ -75,24 +97,9 @@ export const Results = () => {
                         {mode === "creatorMode" &&
                             <>
                                 <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white px-4 mx-auto mb-4 sm:mb-10 mt-10 sm:mt-0 lg:mt-8'>
-                                    <p className="text-xl md:text-2xl font-extrabold leading-tight text-gray-800 my-4 mx-auto text-center lg:px-6">{tinyURL ? "Your Free URL:" : "Nice work! Lets share it."}</p>
+                                    <p className="text-xl md:text-2xl font-extrabold leading-tight text-gray-800 my-4 mx-auto text-center lg:px-6">{tinyURL ? "Your Free URL:" : "Bravo! You're all set."}</p>
                                     <ShareCTA />
-                                    {tinyURL &&
-                                        <>
-                                            <p className="text-md lg:text-lg font-extrabold leading-tight text-gray-800 mt-2 mx-auto text-center">Thanks for using Pretty Tickets!</p>
-                                            <div className="inline-flex items-center justify-center md:col-span-2 pt-1 mt-2 mb-4">
-                                                <a className="bg-blue-100 px-4 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/benhurley/fancy-tickets" target="_blank" rel="noreferrer">
-                                                    Contribute
-                                                </a>
-                                                <a className="bg-green-100 px-4 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/sponsors/benhurley" target="_blank" rel="noreferrer">
-                                                    Donate
-                                                </a>
-                                                <a className="bg-pink-100 px-4 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/sponsors/benhurley" target="_blank" rel="noreferrer">
-                                                    Sponsor
-                                                </a>
-                                            </div>
-                                        </>
-                                    }
+                                    {tinyURL && <ThankYouModule />}
                                 </div>
                             </>
                         }
@@ -116,13 +123,14 @@ export const Results = () => {
                             eventSeat={eventSeat}
                             imgUrl={imgUrl}
                             ticketColor={ticketColor}
+                            ticketTexture={ticketTexture}
                             textColor={textColor}
                         />
                     </div>
                 </div>
             </div>
             <div>
-                <p className="text-xs px-6 pt-12 italic max-w-[1200px] mx-auto">Disclaimer: Pretty Tickets creates decorative online ticket replicas intended for gifting and sharing. These replicas are not valid for event entry. They hold no actual event admission value. Always refer to your official electronic ticket for event access. Pretty TicketsTicket's services are designed solely to enhance the presentation of your gift and share event details in a creative way.</p>
+                <p className="text-xs px-6 pt-12 italic max-w-[1200px] mx-auto">Disclaimer: Pretty Tickets creates decorative online ticket replicas intended for gifting and sharing. These replicas are not valid for event entry. They hold no actual event admission value. Always refer to your official electronic ticket for event access. Pretty Tickets are designed solely to enhance the presentation of your gift and share event details in a creative way.</p>
             </div>
         </div>
     )

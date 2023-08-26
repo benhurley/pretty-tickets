@@ -1,15 +1,19 @@
-import React, { useEffect, useState, type MouseEventHandler } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Ticket from "../components/organisms/ticket";
 import { IntroHero } from "../components/organisms/introHero";
-import { InputTextField } from "../components/molecules/inputTextField";
-import { InputCheckboxField } from "../components/molecules/inputCheckboxField";
+import { InputTextField } from "../components/molecules/inputFields/inputTextField";
+import { InputCheckboxField } from "../components/molecules/inputFields/inputCheckboxField";
 import { emptyValue } from "../helpers/globalConstants";
-import { InputTextAreaFieldWithAI } from "../components/molecules/inputTextAreaFieldWithAI";
+import { InputTextAreaFieldWithAI } from "../components/molecules/inputFields/inputTextAreaFieldWithAI";
 import { fetchGiftMessage } from "../helpers/fetchOpenAI";
-import { InputColorField } from "../components/molecules/inputColorField";
-import { InputTextAreaField } from "../components/molecules/inputTextAreaField";
+import { InputColorField } from "../components/molecules/inputFields/inputColorField";
+import { InputTextAreaField } from "../components/molecules/inputFields/inputTextAreaField";
 import { isValidInput } from "../helpers/isValidInput";
+import Linen from "../components/atoms/ticketTextures/linen.png";
+import Vertical from "../components/atoms/ticketTextures/vertical.png";
+import Recycled from "../components/atoms/ticketTextures/recycled.png";
+import { InputDropdownField } from "../components/molecules/inputFields/inputDropdownField";
 
 export const Home = () => {
     const navigate = useNavigate();
@@ -25,7 +29,8 @@ export const Home = () => {
     const [eventSeat, setEventSeat] = useState('7');
 
     const [imgUrl, setImgUrl] = useState('https://prettytickets.com/logo512.png')
-    const [ticketColor, setTicketColor] = useState('#e3ebe5')
+    const [ticketColor, setTicketColor] = useState('#F5F5F5')
+    const [ticketTexture, setTicketTexture] = useState(Linen)
     const [textColor, setTextColor] = useState('#000')
 
     const [showConfetti, setShowConfetti] = useState(true);
@@ -34,7 +39,6 @@ export const Home = () => {
     const [isLoadingAIGiftMessage, setIsLoadingAIGiftMessage] = useState(false);
 
     const handleGenerateMessageWithAI = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault();
         setIsLoadingAIGiftMessage(true)
         const message = await fetchGiftMessage({
             eventName,
@@ -57,7 +61,7 @@ export const Home = () => {
         setShowConfetti(isChecked);
     };
 
-    const handleSubmit = (e: MouseEventHandler<HTMLButtonElement>) => {
+    const handleSubmit = () => {
         const formData = {
             eventName,
             eventSubtitle,
@@ -70,6 +74,7 @@ export const Home = () => {
             eventSeat,
             imgUrl,
             ticketColor,
+            ticketTexture,
             textColor,
             giftMessage,
             gifterName,
@@ -93,6 +98,7 @@ export const Home = () => {
 
         queryParams.set('imgUrl', imgUrl || emptyValue);
         queryParams.set('ticketColor', ticketColor || emptyValue);
+        queryParams.set('ticketTexture', ticketTexture || emptyValue);
         queryParams.set('textColor', textColor || emptyValue);
         queryParams.set('giftMessage', giftMessage || emptyValue);
         queryParams.set('gifterName', gifterName || 'Someone secret');
@@ -124,6 +130,7 @@ export const Home = () => {
             setEventSeat(parsedFormData.eventSeat);
             setImgUrl(parsedFormData.imgUrl);
             setTicketColor(parsedFormData.ticketColor);
+            setTicketTexture(parsedFormData.ticketTexture);
             setTextColor(parsedFormData.textColor);
             setGiftMessage(parsedFormData.giftMessage);
             setGifterName(parsedFormData.gifterName);
@@ -138,7 +145,7 @@ export const Home = () => {
             </div>
             <div className="flex flex-col md:flex-row items-center max-w-[1200px] mx-auto">
                 <div className="flex-1 klg:w-1/2 px-4 lg:ml-10 mt-6 sm:mt-10 max-w-full w-full">
-                    <form className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[400px] md:max-h-none overflow-y-scroll pb-4 bg-white bg-opacity-30 px-4 pt-3 mx-2 sm:px-6 sm:pt-4 min-w-[250px] max-w-[500px]" onSubmit={handleSubmit}>
+                    <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[400px] md:max-h-none overflow-y-scroll pb-4 bg-white bg-opacity-30 px-4 pt-3 mx-2 sm:px-6 sm:pt-4 min-w-[250px] max-w-[500px]">
                         <div className="flex-grow overflow-y-scroll">
                             <div className="mt-2">
                                 <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800">Event Information</h3>
@@ -208,6 +215,12 @@ export const Home = () => {
                                         callbackFn={setTextColor}
                                     />
                                 </div>
+                                <InputDropdownField
+                                    label="Texture"
+                                    value={ticketTexture}
+                                    callbackFn={setTicketTexture}
+                                    inputList={[{name: "Linen", path: Linen}, {name: "Vertical", path: Vertical}, {name: "Recycled", path: Recycled}]}
+                                />
                                 <InputTextAreaField
                                     label="Image URL"
                                     required={false}
@@ -239,7 +252,7 @@ export const Home = () => {
                                 />
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div className="flex-1 md:w-1/2 px-4 sm:mt-0 mb-auto sticky top-4">
                     <div className="mt-4 mx-2 sm:mt-10 mb-10">
@@ -256,9 +269,10 @@ export const Home = () => {
                             eventSeat={eventSeat}
                             imgUrl={imgUrl}
                             ticketColor={ticketColor}
+                            ticketTexture={ticketTexture}
                             textColor={textColor}
                         />
-                        <h2 className="text-sm lg:text-md font-extrabold leading-tight text-center text-gray-800 mx-auto italic mt-6">Gift Preview:</h2>
+                        <h2 className="text-sm lg:text-md font-extrabold leading-tight text-center text-gray-800 mx-auto italic mt-12 sm:mt-6">Gift Preview:</h2>
                         <h1 className="text-xl lg:text-2xl font-extrabold leading-tight text-gray-800 mt-10 mb-6 sm:mt-6 mx-auto text-center max-w-[250px] md:max-w-[400px]">{gifterName} sent you tickets to an event!</h1>
                         {isValidInput(giftMessage) && isValidInput(giftMessage) && <div className='rounded-xl shadow-2xl bg-white p-4 mx-auto max-w-[575px]'>
                             <p>{`${giftMessage} - ${gifterName}`}</p>
@@ -272,7 +286,7 @@ export const Home = () => {
                 </button>
             </div>
             <div>
-                <p className="text-xs pb-20 px-6 pt-12 italic max-w-[1200px] mx-auto">Disclaimer: Pretty Tickets creates decorative online ticket replicas intended for gifting and sharing. These replicas are not valid for event entry. They hold no actual event admission value. Always refer to your official electronic ticket for event access. Pretty TicketsTicket's services are designed solely to enhance the presentation of your gift and share event details in a creative way.</p>
+                <p className="text-xs pb-20 px-6 pt-12 italic max-w-[1200px] mx-auto">Disclaimer: Pretty Tickets creates decorative online ticket replicas intended for gifting and sharing. These replicas are not valid for event entry. They hold no actual event admission value. Always refer to your official electronic ticket for event access. Pretty Tickets are designed solely to enhance the presentation of your gift and share event details in a creative way.</p>
             </div>
         </div>
     );

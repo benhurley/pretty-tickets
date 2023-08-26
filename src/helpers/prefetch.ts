@@ -1,5 +1,5 @@
-import logo128 from "../components/atoms/logo128.png"
-import logo512 from "../components/atoms/logo512.png"
+import logo128 from "../components/atoms/logos/logo128.png"
+import logo512 from "../components/atoms/logos/logo512.png"
 
 export const preloadImages = () => {
   // add any images to preload above fold here
