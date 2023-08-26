@@ -11,7 +11,7 @@ export const InputCheckboxField = ({ checked, label, onChangeFn }: InputTextFiel
                 <label className="pr-4">{label}</label>
             </div>
             <input
-                className="py-0.5 px-1 rounded shadow-xl"
+                className="py-0.5 px-1 mt-1 rounded shadow-xl"
                 type="checkbox"
                 name="confetti"
                 value="show"
