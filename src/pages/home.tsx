@@ -140,7 +140,7 @@ export const Home = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 lg:p-10">
-            <div className="grid justify-center my-10">
+            <div className="grid justify-center mt-6 mb-4 sm:my-10">
                 <IntroHero />
             </div>
             <div className="flex flex-col md:flex-row items-center max-w-[1200px] mx-auto">
