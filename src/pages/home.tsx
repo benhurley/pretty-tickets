@@ -145,7 +145,7 @@ export const Home = () => {
             </div>
             <div className="flex flex-col md:flex-row items-center max-w-[1200px] mx-auto">
                 <div className="flex-1 klg:w-1/2 px-4 lg:ml-10 mt-6 sm:mt-10 max-w-full w-full">
-                    <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[400px] md:max-h-none overflow-y-scroll pb-4 bg-white bg-opacity-30 px-4 pt-3 mx-2 sm:px-6 sm:pt-4 min-w-[250px] max-w-[500px]">
+                    <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[420px] md:max-h-none overflow-y-scroll pb-4 bg-white bg-opacity-30 px-4 pt-3 mx-2 sm:px-6 sm:pt-4 min-w-[250px] max-w-[500px]">
                         <div className="flex-grow overflow-y-scroll">
                             <div className="mt-2">
                                 <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800">Event Information</h3>
