@@ -22,7 +22,7 @@ export const InputDropdownField = ({ label, value, callbackFn, required = true, 
     return (
         <div className="mb-2 px-2">
             <label htmlFor="dropdown">{label}</label>
-            <select name="dropdown" id="dropdown" className="py-1 px-2 lg:p-2 rounded shadow-xl w-[100%]" value={value} onChange={handleOptionChange}>
+            <select name="dropdown" id="dropdown" className="bg-white py-1 px-2 lg:p-2 rounded shadow-xl w-[100%]" value={value} onChange={handleOptionChange}>
                 {inputList.map((item: Texture, index: number) => (
                     <option key={index} value={item.path}>
                         {item.name}
