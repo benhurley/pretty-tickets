@@ -11,9 +11,8 @@ import { InputColorField } from "../components/molecules/inputFields/inputColorF
 import { InputTextAreaField } from "../components/molecules/inputFields/inputTextAreaField";
 import { isValidInput } from "../helpers/isValidInput";
 import Linen from "../components/atoms/ticketTextures/linen.png";
-import Vertical from "../components/atoms/ticketTextures/vertical.png";
-import Recycled from "../components/atoms/ticketTextures/recycled.png";
 import { InputDropdownField } from "../components/molecules/inputFields/inputDropdownField";
+import { getTextures } from "../helpers/textures";
 
 export const Home = () => {
     const navigate = useNavigate();
@@ -219,7 +218,7 @@ export const Home = () => {
                                     label="Texture"
                                     value={ticketTexture}
                                     callbackFn={setTicketTexture}
-                                    inputList={[{name: "Linen", path: Linen}, {name: "Vertical", path: Vertical}, {name: "Recycled", path: Recycled}]}
+                                    inputList={getTextures()}
                                 />
                                 <InputTextAreaField
                                     label="Image URL"

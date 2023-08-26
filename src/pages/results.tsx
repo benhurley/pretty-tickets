@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { fetchTinyURL } from '../helpers/fetchTinyURL';
 import { isValidInput } from '../helpers/isValidInput';
+import ShareIcon from '../components/atoms/shareIcon.png';
 
 export const Results = () => {
     const location = useLocation();
@@ -26,7 +27,6 @@ export const Results = () => {
     const textColor = queryParams.get('textColor');
     const gifterName = queryParams.get('gifterName');
     const giftMessage = queryParams.get('giftMessage');
-    const shareIconUrl = 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpngimg.com%2Fuploads%2Fshare%2Fshare_PNG52.png&f=1&nofb=1&ipt=a194c632dab401ac1cec221e25326f23a661b5d8b8b3becd7275a809dad16023&ipo=images';
 
     const [shareBtnCopy, setShareBtnCopy] = useState("Share")
     const [tinyURL, setTinyURL] = useState(sessionStorage.getItem('tinyURL'));
@@ -59,7 +59,7 @@ export const Results = () => {
                 {!tinyURL
                     ? <button disabled={!!tinyURL} className="bg-white mx-auto px-6 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 disabled:scale-100" onClick={() => { handleFetchTinyURL() }}>
                         {shareBtnCopy.includes("Share") && <div className='inline-block pr-2'>
-                            <img src={shareIconUrl} className="-mb-1" width={20} alt="share icon" />
+                            <img src={ShareIcon} className="-mb-1" width={18} alt="share icon" />
                         </div>}
                         <div className='inline-block'>
                             <p className='text-md'>{shareBtnCopy}</p>
