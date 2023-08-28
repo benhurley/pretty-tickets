@@ -31,7 +31,7 @@ export const InputTextAreaFieldWithAI = ({ label, value, inputCallbackFn, aiCall
                 >
                     {isLoading ? (
                         <div className="flex items-center">
-                            <PulseLoader color="000000" size={4} />
+                            <PulseLoader color="#000000" size={4} />
                             <span className="ml-2">Loading...</span>
                         </div>
                     ) : wasAIButtonClicked ? (
