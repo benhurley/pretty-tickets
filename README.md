@@ -4,7 +4,7 @@
 
 ## Elevate Your Electronic Tickets
 
-Transform your electronic ticket receipt into a beautiful online ticket that's perfect for gifting and sharing.
+Transform your recent purchase into a beautiful ticket replica made for gifting and sharing
 
 ![Homepage](./public/screenshot.png)
 
