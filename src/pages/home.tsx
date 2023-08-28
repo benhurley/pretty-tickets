@@ -20,8 +20,8 @@ export const Home = () => {
 
     const [eventName, setEventName] = useState('2023 US Open Tennis');
     const [eventSubtitle, setEventSubtitle] = useState('VIP ENTRY');
-    const [eventDescription, setEventDescription] = useState(`Session 24: Women's Final/Mixed Doubles Final`);
-    const [eventDate, setEventDate] = useState('Saturday, September 09, 2023');
+    const [eventDescription, setEventDescription] = useState(`Session 24: Women's Final / Mixed Doubles Final`);
+    const [eventDate, setEventDate] = useState('Saturday, September 9th, 2023');
     const [eventTime, setEventTime] = useState('12PM EST');
     const [eventVenue, setEventVenue] = useState('Arthur Ashe Stadium (Flushing, NY)');
     const [eventSection, setEventSection] = useState('415');

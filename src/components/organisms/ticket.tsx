@@ -57,16 +57,16 @@ const Ticket = ({
                             <div className="absolute rounded-full w-9 h-9 bg-white -mt-11 -left-4"></div>
                             <div className="absolute rounded-full w-9 h-9 bg-white -mt-11 -right-4"></div>
                             <div className="flex items-center justify-between mb-4">
-                                <div style={{ color: textColor || "#000" }} className="text-2xl font-bold">{eventName}</div>
-                                {isValidInput(eventSubtitle) && <div style={{ color: textColor || "#000" }} className="text-sm text-gray-500 text-right">{eventSubtitle}</div>}
+                                <div style={{ color: textColor || "#000000" }} className="text-2xl font-bold">{eventName}</div>
+                                {isValidInput(eventSubtitle) && <div style={{ color: textColor || "#000000" }} className="text-sm text-gray-500 text-right">{eventSubtitle}</div>}
                             </div>
                             <div className="top --flex-column mb-4">
                                 {isValidInput(imgUrl) && <img className="rounded-md shadow-2xl border-4 border-white" src={imgUrl || ""} alt="venue" />}
                             </div>
                             <div className="flex flex-col lg:flex-row md:space-y-0 md:justify-between">
-                                {isValidInput(eventDescription) && <p style={{ color: textColor || "#000" }} className="text-gray-600">{eventDescription}</p>}
+                                {isValidInput(eventDescription) && <p style={{ color: textColor || "#000000" }} className="text-gray-600">{eventDescription}</p>}
                             </div>
-                            <div style={{ color: textColor || "#000" }} className="flex space-y-2 flex-row justify-between mt-4">
+                            <div style={{ color: textColor || "#000000" }} className="flex flex-row justify-between mt-4 mb-2">
                                 <div>
                                     <span className="text-sm">Date</span>
                                     <div className="font-semibold">{eventDate}</div>
@@ -75,15 +75,14 @@ const Ticket = ({
                                     <span className="text-sm">Time</span>
                                     {eventTime && <div className="font-semibold">{eventTime}</div>}
                                 </div>}
-
                             </div>
-                            <div style={{ color: textColor || "#000" }} className="flex flex-col space-y-2 mb-6">
+                            <div style={{ color: textColor || "#000000" }} className="flex flex-col space-y-2 mb-6">
                                 <div>
                                     <span className="text-sm">Venue</span>
                                     <div className="font-semibold">{eventVenue}</div>
                                 </div>
                             </div>
-                            <div style={{ color: textColor || "#000" }} className="flex items-center justify-around my-4">
+                            <div style={{ color: textColor || "#000000" }} className="flex items-center justify-around my-4">
                                 {isValidInput(eventSection) && <div>
                                     <span className="text-sm">Section</span>
                                     {eventSection && <div className="font-semibold">{eventSection}</div>}
