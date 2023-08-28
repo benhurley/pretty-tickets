@@ -25,6 +25,7 @@ export const Results = () => {
     const ticketColor = queryParams.get('ticketColor');
     const ticketTexture = queryParams.get('ticketTexture');
     const textColor = queryParams.get('textColor');
+    const font = queryParams.get('font');
     const gifterName = queryParams.get('gifterName');
     const giftMessage = queryParams.get('giftMessage');
 
@@ -125,6 +126,7 @@ export const Results = () => {
                             ticketColor={ticketColor}
                             ticketTexture={ticketTexture}
                             textColor={textColor}
+                            font={font}
                         />
                     </div>
                 </div>

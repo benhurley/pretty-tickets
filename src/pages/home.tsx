@@ -13,24 +13,26 @@ import { isValidInput } from "../helpers/isValidInput";
 import Linen from "../components/atoms/ticketTextures/linen.png";
 import { InputDropdownField } from "../components/molecules/inputFields/inputDropdownField";
 import { getTextures } from "../helpers/textures";
+import { getFonts } from "../helpers/fonts";
 
 export const Home = () => {
     const navigate = useNavigate();
 
     const [eventName, setEventName] = useState('2023 US Open Tennis');
-    const [eventSubtitle, setEventSubtitle] = useState('VIP Entry');
+    const [eventSubtitle, setEventSubtitle] = useState('VIP ENTRY');
     const [eventDescription, setEventDescription] = useState(`Session 24: Women's Final/Mixed Doubles Final`);
-    const [eventDate, setEventDate] = useState('Sept 09, 2023');
-    const [eventTime, setEventTime] = useState('12PM');
-    const [eventVenue, setEventVenue] = useState('Arthur Ashe Stadium');
+    const [eventDate, setEventDate] = useState('Saturday, September 09, 2023');
+    const [eventTime, setEventTime] = useState('12PM EST');
+    const [eventVenue, setEventVenue] = useState('Arthur Ashe Stadium (Flushing, NY)');
     const [eventSection, setEventSection] = useState('415');
     const [eventRow, setEventRow] = useState('J');
     const [eventSeat, setEventSeat] = useState('7');
 
-    const [imgUrl, setImgUrl] = useState('https://prettytickets.com/logo512.png')
-    const [ticketColor, setTicketColor] = useState('#F5F5F5')
+    const [imgUrl, setImgUrl] = useState('https://tinyurl.com/example-img')
+    const [ticketColor, setTicketColor] = useState('#EAF1E4')
     const [ticketTexture, setTicketTexture] = useState(Linen)
-    const [textColor, setTextColor] = useState('#000')
+    const [textColor, setTextColor] = useState('#000000')
+    const [font, setFont] = useState('sans-serif')
 
     const [showConfetti, setShowConfetti] = useState(true);
     const [gifterName, setGifterName] = useState("Someone secret");
@@ -75,6 +77,7 @@ export const Home = () => {
             ticketColor,
             ticketTexture,
             textColor,
+            font,
             giftMessage,
             gifterName,
             showConfetti,
@@ -99,6 +102,7 @@ export const Home = () => {
         queryParams.set('ticketColor', ticketColor || emptyValue);
         queryParams.set('ticketTexture', ticketTexture || emptyValue);
         queryParams.set('textColor', textColor || emptyValue);
+        queryParams.set('font', font || emptyValue);
         queryParams.set('giftMessage', giftMessage || emptyValue);
         queryParams.set('gifterName', gifterName || 'Someone secret');
 
@@ -131,6 +135,7 @@ export const Home = () => {
             setTicketColor(parsedFormData.ticketColor);
             setTicketTexture(parsedFormData.ticketTexture);
             setTextColor(parsedFormData.textColor);
+            setFont(parsedFormData.font);
             setGiftMessage(parsedFormData.giftMessage);
             setGifterName(parsedFormData.gifterName);
             setShowConfetti(parsedFormData.showConfetti);
@@ -147,7 +152,7 @@ export const Home = () => {
                     <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[420px] md:max-h-none overflow-y-scroll pb-4 bg-white bg-opacity-30 px-4 pt-3 mx-2 sm:px-6 sm:pt-4 min-w-[250px] md:max-w-[500px]">
                         <div className="flex-grow overflow-y-scroll">
                             <div className="mt-2">
-                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800">Event Information</h3>
+                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800">Event Info</h3>
                                 <InputTextField
                                     label="Title*"
                                     value={eventName}
@@ -201,7 +206,7 @@ export const Home = () => {
                                 />
                             </div>
                             <div className="my-8">
-                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800">Ticket Design</h3>
+                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800">Design</h3>
                                 <div className="inline-flex justify-around w-[100%] mt-4 mb-2">
                                     <InputColorField
                                         label="Background"
@@ -220,6 +225,12 @@ export const Home = () => {
                                     callbackFn={setTicketTexture}
                                     inputList={getTextures()}
                                 />
+                                <InputDropdownField
+                                    label="Font"
+                                    value={font}
+                                    callbackFn={setFont}
+                                    inputList={getFonts()}
+                                />
                                 <InputTextAreaField
                                     label="Image URL"
                                     required={false}
@@ -229,7 +240,7 @@ export const Home = () => {
                             </div>
 
                             <div className="mb-2">
-                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800">Gift Information</h3>
+                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800">Gift Info</h3>
                                 <InputTextField
                                     label="Your Name"
                                     required={false}
@@ -270,6 +281,7 @@ export const Home = () => {
                             ticketColor={ticketColor}
                             ticketTexture={ticketTexture}
                             textColor={textColor}
+                            font={font}
                         />
                         <h2 className="text-sm lg:text-md font-extrabold leading-tight text-center text-gray-800 mx-auto italic mt-12 sm:mt-6">Gift Preview:</h2>
                         <h1 className="text-xl lg:text-2xl font-extrabold leading-tight text-gray-800 mt-10 mb-6 sm:mt-6 mx-auto text-center max-w-[250px] md:max-w-[400px]">{gifterName} sent you tickets to an event!</h1>

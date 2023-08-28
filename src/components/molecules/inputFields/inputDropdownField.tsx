@@ -1,8 +1,8 @@
 import React from 'react';
 
-type Texture = {
+export type DropdownItem = {
     name: string,
-    path: string,
+    value: string,
 }
 
 type InputDropdownFieldProps = {
@@ -10,7 +10,7 @@ type InputDropdownFieldProps = {
     label: string,
     required?: boolean,
     value: string,
-    inputList: Texture[]
+    inputList: DropdownItem[]
 }
 
 export const InputDropdownField = ({ label, value, callbackFn, required = true, inputList }: InputDropdownFieldProps) => {
@@ -23,8 +23,8 @@ export const InputDropdownField = ({ label, value, callbackFn, required = true, 
         <div className="mb-2 px-2">
             <label htmlFor="dropdown">{label}</label>
             <select name="dropdown" id="dropdown" className="bg-white py-1 px-2 lg:p-2 rounded shadow-xl w-[100%]" value={value} onChange={handleOptionChange}>
-                {inputList.map((item: Texture, index: number) => (
-                    <option key={index} value={item.path}>
+                {inputList.map((item: DropdownItem, index: number) => (
+                    <option key={index} value={item.value}>
                         {item.name}
                     </option>
                 ))}

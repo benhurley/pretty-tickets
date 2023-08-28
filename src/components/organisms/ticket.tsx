@@ -15,6 +15,7 @@ type TicketData = {
     ticketColor: string;
     textColor: string;
     ticketTexture: string;
+    font: string;
 };
 
 type TicketProps = {
@@ -34,7 +35,8 @@ const Ticket = ({
     imgUrl,
     ticketColor,
     textColor,
-    ticketTexture
+    ticketTexture,
+    font,
 }: TicketProps) => {
     return (
         <div className="flex flex-col items-center justify-center">
@@ -47,7 +49,8 @@ const Ticket = ({
                                 backgroundColor: ticketColor || "#EEEEEE",
                                 backgroundImage: ticketTexture ? `url(${ticketTexture})` : `url(${Linen})`,
                                 backgroundBlendMode: "multiply", // Blend the color and texture
-                                backgroundRepeat: "no-repeat"
+                                backgroundRepeat: "no-repeat",
+                                fontFamily: font || "sans-serif",
                             }}
                             className="border-t border-b border-dashed border-b-4 border-t-4 border-white relative px-6 py-6 m-4"
                         >
@@ -63,22 +66,24 @@ const Ticket = ({
                             <div className="flex flex-col lg:flex-row md:space-y-0 md:justify-between">
                                 {isValidInput(eventDescription) && <p style={{ color: textColor || "#000" }} className="text-gray-600">{eventDescription}</p>}
                             </div>
-                            <div style={{ color: textColor || "#000" }} className="flex flex-col space-y-2 lg:flex-row lg:space-y-0 lg:justify-between mt-4">
-                                <div className="max-w-[160px]">
+                            <div style={{ color: textColor || "#000" }} className="flex space-y-2 flex-row justify-between mt-4">
+                                <div>
                                     <span className="text-sm">Date</span>
                                     <div className="font-semibold">{eventDate}</div>
                                 </div>
-                                {isValidInput(eventTime) && <div className="max-w-[160px]">
+                                {isValidInput(eventTime) && <div>
                                     <span className="text-sm">Time</span>
                                     {eventTime && <div className="font-semibold">{eventTime}</div>}
                                 </div>}
-                                <div className="max-w-[160px]">
+
+                            </div>
+                            <div style={{ color: textColor || "#000" }} className="flex flex-col space-y-2 mb-6">
+                                <div>
                                     <span className="text-sm">Venue</span>
                                     <div className="font-semibold">{eventVenue}</div>
                                 </div>
                             </div>
-
-                            <div style={{ color: textColor || "#000" }} className="flex items-center justify-between my-4">
+                            <div style={{ color: textColor || "#000" }} className="flex items-center justify-around my-4">
                                 {isValidInput(eventSection) && <div>
                                     <span className="text-sm">Section</span>
                                     {eventSection && <div className="font-semibold">{eventSection}</div>}

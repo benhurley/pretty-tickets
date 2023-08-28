@@ -6,16 +6,15 @@ import Wrinkled from "../components/atoms/ticketTextures/wrinkled.png";
 import Horizontal from "../components/atoms/ticketTextures/horizontal.png";
 import Marble from "../components/atoms/ticketTextures/marbled.png";
 import Wood from "../components/atoms/ticketTextures/wood.png";
-
 const textures = [
-    { name: "Linen", path: Linen }, 
-    { name: "Horizontal Lines", path: Horizontal }, 
-    { name: "Vertical Lines", path: Vertical }, 
-    { name: "Recycled", path: Recycled }, 
-    { name: "Weathered", path: Weathered }, 
-    { name: "Wrinkled", path: Wrinkled }, 
-    { name: "Marble", path: Marble }, 
-    { name: "Wood", path: Wood }
+    { name: "Linen", value: Linen },
+    { name: "Horizontal Lines", value: Horizontal },
+    { name: "Vertical Lines", value: Vertical },
+    { name: "Recycled", value: Recycled },
+    { name: "Weathered", value: Weathered },
+    { name: "Wrinkled", value: Wrinkled },
+    { name: "Marble", value: Marble },
+    { name: "Wood", value: Wood }
 ];
 
 export const getTextures = () => {
