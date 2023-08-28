@@ -23,7 +23,7 @@ const handler: Handler = async (event: HandlerEvent) => {
         messages: [
             {
                 role: "system",
-                content: "You are designing a digital ticket for an upcoming event. The ticket will be gifted virtually and can include a small gift message as part of it. Use event data to draft a message that the gift giver can use. Rules: Keep it to around 75 words, dont use salutations or signatures in the message, and dont restate the obvious too much).",
+                content: "You are designing a digital ticket for an upcoming event. The ticket will be gifted virtually to a friend and can include a small gift message as part of it. Use event data to draft a message that the gift giver can use. Rules: Keep it to around 60 words, voice the message as if you are casually talking to an friend, dont use salutations or signatures in the message, and dont restate all of the event info).",
             },
             // Use "slice" to limit the length of the input to 500 characters
             { role: "user", content: prompt.slice(0, 500) },
