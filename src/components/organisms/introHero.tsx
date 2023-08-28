@@ -10,7 +10,7 @@ export const IntroHero = () => {
                 <img className="absolute inline-block top-[80px] sm:hidden ml-4 animate-in spin-in-90 ease-in-out duration-1000" width={50} src="/logo128.png" alt="ticket" />
             </>
             <h2 className="text-lg text-gray-800 font-bold">Elevate Your Electronic Tickets</h2>
-            <p className="mt-4 mb-6 sm:my-6">Transform your recent purchase into a beautiful ticket replica made for gifting and sharing.</p>
+            <p className="mt-4 mb-6 sm:my-6">Transform your recent purchase into a beautiful ticket replica made for gifting.</p>
             <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
                 <div className="bg-white p-4 rounded-lg shadow-md text-center sm:flex-grow md:w-[200px] md:h-[110px] w-full">
                     <h3 className="text-lg md:text-xl font-semibold mb-1 text-left">1. Add Details</h3>

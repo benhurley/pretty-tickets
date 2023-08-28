@@ -4,7 +4,7 @@
 
 ## Elevate Your Electronic Tickets
 
-Transform your recent purchase into a beautiful ticket replica made for gifting and sharing
+Transform your recent purchase into a beautiful ticket replica made for gifting.
 
 ![Homepage](./public/screenshot.png)
 
