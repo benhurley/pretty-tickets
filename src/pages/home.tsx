@@ -23,7 +23,7 @@ export const Home = () => {
     const [eventDescription, setEventDescription] = useState(`Session 24: Women's Final / Mixed Doubles Final`);
     const [eventDate, setEventDate] = useState('Saturday, September 9th, 2023');
     const [eventTime, setEventTime] = useState('12PM EST');
-    const [eventVenue, setEventVenue] = useState('Arthur Ashe Stadium (Flushing, NY)');
+    const [eventVenue, setEventVenue] = useState('Arthur Ashe Stadium');
     const [eventSection, setEventSection] = useState('415');
     const [eventRow, setEventRow] = useState('J');
     const [eventSeat, setEventSeat] = useState('7');
