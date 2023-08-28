@@ -71,7 +71,7 @@ const Ticket = ({
                                     <span className="text-sm">Date</span>
                                     <div className="font-semibold">{eventDate}</div>
                                 </div>
-                                {isValidInput(eventTime) && <div>
+                                {isValidInput(eventTime) && <div className="ml-8 min-w-[100px]">
                                     <span className="text-sm">Time</span>
                                     {eventTime && <div className="font-semibold">{eventTime}</div>}
                                 </div>}
