@@ -73,7 +73,7 @@ export const Results = () => {
 
     const ThankYouModule = () => {
         return (<>
-            <p className="text-md lg:text-lg font-extrabold leading-tight text-gray-800 mt-2 mx-auto text-center">Thanks for using Pretty Tickets<span className="text-[10px] absolute -mt-2">™</span></p>
+            <p className="text-md lg:text-lg font-extrabold leading-tight text-gray-800 mt-4 mx-auto text-center">Thanks for using Pretty Tickets<span className="text-[10px] absolute -mt-1">™</span></p>
             <div className="inline-flex items-center justify-center md:col-span-2 pt-1 mt-2 mb-4 font-bold">
                 <a className="bg-purple-100 px-4 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/benhurley/fancy-tickets" target="_blank" rel="noreferrer">
                     Contribute
@@ -91,14 +91,14 @@ export const Results = () => {
     return (
         <div className='min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 pb-20'>
             <Confetti run={showConfetti === "true"} width={window.innerWidth} height={window.innerHeight} numberOfPieces={150} />
-            <div className="flex flex-col md:flex-row items-center justify-center px-2 py-[10%] sm:py-[6%] lg:px-10 lg:max-w-[1440px] lg:mx-auto mt-8 sm:mt-0">
+            <div className="flex flex-col md:flex-row items-center justify-center px-2 py-[10%] sm:py-[6%] lg:px-10 lg:max-w-[1440px] lg:mx-auto mt-12 sm:mt-0">
                 <div className="flex-1 md:w-1/2 flex flex-col items-center md:items-start justify-center px-4 py-6 sm:py-20 md:pt-0 z-10">
                     <p className="absolute top-16 md:top-20 left-6 sm:left-10 text-sm mr-auto text-gray-800 font-bold"><Link className="hover:underline" to="/">Home</Link> / Results</p>
                     <>
                         {mode === "creatorMode" &&
                             <>
-                                <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white px-4 mx-auto mb-10 mt-10 sm:mt-0 lg:mt-8'>
-                                    <p className="text-xl md:text-2xl font-bold leading-tight text-gray-800 my-4 mx-auto text-center lg:px-6">{tinyURL ? "Your Free URL:" : "Your Pretty Ticket is ready!"}</p>
+                                <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white px-3 sm:px-4 mx-auto mb-10 mt-10 sm:mt-0 lg:mt-8'>
+                                    <p className="text-xl md:text-2xl font-bold leading-tight text-gray-800 my-4 mx-auto text-center px-4 lg:px-6">{tinyURL ? "Your Free URL:" : "Your Pretty Ticket is ready!"}</p>
                                     <ShareCTA />
                                     {tinyURL && <ThankYouModule />}
                                 </div>

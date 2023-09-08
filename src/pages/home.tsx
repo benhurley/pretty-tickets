@@ -149,9 +149,9 @@ export const Home = () => {
             </div>
             <div className="flex flex-col md:flex-row items-center max-w-[1200px] mx-auto">
                 <div className="flex-1 md:w-1/2 px-4 lg:ml-10 mt-6 max-w-full w-full">
-                    <div className="bg-green-100 p-4 rounded-lg shadow-md text-center sm:flex-grow max-w-[350px] w-full mx-auto mb-8">
-                        <h3 className="text-lg md:text-xl font-semibold mb-1 text-left">Step 1: Add Details</h3>
-                        <p className="text-xs sm:text-sm text-gray-600 text-left">Input event details with the help of Generative AI.</p>
+                    <div className="bg-green-100 p-4 rounded-lg shadow-md text-center sm:flex-grow max-w-[325px] w-full mx-auto mb-8">
+                        <h3 className="text-lg font-semibold mb-1 text-left">Step 1: Add Details</h3>
+                        <p className="text-xs text-gray-600 text-left">Input event details with the help of Generative AI.</p>
                     </div>
                     <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[420px] md:max-h-none overflow-y-scroll pb-4 bg-white bg-opacity-30 px-4 pt-3 mx-2 sm:px-6 sm:pt-4 min-w-[250px] md:max-w-[500px]">
                         <div className="flex-grow overflow-y-scroll">
@@ -270,9 +270,9 @@ export const Home = () => {
                 </div>
                 <div className="flex-1 md:w-1/2 px-4 mt-4 sm:mt-0 mb-auto sticky top-16">
                     <div className="mt-4 mx-2 sm:mt-6 mb-10">
-                        <div className="bg-green-100 p-4 rounded-lg shadow-md text-center sm:flex-grow max-w-[350px] w-full mx-auto mb-8">
-                            <h3 className="text-lg md:text-xl font-semibold mb-1 text-left">Step 2: Preview</h3>
-                            <p className="text-xs sm:text-sm text-gray-600 text-left">Get a real-time look at your beautiful gift design.</p>
+                        <div className="bg-green-100 p-4 rounded-lg shadow-md text-center sm:flex-grow max-w-[325px] w-full mx-auto mb-8">
+                            <h3 className="text-lg font-semibold mb-1 text-left">Step 2: Preview</h3>
+                            <p className="text-xs text-gray-600 text-left">Get a real-time look at your beautiful gift design.</p>
                         </div>
                         <Ticket
                             eventName={eventName}
@@ -298,9 +298,9 @@ export const Home = () => {
                 </div>
             </div>
             <div className="block items-center justify-center sm:py-12">
-                <div className="bg-green-100 p-4 rounded-lg shadow-md text-center max-w-[350px] mx-auto mb-8">
-                    <h3 className="text-lg md:text-xl font-semibold mb-1 text-left">Step 3: Create</h3>
-                    <p className="text-xs sm:text-sm text-gray-600 text-left">Share your ticket replica with it's lucky recipient.</p>
+                <div className="bg-green-100 p-4 rounded-lg shadow-md text-center max-w-[325px] mx-auto mb-8">
+                    <h3 className="text-lg font-semibold mb-1 text-left">Step 3: Create</h3>
+                    <p className="text-xs text-gray-600 text-left">Share your ticket replica with it's lucky recipient.</p>
                 </div>
                 <div className="flex justify-center">
                     <button className="bg-white font-bold px-8 py-2 rounded-full text-lg shadow-xl transform hover:scale-105 transition-transform duration-300" onClick={handleSubmit}>
