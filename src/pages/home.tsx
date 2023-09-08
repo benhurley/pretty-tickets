@@ -299,11 +299,11 @@ export const Home = () => {
             </div>
             <div className="block items-center justify-center sm:py-12">
                 <div className="bg-green-100 p-4 rounded-lg shadow-md text-center max-w-[350px] mx-auto mb-8">
-                    <h3 className="text-lg md:text-xl font-semibold mb-1 text-left">Step 3: Create!</h3>
+                    <h3 className="text-lg md:text-xl font-semibold mb-1 text-left">Step 3: Create</h3>
                     <p className="text-xs sm:text-sm text-gray-600 text-left">Share your ticket replica with it's lucky recipient.</p>
                 </div>
                 <div className="flex justify-center">
-                    <button className="bg-white px-6 py-1 rounded-2xl text-lg shadow-xl transform hover:scale-105 transition-transform duration-300" onClick={handleSubmit}>
+                    <button className="bg-white font-bold px-8 py-2 rounded-full text-lg shadow-xl transform hover:scale-105 transition-transform duration-300" onClick={handleSubmit}>
                         Create Pretty Ticket
                     </button>
                 </div>

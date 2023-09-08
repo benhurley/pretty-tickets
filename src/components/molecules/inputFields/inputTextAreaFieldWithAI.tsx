@@ -25,7 +25,7 @@ export const InputTextAreaFieldWithAI = ({ label, value, inputCallbackFn, aiCall
                 <button
                     disabled={wasAIButtonClicked || isLoading}
                     className={`
-                        ${wasAIButtonClicked ? !isLoading ? 'bg-blue-100' : 'bg-gray-100' : 'bg-green-100'} px-4 py-1 rounded-xl text-xs shadow transition-all duration-300 ${wasAIButtonClicked ? 'scale-100' : 'hover:scale-105 active:scale-100'
+                        ${wasAIButtonClicked ? !isLoading ? 'bg-blue-100' : 'bg-gray-100' : 'bg-green-100'} font-bold px-4 py-1 rounded-xl text-xs shadow transition-all duration-300 ${wasAIButtonClicked ? 'scale-100' : 'hover:scale-105 active:scale-100'
                         }`}
                     onClick={handleClick}
                 >

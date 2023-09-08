@@ -63,7 +63,7 @@ export const Results = () => {
                             <img src={ShareIcon} className="-mb-1" width={18} alt="share icon" />
                         </div>}
                         <div className='inline-block'>
-                            <p className='text-md'>{shareBtnCopy}</p>
+                            <p className='text-md font-bold'>{shareBtnCopy}</p>
                         </div>
                     </button>
                     : <button className="bg-white mx-auto px-6 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 disabled:scale-100" onClick={() => handleCopyClick(tinyURL)}>{hasCopiedTinyUrl ? <span className='px-6'>Copied to clipboard ✔</span> : tinyURL}</button>}
@@ -73,8 +73,8 @@ export const Results = () => {
 
     const ThankYouModule = () => {
         return (<>
-            <p className="text-md lg:text-lg font-extrabold leading-tight text-gray-800 mt-2 mx-auto text-center">Thanks for using Pretty Tickets!</p>
-            <div className="inline-flex items-center justify-center md:col-span-2 pt-1 mt-2 mb-4">
+            <p className="text-md lg:text-lg font-extrabold leading-tight text-gray-800 mt-2 mx-auto text-center">Thanks for using Pretty Tickets<span className="text-[10px] absolute -mt-2">™</span></p>
+            <div className="inline-flex items-center justify-center md:col-span-2 pt-1 mt-2 mb-4 font-bold">
                 <a className="bg-purple-100 px-4 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/benhurley/fancy-tickets" target="_blank" rel="noreferrer">
                     Contribute
                 </a>
