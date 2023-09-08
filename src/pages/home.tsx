@@ -5,15 +5,16 @@ import { InputTextField } from "../components/molecules/inputFields/inputTextFie
 import { InputCheckboxField } from "../components/molecules/inputFields/inputCheckboxField";
 import { emptyValue } from "../helpers/globalConstants";
 import { InputTextAreaFieldWithAI } from "../components/molecules/inputFields/inputTextAreaFieldWithAI";
-import { fetchGiftMessage } from "../helpers/fetchOpenAI";
+import { fetchGiftMessage, fetchTicketDesign } from "../helpers/fetchOpenAI";
 import { InputColorField } from "../components/molecules/inputFields/inputColorField";
 import { InputTextAreaField } from "../components/molecules/inputFields/inputTextAreaField";
 import { isValidInput } from "../helpers/isValidInput";
-import Linen from "../components/atoms/ticketTextures/linen.png";
+import VerticalLines from "../components/atoms/ticketTextures/vertical.png";
 import { InputDropdownField } from "../components/molecules/inputFields/inputDropdownField";
 import { getTextures } from "../helpers/textures";
 import { getFonts } from "../helpers/fonts";
 import { IntroHero } from "../components/organisms/introHero";
+import { GenerateWithAIButton } from "../components/molecules/buttons/generateWithAIButton";
 
 export const Home = () => {
     const navigate = useNavigate();
@@ -30,7 +31,7 @@ export const Home = () => {
 
     const [imgUrl, setImgUrl] = useState('https://tinyurl.com/example-img')
     const [ticketColor, setTicketColor] = useState('#F5F5F5')
-    const [ticketTexture, setTicketTexture] = useState(Linen)
+    const [ticketTexture, setTicketTexture] = useState(VerticalLines)
     const [textColor, setTextColor] = useState('#000000')
     const [font, setFont] = useState('sans-serif')
 
@@ -38,6 +39,29 @@ export const Home = () => {
     const [gifterName, setGifterName] = useState("Someone secret");
     const [giftMessage, setGiftMessage] = useState(`"Happy Birthday! Can't wait to celebrate with you and finally see the pros face-off at The US Open."`);
     const [isLoadingAIGiftMessage, setIsLoadingAIGiftMessage] = useState(false);
+    const [isLoadingTicketDesignWithAI, setIsLoadingTicketDesignWithAI] = useState(false);
+
+    const handleDesignTicketWithAI = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        setIsLoadingTicketDesignWithAI(true)
+        const design = await fetchTicketDesign({
+            eventName,
+            eventSubtitle,
+            eventDescription,
+            eventDate,
+            eventTime,
+            eventVenue,
+        })
+
+        setIsLoadingTicketDesignWithAI(false)
+
+        if (!!design) {
+            const textures = getTextures();
+            setTicketColor(design.ticket_color)
+            setFont(design.font)
+            setTextColor(design.font_color)
+            setTicketTexture(textures.find(t => t.name === design.texture)?.value || "");
+        }
+    }
 
     const handleGenerateMessageWithAI = async (e: React.ChangeEvent<HTMLInputElement>) => {
         setIsLoadingAIGiftMessage(true)
@@ -211,6 +235,12 @@ export const Home = () => {
                             </div>
                             <div className="my-8">
                                 <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800">Ticket Design</h3>
+                                <div className="flex justify-center mt-3 mb-2">
+                                    <GenerateWithAIButton
+                                        isLoading={isLoadingTicketDesignWithAI}
+                                        aiCallbackFn={handleDesignTicketWithAI}
+                                    />
+                                </div>
                                 <div className="inline-flex justify-around w-[100%] mt-4 mb-2">
                                     <InputColorField
                                         label="Background"
