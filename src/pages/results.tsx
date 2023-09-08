@@ -56,7 +56,7 @@ export const Results = () => {
 
     const ShareCTA = () => {
         return (
-            <div className='flex mx-auto my-2 pb-3'>
+            <div className='flex mx-auto my-2 pb-3 min-w-[250px]'>
                 {!tinyURL
                     ? <button disabled={!!tinyURL} className="bg-white mx-auto px-6 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 disabled:scale-100" onClick={() => { handleFetchTinyURL() }}>
                         {shareBtnCopy.includes("Share") && <div className='inline-block pr-2'>
@@ -75,10 +75,10 @@ export const Results = () => {
         return (<>
             <p className="text-md lg:text-lg font-extrabold leading-tight text-gray-800 mt-2 mx-auto text-center">Thanks for using Pretty Tickets!</p>
             <div className="inline-flex items-center justify-center md:col-span-2 pt-1 mt-2 mb-4">
-                <a className="bg-blue-100 px-4 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/benhurley/fancy-tickets" target="_blank" rel="noreferrer">
+                <a className="bg-purple-100 px-4 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/benhurley/fancy-tickets" target="_blank" rel="noreferrer">
                     Contribute
                 </a>
-                <a className="bg-green-100 px-4 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/sponsors/benhurley" target="_blank" rel="noreferrer">
+                <a className="bg-blue-100 px-4 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/sponsors/benhurley" target="_blank" rel="noreferrer">
                     Donate
                 </a>
                 <a className="bg-pink-100 px-4 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/sponsors/benhurley" target="_blank" rel="noreferrer">
@@ -97,15 +97,15 @@ export const Results = () => {
                     <>
                         {mode === "creatorMode" &&
                             <>
-                                <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white px-4 mx-auto mb-4 sm:mb-10 mt-10 sm:mt-0 lg:mt-8'>
-                                    <p className="text-xl md:text-2xl font-extrabold leading-tight text-gray-800 my-4 mx-auto text-center lg:px-6">{tinyURL ? "Your Free URL:" : "Bravo! You're all set."}</p>
+                                <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white px-4 mx-auto mb-10 mt-10 sm:mt-0 lg:mt-8'>
+                                    <p className="text-xl md:text-2xl font-bold leading-tight text-gray-800 my-4 mx-auto text-center lg:px-6">{tinyURL ? "Your Free URL:" : "Your Pretty Ticket is ready!"}</p>
                                     <ShareCTA />
                                     {tinyURL && <ThankYouModule />}
                                 </div>
                             </>
                         }
-                        <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight text-gray-800 mt-10 mb-6 sm:mt-4 mx-auto text-center max-w-[250px] md:max-w-[575px]">{gifterName} sent you tickets to an event!</h1>
-                        {isValidInput(giftMessage) && isValidInput(giftMessage) && <div className='rounded-xl shadow-2xl bg-white p-4 mx-auto max-w-[575px]'>
+                        {isValidInput(giftMessage) && isValidInput(giftMessage) && <div className='rounded-xl shadow-2xl bg-white p-8 mx-auto max-w-[575px]'>
+                            <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight text-gray-800 mb-6 mx-auto text-center">{gifterName} sent you tickets to an event!</h1>
                             <p>{`${giftMessage} - ${gifterName}`}</p>
                         </div>}
                     </>
