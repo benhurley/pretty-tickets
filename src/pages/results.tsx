@@ -98,7 +98,7 @@ export const Results = () => {
                         {mode === "creatorMode" &&
                             <>
                                 <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white px-3 sm:px-4 mx-auto mb-10 mt-10 sm:mt-0 lg:mt-8'>
-                                    <p className="text-xl md:text-2xl font-bold leading-tight text-gray-800 my-4 mx-auto text-center px-4 lg:px-6">{tinyURL ? "Your Free URL:" : "Your Pretty Ticket is ready!"}</p>
+                                    <p className="text-xl md:text-2xl font-bold leading-tight text-gray-800 my-4 mx-auto text-center px-4 lg:px-6">{tinyURL ? "Your Free URL:" : "Your ticket is ready to send!"}</p>
                                     <ShareCTA />
                                     {tinyURL && <ThankYouModule />}
                                 </div>
@@ -106,7 +106,10 @@ export const Results = () => {
                         }
                         {isValidInput(giftMessage) && isValidInput(giftMessage) && <div className='rounded-xl shadow-2xl bg-white p-8 mx-auto max-w-[575px]'>
                             <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight text-gray-800 mb-6 mx-auto text-center">{gifterName} sent you tickets to an event!</h1>
-                            <p>{`${giftMessage} - ${gifterName}`}</p>
+                            <div className='md:px-6'>
+                                <p>{giftMessage}</p>
+                                <p className='mt-3'>{`- ${gifterName}`}</p>
+                            </div>
                         </div>}
                     </>
                 </div>
