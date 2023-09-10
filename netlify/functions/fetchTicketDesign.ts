@@ -6,7 +6,6 @@ const handler: Handler = async (event: HandlerEvent) => {
     const eventSubtitle = event.queryStringParameters?.subTitle || ""
     const eventDescription = event.queryStringParameters?.eventDescription || ""
     const eventDate = event.queryStringParameters?.eventDate || ""
-    const eventTime = event.queryStringParameters?.eventTime || ""
     const eventVenue = event.queryStringParameters?.eventVenue || ""
 
     if (!eventName) {
@@ -16,7 +15,7 @@ const handler: Handler = async (event: HandlerEvent) => {
         };
     }
 
-    const prompt = `Event Details: ${eventName} ${eventSubtitle} ${eventDescription} ${eventDate} ${eventTime} ${eventVenue}`
+    const prompt = `Event Details: ${eventName} ${eventSubtitle} ${eventDescription} ${eventDate} ${eventVenue}`
 
     const requestBody = {
         model: "gpt-3.5-turbo",

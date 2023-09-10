@@ -1,3 +1,4 @@
+import { formatTime } from "../../helpers/formatTime";
 import { isValidInput } from "../../helpers/isValidInput";
 import Linen from "../atoms/ticketTextures/linen.png";
 
@@ -6,7 +7,8 @@ type TicketData = {
     eventSubtitle: string;
     eventDescription: string;
     eventDate: string;
-    eventTime: string;
+    eventStartTime: string;
+    eventEndTime: string;
     eventVenue: string;
     eventSection: string;
     eventRow: string;
@@ -27,7 +29,8 @@ const Ticket = ({
     eventSubtitle,
     eventDescription,
     eventDate,
-    eventTime,
+    eventStartTime,
+    eventEndTime,
     eventVenue,
     eventSection,
     eventRow,
@@ -38,6 +41,8 @@ const Ticket = ({
     ticketTexture,
     font,
 }: TicketProps) => {
+  const eventDateConverted = new Date(eventDate || "");
+
     return (
         <div className="flex flex-col items-center justify-center">
             <div className="absolute bg-green-500 z-0"></div>
@@ -69,18 +74,22 @@ const Ticket = ({
                             <div style={{ color: textColor || "#000000" }} className="flex flex-row justify-between mt-4 mb-2">
                                 <div>
                                     <span className="text-sm">Date</span>
-                                    <div className="font-semibold">{eventDate}</div>
+                                    <div className="font-semibold">{eventDateConverted?.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric'})}</div>
                                 </div>
-                                {isValidInput(eventTime) && <div className="ml-8 min-w-[100px]">
-                                    <span className="text-sm">Time</span>
-                                    {eventTime && <div className="font-semibold">{eventTime}</div>}
+                                {isValidInput(eventStartTime) && <div className="ml-8 min-w-[100px]">
+                                    <span className="text-sm">Start Time</span>
+                                    {eventStartTime && <div className="font-semibold">{formatTime(eventStartTime)}</div>}
                                 </div>}
                             </div>
-                            <div style={{ color: textColor || "#000000" }} className="flex flex-col space-y-2 mb-6">
+                            <div style={{ color: textColor || "#000000" }} className="flex flex-row justify-between mt-3 mb-6">
                                 <div>
                                     <span className="text-sm">Venue</span>
                                     <div className="font-semibold">{eventVenue}</div>
                                 </div>
+                                {isValidInput(eventEndTime) && <div className="ml-8 min-w-[100px]">
+                                    <span className="text-sm">End Time</span>
+                                    {eventEndTime && <div className="font-semibold">{formatTime(eventEndTime)}</div>}
+                                </div>}
                             </div>
                             <div style={{ color: textColor || "#000000" }} className="flex items-center justify-around my-4">
                                 {isValidInput(eventSection) && <div>

@@ -3,7 +3,6 @@ type queryParams = {
     eventSubtitle: string,
     eventDescription: string,
     eventDate: string,
-    eventTime: string,
     eventVenue: string
 };
 
@@ -16,7 +15,6 @@ export async function fetchGiftMessage({
     eventSubtitle,
     eventDescription,
     eventDate,
-    eventTime,
     eventVenue,
 }: fetchGiftMessageProps): Promise<string> {
     const functionName = "fetchGiftMessage";
@@ -27,7 +25,6 @@ export async function fetchGiftMessage({
     queryParams.set('eventSubtitle', eventSubtitle || "");
     queryParams.set('eventDescription', eventDescription || "");
     queryParams.set('eventDate', eventDate || "");
-    queryParams.set('eventTime', eventTime || "");
     queryParams.set('eventVenue', eventVenue || "");
 
     const url = `${baseURL}?${queryParams.toString()}`;
@@ -57,8 +54,6 @@ export async function fetchTicketDesign({
     eventName,
     eventSubtitle,
     eventDescription,
-    eventDate,
-    eventTime,
     eventVenue,
 }: fetchGiftMessageProps): Promise<TicketDesignResponse> {
     const functionName = "fetchTicketDesign";
@@ -68,8 +63,6 @@ export async function fetchTicketDesign({
     queryParams.set('eventName', eventName || "");
     queryParams.set('eventSubtitle', eventSubtitle || "");
     queryParams.set('eventDescription', eventDescription || "");
-    queryParams.set('eventDate', eventDate || "");
-    queryParams.set('eventTime', eventTime || "");
     queryParams.set('eventVenue', eventVenue || "");
 
     const url = `${baseURL}?${queryParams.toString()}`;

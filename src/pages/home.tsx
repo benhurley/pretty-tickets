@@ -15,6 +15,8 @@ import { getTextures } from "../helpers/textures";
 import { getFonts } from "../helpers/fonts";
 import { IntroHero } from "../components/organisms/introHero";
 import { GenerateWithAIButton } from "../components/molecules/buttons/generateWithAIButton";
+import { InputDateField } from "../components/molecules/inputFields/inputDateField";
+import { InputTimeField } from "../components/molecules/inputFields/inputTimeField";
 
 export const Home = () => {
     const navigate = useNavigate();
@@ -22,8 +24,9 @@ export const Home = () => {
     const [eventName, setEventName] = useState('2023 US Open Tennis');
     const [eventSubtitle, setEventSubtitle] = useState('VIP ENTRY');
     const [eventDescription, setEventDescription] = useState(`Session 24: Women's Final / Mixed Doubles Final`);
-    const [eventDate, setEventDate] = useState('Saturday, September 9th, 2023');
-    const [eventTime, setEventTime] = useState('12PM EST');
+    const [eventDate, setEventDate] = useState("2023-09-09");
+    const [eventStartTime, setEventStartTime] = useState("12:00");
+    const [eventEndTime, setEventEndTime] = useState("17:00");
     const [eventVenue, setEventVenue] = useState('Arthur Ashe Stadium');
     const [eventSection, setEventSection] = useState('415');
     const [eventRow, setEventRow] = useState('J');
@@ -36,7 +39,7 @@ export const Home = () => {
     const [font, setFont] = useState('sans-serif')
 
     const [showConfetti, setShowConfetti] = useState(true);
-    const [gifterName, setGifterName] = useState("Someone secret");
+    const [gifterName, setGifterName] = useState("Someone");
     const [giftMessage, setGiftMessage] = useState(`"Happy Birthday! Can't wait to celebrate with you and finally see the pros face-off at The US Open."`);
     const [isLoadingAIGiftMessage, setIsLoadingAIGiftMessage] = useState(false);
     const [isLoadingTicketDesignWithAI, setIsLoadingTicketDesignWithAI] = useState(false);
@@ -47,8 +50,6 @@ export const Home = () => {
             eventName,
             eventSubtitle,
             eventDescription,
-            eventDate,
-            eventTime,
             eventVenue,
         })
 
@@ -70,7 +71,6 @@ export const Home = () => {
             eventSubtitle,
             eventDescription,
             eventDate,
-            eventTime,
             eventVenue,
         })
 
@@ -92,7 +92,8 @@ export const Home = () => {
             eventSubtitle,
             eventDescription,
             eventDate,
-            eventTime,
+            eventStartTime,
+            eventEndTime,
             eventVenue,
             eventSection,
             eventRow,
@@ -116,7 +117,8 @@ export const Home = () => {
         queryParams.set('eventSubtitle', eventSubtitle || emptyValue);
         queryParams.set('eventDescription', eventDescription || emptyValue);
         queryParams.set('eventDate', eventDate || emptyValue);
-        queryParams.set('eventTime', eventTime || emptyValue);
+        queryParams.set('eventStartTime', eventStartTime || emptyValue);
+        queryParams.set('eventEndTime', eventEndTime || emptyValue);
         queryParams.set('eventVenue', eventVenue || emptyValue);
         queryParams.set('eventSection', eventSection || emptyValue);
         queryParams.set('eventRow', eventRow || emptyValue);
@@ -128,7 +130,7 @@ export const Home = () => {
         queryParams.set('textColor', textColor || emptyValue);
         queryParams.set('font', font || emptyValue);
         queryParams.set('giftMessage', giftMessage || emptyValue);
-        queryParams.set('gifterName', gifterName || 'Someone secret');
+        queryParams.set('gifterName', gifterName || 'Someone');
 
         const queryString = queryParams.toString();
         const longURL = `/results?${queryString}`;
@@ -150,7 +152,8 @@ export const Home = () => {
             setEventSubtitle(parsedFormData.eventSubtitle);
             setEventDescription(parsedFormData.eventDescription);
             setEventDate(parsedFormData.eventDate);
-            setEventTime(parsedFormData.eventTime);
+            setEventStartTime(parsedFormData.eventStartTime);
+            setEventEndTime(parsedFormData.eventEndTime);
             setEventVenue(parsedFormData.eventVenue);
             setEventSection(parsedFormData.eventSection);
             setEventRow(parsedFormData.eventRow);
@@ -173,9 +176,9 @@ export const Home = () => {
             </div>
             <div className="flex flex-col md:flex-row items-center max-w-[1200px] mx-auto">
                 <div className="flex-1 md:w-1/2 px-4 lg:ml-10 mt-2 sm:mt-6 max-w-full w-full">
-                    <div className="bg-green-100 p-4 rounded-lg shadow-md text-center sm:flex-grow max-w-[325px] w-full mx-auto mb-8">
+                    <div className="bg-green-100 p-4 rounded-lg shadow-md text-center sm:flex-grow max-w-[350px] w-full mx-auto mb-8">
                         <h3 className="text-lg font-semibold mb-1 text-left">Add Details</h3>
-                        <p className="text-xs text-gray-600 text-left">Input event details with the help of Generative AI.</p>
+                        <p className="text-sm text-gray-600 text-left">Input event details with the help of Generative AI.</p>
                     </div>
                     <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[420px] md:max-h-none overflow-y-scroll pb-4 bg-white bg-opacity-30 px-4 pt-3 mx-2 sm:px-6 sm:pt-4 min-w-[250px] md:max-w-[500px]">
                         <div className="flex-grow overflow-y-scroll">
@@ -198,16 +201,20 @@ export const Home = () => {
                                     value={eventDescription}
                                     callbackFn={setEventDescription}
                                 />
-                                <InputTextField
+                                <InputDateField
                                     label="Date*"
                                     value={eventDate}
                                     callbackFn={setEventDate}
                                 />
-                                <InputTextField
-                                    label="Time"
-                                    required={false}
-                                    value={eventTime}
-                                    callbackFn={setEventTime}
+                                <InputTimeField
+                                    label="Start Time*"
+                                    value={eventStartTime}
+                                    callbackFn={setEventStartTime}
+                                />
+                                <InputTimeField
+                                    label="End Time*"
+                                    value={eventEndTime}
+                                    callbackFn={setEventEndTime}
                                 />
                                 <InputTextField
                                     label="Venue*"
@@ -235,7 +242,7 @@ export const Home = () => {
                             </div>
                             <div className="my-8">
                                 <div className="flex justify-center mt-3 mb-2">
-                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800 mr-4">Ticket Design</h3>
+                                    <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800 mr-4">Ticket Design</h3>
                                     <GenerateWithAIButton
                                         isLoading={isLoadingTicketDesignWithAI}
                                         aiCallbackFn={handleDesignTicketWithAI}
@@ -300,16 +307,17 @@ export const Home = () => {
                 </div>
                 <div className="flex-1 md:w-1/2 px-4 mt-4 sm:mt-0 mb-auto sticky top-16">
                     <div className="mt-4 mx-2 sm:mt-6 mb-10">
-                        <div className="bg-green-100 p-4 rounded-lg shadow-md text-center sm:flex-grow max-w-[325px] w-full mx-auto mb-8">
+                        <div className="bg-green-100 p-4 rounded-lg shadow-md text-center sm:flex-grow max-w-[350px] w-full mx-auto mb-8">
                             <h3 className="text-lg font-semibold mb-1 text-left">Preview</h3>
-                            <p className="text-xs text-gray-600 text-left">Get a real-time look at your beautiful gift design.</p>
+                            <p className="text-sm text-gray-600 text-left">Get a real-time look at your beautiful gift design.</p>
                         </div>
                         <Ticket
                             eventName={eventName}
                             eventSubtitle={eventSubtitle}
                             eventDescription={eventDescription}
                             eventDate={eventDate}
-                            eventTime={eventTime}
+                            eventStartTime={eventStartTime}
+                            eventEndTime={eventEndTime}
                             eventVenue={eventVenue}
                             eventSection={eventSection}
                             eventRow={eventRow}
@@ -320,9 +328,11 @@ export const Home = () => {
                             textColor={textColor}
                             font={font}
                         />
-                        {isValidInput(giftMessage) && isValidInput(giftMessage) && <div className='rounded-xl shadow-2xl bg-white p-8 mx-auto max-w-[575px] mt-12'>
-                            <h3 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight text-gray-800 mb-6 mx-auto text-center">{gifterName} sent you tickets to an event!</h3>
-                            <p>{`${giftMessage} - ${gifterName}`}</p>
+                        {isValidInput(gifterName) && <div className='rounded-xl shadow-2xl bg-white p-6 mx-auto max-w-[575px] mt-12'>
+                            <h3 className="text-xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-gray-800 mx-auto text-center">{gifterName} sent you tickets to an event!</h3>
+                            {isValidInput(giftMessage) && <div className='md:px-6 mt-6 mb-2'>
+                                <p>{giftMessage}</p>
+                            </div>}
                         </div>}
                     </div>
                 </div>
