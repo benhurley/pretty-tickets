@@ -25,7 +25,7 @@ export const GenerateWithAIButton: FunctionComponent<GenerateWithAIButtonProps> 
             {isLoading ? (
                 <div className="flex items-center">
                     <PulseLoader color="#000000" size={4} />
-                    <span className="ml-2">Loading...</span>
+                    <span className="ml-2 px-1">Loading...</span>
                 </div>
             ) : wasAIButtonClicked ? (
                 'Using AI ✓'

@@ -234,8 +234,8 @@ export const Home = () => {
                                 />
                             </div>
                             <div className="my-8">
-                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800">Ticket Design</h3>
                                 <div className="flex justify-center mt-3 mb-2">
+                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800 mr-4">Ticket Design</h3>
                                     <GenerateWithAIButton
                                         isLoading={isLoadingTicketDesignWithAI}
                                         aiCallbackFn={handleDesignTicketWithAI}
