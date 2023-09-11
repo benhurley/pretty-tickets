@@ -178,7 +178,7 @@ export const Home = () => {
                 <div className="flex-1 md:w-1/2 px-4 lg:ml-10 mt-2 sm:mt-6 max-w-full w-full">
                     <div className="bg-green-100 p-4 rounded-lg shadow-md text-center sm:flex-grow max-w-[350px] w-full mx-auto mb-8">
                         <h3 className="text-lg font-semibold mb-1 text-left">Add Details</h3>
-                        <p className="text-sm text-gray-600 text-left">Input event details with the help of Generative AI.</p>
+                        <p className="text-sm text-gray-600 text-left">NEW: Auto-fill details with Generative AI.</p>
                     </div>
                     <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[420px] md:max-h-none overflow-y-scroll pb-4 bg-white bg-opacity-30 px-4 pt-3 mx-2 sm:px-6 sm:pt-4 min-w-[250px] md:max-w-[500px]">
                         <div className="flex-grow overflow-y-scroll">
@@ -309,7 +309,7 @@ export const Home = () => {
                     <div className="mt-4 mx-2 sm:mt-6 mb-10">
                         <div className="bg-green-100 p-4 rounded-lg shadow-md text-center sm:flex-grow max-w-[350px] w-full mx-auto mb-8">
                             <h3 className="text-lg font-semibold mb-1 text-left">Preview</h3>
-                            <p className="text-sm text-gray-600 text-left">Get a real-time look at your beautiful gift design.</p>
+                            <p className="text-sm text-gray-600 text-left">Take a real-time look at your gift design below.</p>
                         </div>
                         <Ticket
                             eventName={eventName}

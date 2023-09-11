@@ -12,7 +12,7 @@ export const Results = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
 
-    const recipientPageTitle = 'Pretty Tickets | Someone gifted you a Pretty Ticket! Check it out now to prepare for your upcoming event.';
+    const recipientPageTitle = 'Someone gifted you a Pretty Ticket! Check it out now to prepare for your upcoming event.';
 
     const mode = queryParams.get('mode');
     const showConfetti = queryParams.get('showConfetti');
@@ -108,7 +108,7 @@ export const Results = () => {
                         <>
                             {mode === "creatorMode" &&
                                 <>
-                                    <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white px-3 sm:px-4 mx-auto my-10 sm:mt-0'>
+                                    <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white px-3 sm:px-4 mx-auto mt-10 sm:my-10 sm:mt-0'>
                                         <p className="text-xl md:text-2xl font-bold leading-tight text-gray-800 my-4 mx-auto text-center px-4 lg:px-6">{tinyURL ? "Your Free TinyURL to share:" : "Your ticket is ready to send!"}</p>
                                         <ShareCTA />
                                         {tinyURL && <ThankYouModule />}
