@@ -97,8 +97,9 @@ export const Results = () => {
     return (
         <div>
             <Helmet>
-                <meta property="og:title" content={recipientPageTitle} />
-                <meta name="og:description" content={recipientPageDescription} />
+                <title>{recipientPageTitle}</title>
+                <meta property="title" content={recipientPageTitle} />
+                <meta name="description" content={recipientPageDescription} />
             </Helmet>
             <div className='min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 pb-20'>
                 <Confetti run={showConfetti === "true"} width={window.innerWidth} height={window.innerHeight} numberOfPieces={150} />
