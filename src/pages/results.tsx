@@ -12,8 +12,8 @@ export const Results = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
 
-    const pageTitle = 'You just recieved a gift!';
-    const pageDescription = 'A friend just sent you a custom Pretty Ticket, check it out.';
+    const recipientPageTitle = 'You recieved a gift!';
+    const recipientPageDescription = 'Someone sent you a Pretty Ticket, check it out now.';
 
     const mode = queryParams.get('mode');
     const showConfetti = queryParams.get('showConfetti');
@@ -97,8 +97,12 @@ export const Results = () => {
     return (
         <div>
             <Helmet>
-                <title>{pageTitle}</title>
-                <meta name="description" content={pageDescription} />
+                {mode === "recipientMode" &&
+                    <>
+                        <title>{recipientPageTitle}</title>
+                        <meta name="description" content={recipientPageDescription} />
+                    </>
+                }
             </Helmet>
             <div className='min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 pb-20'>
                 <Confetti run={showConfetti === "true"} width={window.innerWidth} height={window.innerHeight} numberOfPieces={150} />
@@ -108,7 +112,7 @@ export const Results = () => {
                         <>
                             {mode === "creatorMode" &&
                                 <>
-                                    <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white px-3 sm:px-4 mx-auto mb-10 mt-10 sm:mt-0 md:mt-16'>
+                                    <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white px-3 sm:px-4 mx-auto my-10 sm:mt-0 md:mt-16'>
                                         <p className="text-xl md:text-2xl font-bold leading-tight text-gray-800 my-4 mx-auto text-center px-4 lg:px-6">{tinyURL ? "Your Free TinyURL to share:" : "Your ticket is ready to send!"}</p>
                                         <ShareCTA />
                                         {tinyURL && <ThankYouModule />}
@@ -116,7 +120,7 @@ export const Results = () => {
                                 </>
                             }
                             <div className='rounded-xl shadow-2xl bg-white p-6 mx-auto max-w-[575px]'>
-                                <h1 className="text-xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-gray-800 mx-auto text-center">{gifterName} just sent you tickets!</h1>
+                                <h1 className="text-xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-gray-800 mx-auto text-center">{gifterName} sent you tickets!</h1>
                                 {isValidInput(giftMessage) && <div className='md:px-6 mt-6 mb-2'>
                                     <p>{giftMessage}</p>
                                 </div>}
