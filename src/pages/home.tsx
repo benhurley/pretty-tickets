@@ -329,7 +329,7 @@ export const Home = () => {
                             font={font}
                         />
                         {isValidInput(gifterName) && <div className='rounded-xl shadow-2xl bg-white p-6 mx-auto max-w-[575px] mt-12'>
-                            <h3 className="text-xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-gray-800 mx-auto text-center">{gifterName} sent you tickets to an event!</h3>
+                            <h3 className="text-xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-gray-800 mx-auto text-center">{gifterName} sent you a ticket!</h3>
                             {isValidInput(giftMessage) && <div className='md:px-6 mt-6 mb-2'>
                                 <p>{giftMessage}</p>
                             </div>}
