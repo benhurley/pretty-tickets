@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <Helmet>
-        <title>Pretty Tickets | Transform event purchases into beautiful digital tickets</title>
+        <title>Pretty Tickets | Transform purchases into beautiful ticket replicas made for gifting digitally</title>
         <meta
           name="description"
           content="From Purchase to Presentation, We've Got You Covered."

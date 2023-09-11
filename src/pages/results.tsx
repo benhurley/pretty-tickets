@@ -12,7 +12,7 @@ export const Results = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
 
-    const recipientPageTitle = 'Pretty Tickets | Someone sent you a Pretty Ticket! Check it out now to prepare for your upcoming event.';
+    const recipientPageTitle = 'Pretty Tickets | Someone gifted you a Pretty Ticket! Check it out now to prepare for your upcoming event.';
 
     const mode = queryParams.get('mode');
     const showConfetti = queryParams.get('showConfetti');
