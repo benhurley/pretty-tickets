@@ -98,6 +98,7 @@ export const Results = () => {
         <div>
             <Helmet>
                 <title>{recipientPageTitle}</title>
+                <meta property="og:title" content="Pretty Tickets" />
                 <meta name="description" content={recipientPageDescription} />
             </Helmet>
             <div className='min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 pb-20'>
