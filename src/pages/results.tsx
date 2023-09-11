@@ -97,9 +97,8 @@ export const Results = () => {
     return (
         <div>
             <Helmet>
-                <title>{recipientPageTitle}</title>
-                <meta property="og:title" content="Pretty Tickets" />
-                <meta name="description" content={recipientPageDescription} />
+                <meta property="og:title" content={recipientPageTitle} />
+                <meta name="og:description" content={recipientPageDescription} />
             </Helmet>
             <div className='min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 pb-20'>
                 <Confetti run={showConfetti === "true"} width={window.innerWidth} height={window.innerHeight} numberOfPieces={150} />
@@ -109,7 +108,7 @@ export const Results = () => {
                         <>
                             {mode === "creatorMode" &&
                                 <>
-                                    <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white px-3 sm:px-4 mx-auto my-10 sm:mt-0 md:mt-16'>
+                                    <div style={{ background: '#c6ecd9' }} className='rounded-xl shadow-2xl bg-white px-3 sm:px-4 mx-auto my-10 sm:mt-0'>
                                         <p className="text-xl md:text-2xl font-bold leading-tight text-gray-800 my-4 mx-auto text-center px-4 lg:px-6">{tinyURL ? "Your Free TinyURL to share:" : "Your ticket is ready to send!"}</p>
                                         <ShareCTA />
                                         {tinyURL && <ThankYouModule />}
