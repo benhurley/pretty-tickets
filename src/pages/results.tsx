@@ -12,8 +12,7 @@ export const Results = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
 
-    const recipientPageTitle = 'Pretty Tickets | You recieved a gift!';
-    const recipientPageDescription = 'Someone sent you a Pretty Ticket, check it out now.';
+    const recipientPageTitle = 'Pretty Tickets | Someone sent you a Pretty Ticket! Check it out now to prepare for your upcoming event.';
 
     const mode = queryParams.get('mode');
     const showConfetti = queryParams.get('showConfetti');
@@ -99,7 +98,7 @@ export const Results = () => {
             <Helmet>
                 <title>{recipientPageTitle}</title>
                 <meta property="title" content={recipientPageTitle} />
-                <meta name="description" content={recipientPageDescription} />
+                <meta property="og:title" content={recipientPageTitle} />
             </Helmet>
             <div className='min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 pb-20'>
                 <Confetti run={showConfetti === "true"} width={window.innerWidth} height={window.innerHeight} numberOfPieces={150} />
@@ -116,7 +115,7 @@ export const Results = () => {
                                     </div>
                                 </>
                             }
-                            <div className='rounded-xl shadow-2xl bg-white p-6 mx-auto max-w-[575px]'>
+                            <div className='rounded-xl shadow-2xl bg-white p-6 mx-auto max-w-[575px] mt-8 sm:mt-0'>
                                 <h1 className="text-xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-gray-800 mx-auto text-center">{gifterName} sent you tickets!</h1>
                                 {isValidInput(giftMessage) && <div className='md:px-6 mt-6 mb-2'>
                                     <p>{giftMessage}</p>
