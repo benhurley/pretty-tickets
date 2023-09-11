@@ -12,7 +12,7 @@ export const Results = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
 
-    const recipientPageTitle = 'You recieved a gift!';
+    const recipientPageTitle = 'Pretty Tickets | You recieved a gift!';
     const recipientPageDescription = 'Someone sent you a Pretty Ticket, check it out now.';
 
     const mode = queryParams.get('mode');
@@ -97,12 +97,8 @@ export const Results = () => {
     return (
         <div>
             <Helmet>
-                {mode === "recipientMode" &&
-                    <>
-                        <title>{recipientPageTitle}</title>
-                        <meta name="description" content={recipientPageDescription} />
-                    </>
-                }
+                <title>{recipientPageTitle}</title>
+                <meta name="description" content={recipientPageDescription} />
             </Helmet>
             <div className='min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 pb-20'>
                 <Confetti run={showConfetti === "true"} width={window.innerWidth} height={window.innerHeight} numberOfPieces={150} />
