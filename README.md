@@ -4,7 +4,7 @@
 
 ## From Purchase to Presentation, We've Got You Covered
 
-Turn ordinary purchases into beautiful commemorative tickets.
+Turn ordinary purchases into beautiful, digitally-sharable commemorative tickets.
 
 ![Homepage](./public/screenshot.png)
 
