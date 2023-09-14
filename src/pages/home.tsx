@@ -242,7 +242,7 @@ export const Home = () => {
                                         <Button className="bg-orange-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleClearEventFields}>Clear</Button>
                                     </div>
                                 </div>
-                                <p className="mx-2 my-4"><span className="font-semibold italic">Recommended:</span> Paste your email confirmation or any other raw purchase details below and let Generative AI fill out the details automatically.</p>
+                                <p className="mx-2 my-4"><span className="font-semibold italic">Recommended:</span> Paste your email confirmation or any raw purchase details below and let Generative AI fill out the details automatically.</p>
                                 <InputTextAreaFieldWithAI
                                     label="Raw Ticket Data"
                                     value={purchaseData}
@@ -250,6 +250,7 @@ export const Home = () => {
                                     aiCallbackFn={handleFillEventFieldsWithAI}
                                     isLoading={isLoadingAIEventInfo}
                                     aiButtonCopy="Parse with AI"
+                                    rows={2}
                                 />
                                 <InputTextField
                                     label="Title*"
