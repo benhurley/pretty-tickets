@@ -17,6 +17,7 @@ import { IntroHero } from "../components/organisms/introHero";
 import { GenerateWithAIButton } from "../components/molecules/buttons/generateWithAIButton";
 import { InputDateField } from "../components/molecules/inputFields/inputDateField";
 import { InputTimeField } from "../components/molecules/inputFields/inputTimeField";
+import { Button } from "../components/molecules/buttons/button";
 
 export const Home = () => {
     const navigate = useNavigate();
@@ -86,7 +87,7 @@ export const Home = () => {
         setShowConfetti(isChecked);
     };
 
-    const handleClearFields = () => {
+    const handleClearEventFields = () => {
         setEventName("")
         setEventSubtitle("")
         setEventDescription("")
@@ -98,6 +99,11 @@ export const Home = () => {
         setEventRow("")
         setEventSeat("")
         setImgUrl("")
+    }
+
+    const handleClearGiftFields = () => {
+        setGifterName("")
+        setGiftMessage("")
     }
 
     const handleSubmit = () => {
@@ -200,9 +206,9 @@ export const Home = () => {
                             <div className="mt-2">
                                 <div className="flex justify-between align-center mb-3">
                                     <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Event Information</h3>
-                                    <div className="flex gap-2">
-                                        <button className="bg-orange-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={() => window.location.reload()}>Reset Fields</button>
-                                        <button className="bg-purple-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleClearFields}>Clear Fields</button>
+                                    <div className="flex gap-2 mr-2">
+                                        <Button className="bg-orange-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={() => window.location.reload()}>Reset</Button>
+                                        <Button className="bg-purple-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleClearEventFields}>Clear</Button>
                                     </div>
                                 </div>
                                 <InputTextField
@@ -261,15 +267,15 @@ export const Home = () => {
                                     callbackFn={setEventSeat}
                                 />
                             </div>
-                            <div className="my-8">
-                                <div className="flex mt-3 mb-2">
-                                    <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-left text-gray-800 mr-4 ml-2">Ticket Design</h3>
+                            <div className="my-12">
+                                <div className="flex justify-between mb-2 mr-2">
+                                    <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Ticket Design</h3>
                                     <GenerateWithAIButton
                                         isLoading={isLoadingTicketDesignWithAI}
                                         aiCallbackFn={handleDesignTicketWithAI}
                                     />
                                 </div>
-                                <div className="inline-flex justify-around w-[100%] mt-4 mb-2">
+                                <div className="flex justify-left gap-5 w-[100%] mt-4 mb-2 ml-2 ">
                                     <InputColorField
                                         label="Background"
                                         value={ticketColor}
@@ -302,7 +308,12 @@ export const Home = () => {
                             </div>
 
                             <div className="mb-2">
-                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Gift Message (Optional)</h3>
+                            <div className="flex justify-between align-center mb-2">
+                                    <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Gift Message</h3>
+                                    <div className="flex gap-2">
+                                        <Button className="bg-purple-100 text-xs mr-2" onClick={handleClearGiftFields}>Clear</Button>
+                                    </div>
+                                </div>
                                 <InputTextField
                                     label="Your Name"
                                     required={false}
@@ -360,9 +371,9 @@ export const Home = () => {
             </div>
             <div className="block items-center justify-center sm:py-12">
                 <div className="flex justify-center">
-                    <button className="bg-green-100 font-bold px-8 py-2 rounded-full text-lg shadow-xl transform hover:scale-105 transition-transform duration-300" onClick={handleSubmit}>
-                        Create Pretty Ticket
-                    </button>
+                    <Button className="bg-green-100 font-semibold px-8 py-2 rounded-full text-lg shadow-xl transform hover:scale-105 transition-transform duration-300" onClick={handleSubmit}>
+                        Create Ticket
+                    </Button>
                 </div>
             </div>
             <div>
