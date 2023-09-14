@@ -5,7 +5,7 @@ import { InputTextField } from "../components/molecules/inputFields/inputTextFie
 import { InputCheckboxField } from "../components/molecules/inputFields/inputCheckboxField";
 import { emptyValue } from "../helpers/globalConstants";
 import { InputTextAreaFieldWithAI } from "../components/molecules/inputFields/inputTextAreaFieldWithAI";
-import { fetchGiftMessage, fetchTicketDesign } from "../helpers/fetchOpenAI";
+import { fetchEventInfo, fetchGiftMessage, fetchTicketDesign } from "../helpers/fetchOpenAI";
 import { InputColorField } from "../components/molecules/inputFields/inputColorField";
 import { InputTextAreaField } from "../components/molecules/inputFields/inputTextAreaField";
 import { isValidInput } from "../helpers/isValidInput";
@@ -22,6 +22,7 @@ import { Button } from "../components/molecules/buttons/button";
 export const Home = () => {
     const navigate = useNavigate();
 
+    const [purchaseData, setPurchaseData] = useState("");
     const [eventName, setEventName] = useState('2023 US Open Tennis');
     const [eventSubtitle, setEventSubtitle] = useState('VIP ENTRY');
     const [eventDescription, setEventDescription] = useState(`Session 24: Women's Final / Mixed Doubles Final`);
@@ -42,8 +43,10 @@ export const Home = () => {
     const [showConfetti, setShowConfetti] = useState(true);
     const [gifterName, setGifterName] = useState("Someone");
     const [giftMessage, setGiftMessage] = useState(`"Happy Birthday! Can't wait to celebrate with you and finally see the pros face-off at The US Open."`);
+
     const [isLoadingAIGiftMessage, setIsLoadingAIGiftMessage] = useState(false);
     const [isLoadingTicketDesignWithAI, setIsLoadingTicketDesignWithAI] = useState(false);
+    const [isLoadingAIEventInfo, setIsLoadingAIEventInfo] = useState(false);
 
     const handleDesignTicketWithAI = async (e: React.ChangeEvent<HTMLInputElement>) => {
         setIsLoadingTicketDesignWithAI(true)
@@ -79,6 +82,29 @@ export const Home = () => {
 
         if (!!message) {
             setGiftMessage(message)
+        }
+    }
+
+    const handleFillEventFieldsWithAI = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        setIsLoadingAIEventInfo(true)
+        const result = await fetchEventInfo({
+            purchaseData
+        })
+
+        setIsLoadingAIEventInfo(false)
+
+        if (!!result) {
+            setEventName(result.title || "");
+            setEventSubtitle(result.subtitle || "");
+            setEventDescription(result.description || "");
+            setEventDate(result.date || "");
+            setEventStartTime(result.start_time || "");
+            setEventEndTime(result.end_time || "");
+            setEventVenue(result.venue || "");
+            setEventSection(result.section || "");
+            setEventRow(result.row || "");
+            setEventSeat(result.seats || "");
+            setImgUrl("")
         }
     }
 
@@ -207,15 +233,24 @@ export const Home = () => {
                         <p className="text-sm text-gray-600 text-left">Auto-fill event details using Generative AI.</p>
                     </div>
                     <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[420px] md:max-h-none overflow-y-scroll pb-4 bg-white bg-opacity-30 px-4 pt-3 mx-2 sm:px-6 sm:pt-4 min-w-[250px] md:max-w-[500px]">
-                        <div className="flex-grow overflow-y-scroll">
+                        <div className="flex-grow overflow-y-scroll overflow-x-hidden">
                             <div className="mt-2">
                                 <div className="flex justify-between align-center mb-3">
-                                    <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Event Information</h3>
+                                    <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Event Details</h3>
                                     <div className="flex gap-2 mr-2">
-                                        <Button className="bg-orange-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleReset}>Reset</Button>
-                                        <Button className="bg-purple-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleClearEventFields}>Clear</Button>
+                                        <Button className="bg-red-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleReset}>Reset</Button>
+                                        <Button className="bg-orange-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleClearEventFields}>Clear</Button>
                                     </div>
                                 </div>
+                                <p className="mx-2 my-4"><span className="font-semibold italic">Recommended:</span> Paste your email confirmation or any other raw purchase details below and let Generative AI fill out the details automatically.</p>
+                                <InputTextAreaFieldWithAI
+                                    label="Raw Ticket Data"
+                                    value={purchaseData}
+                                    inputCallbackFn={setPurchaseData}
+                                    aiCallbackFn={handleFillEventFieldsWithAI}
+                                    isLoading={isLoadingAIEventInfo}
+                                    aiButtonCopy="Parse with AI"
+                                />
                                 <InputTextField
                                     label="Title*"
                                     value={eventName}
@@ -313,10 +348,10 @@ export const Home = () => {
                             </div>
 
                             <div className="mb-2">
-                            <div className="flex justify-between align-center mb-2">
+                                <div className="flex justify-between align-center mb-2">
                                     <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Gift Message</h3>
                                     <div className="flex gap-2">
-                                        <Button className="bg-purple-100 text-xs mr-2" onClick={handleClearGiftFields}>Clear</Button>
+                                        <Button className="bg-orange-100 text-xs mr-2" onClick={handleClearGiftFields}>Clear</Button>
                                     </div>
                                 </div>
                                 <InputTextField

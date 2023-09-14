@@ -5,9 +5,10 @@ import { PulseLoader } from "react-spinners";
 type GenerateWithAIButtonProps = {
     isLoading: boolean;
     aiCallbackFn: (e: any) => void;
+    copy?: string | undefined;
 }
 
-export const GenerateWithAIButton: FunctionComponent<GenerateWithAIButtonProps> = ({isLoading, aiCallbackFn}) => {
+export const GenerateWithAIButton: FunctionComponent<GenerateWithAIButtonProps> = ({isLoading, aiCallbackFn, copy = "Generate with AI"}) => {
     const [wasAIButtonClicked, setWasAIButtonClicked] = useState(false);
 
     const handleClick = (e: any) => {
@@ -18,7 +19,7 @@ export const GenerateWithAIButton: FunctionComponent<GenerateWithAIButtonProps> 
         <button
             disabled={wasAIButtonClicked || isLoading}
             className={`
-            ${wasAIButtonClicked ? !isLoading ? 'bg-blue-100' : 'bg-gray-100' : 'bg-green-100'} font-semibold px-4 py-1 rounded-full text-xs shadow transition-all duration-300 ${wasAIButtonClicked ? 'scale-100' : 'hover:scale-105 active:scale-100'
+            ${wasAIButtonClicked ? !isLoading ? 'bg-blue-100' : 'bg-gray-100' : 'bg-green-100'} font-semibold px-4 py-1 rounded-full text-xs shadow whitespace-nowrap transition-all duration-300 ${wasAIButtonClicked ? 'scale-100' : 'hover:scale-105 active:scale-100'
                 }`}
             onClick={handleClick}
         >
@@ -30,7 +31,7 @@ export const GenerateWithAIButton: FunctionComponent<GenerateWithAIButtonProps> 
             ) : wasAIButtonClicked ? (
                 'Using AI ✓'
             ) : (
-                'Generate with AI'
+                copy
             )}
         </button>
     )

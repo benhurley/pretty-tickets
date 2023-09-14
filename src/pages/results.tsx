@@ -103,7 +103,7 @@ export const Results = () => {
             <div className='min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 pb-20'>
                 <Confetti run={showConfetti === "true"} width={window.innerWidth} height={window.innerHeight} numberOfPieces={150} />
                 <div className="flex flex-col md:flex-row items-center justify-center px-2 py-[10%] sm:py-[6%] lg:px-10 lg:max-w-[1440px] lg:mx-auto mt-2 sm:mt-0">
-                    <div className="flex-1 md:w-1/2 flex flex-col items-center md:items-start justify-center px-4 py-6 sm:py-20 md:pt-0 z-10">
+                    <div className="flex-1 md:w-1/2 flex flex-col items-center md:items-start justify-center px-4 py-6 sm:py-20 md:pt-0 z-10 md:mt-20">
                         <p className="absolute top-16 md:top-20 left-6 sm:left-10 text-sm mr-auto text-gray-800 font-bold"><Link className="hover:underline" to="/">Home</Link> / Results</p>
                         <>
                             {mode === "creatorMode" &&

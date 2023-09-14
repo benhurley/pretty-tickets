@@ -80,3 +80,43 @@ export async function fetchTicketDesign({
         throw new Error(data.error);
     }
 }
+
+export type EventInfoResponse = {
+    title?: string,
+    subtitle?: string,
+    description?: string,
+    date?: string,
+    start_time?: string,
+    end_time?: string,
+    venue?: string,
+    section?: string,
+    row?: string,
+    seats?: string,
+}
+
+type fetchEventInfoProps = {
+    purchaseData: string;
+}
+
+export async function fetchEventInfo({ purchaseData }: fetchEventInfoProps): Promise<EventInfoResponse> {
+    const functionName = "fetchEventInfo";
+    const baseURL = `${window.location.origin}/.netlify/functions/${functionName}`;
+
+    const queryParams = new URLSearchParams();
+    queryParams.set('purchaseData', purchaseData || "");
+
+    const url = `${baseURL}?${queryParams.toString()}`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        throw new Error(`Request failed with status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (data) {
+        return data;
+    } else {
+        throw new Error(data.error);
+    }
+}
