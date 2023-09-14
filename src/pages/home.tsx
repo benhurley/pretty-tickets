@@ -165,16 +165,16 @@ export const Home = () => {
         queryParams.set('mode', 'creatorMode'); // default to creator mode on submit
         queryParams.set('showConfetti', showConfetti.toString());
 
-        queryParams.set('eventName', eventName || emptyValue);
-        queryParams.set('eventSubtitle', eventSubtitle || emptyValue);
-        queryParams.set('eventDescription', eventDescription || emptyValue);
+        queryParams.set('eventName', eventName.slice(0,50) || emptyValue);
+        queryParams.set('eventSubtitle', eventSubtitle.slice(0,50) || emptyValue);
+        queryParams.set('eventDescription', eventDescription.slice(0,200) || emptyValue);
         queryParams.set('eventDate', eventDate || emptyValue);
         queryParams.set('eventStartTime', eventStartTime || emptyValue);
         queryParams.set('eventEndTime', eventEndTime || emptyValue);
-        queryParams.set('eventVenue', eventVenue || emptyValue);
-        queryParams.set('eventSection', eventSection || emptyValue);
-        queryParams.set('eventRow', eventRow || emptyValue);
-        queryParams.set('eventSeat', eventSeat || emptyValue);
+        queryParams.set('eventVenue', eventVenue.slice(0,50) || emptyValue);
+        queryParams.set('eventSection', eventSection.slice(0,10) || emptyValue);
+        queryParams.set('eventRow', eventRow.slice(0,10) || emptyValue);
+        queryParams.set('eventSeat', eventSeat.slice(0,10) || emptyValue);
 
         queryParams.set('imgUrl', imgUrl || emptyValue);
         queryParams.set('ticketColor', ticketColor || emptyValue);
@@ -182,7 +182,7 @@ export const Home = () => {
         queryParams.set('textColor', textColor || emptyValue);
         queryParams.set('font', font || emptyValue);
         queryParams.set('giftMessage', giftMessage || emptyValue);
-        queryParams.set('gifterName', gifterName || 'Someone');
+        queryParams.set('gifterName', gifterName.slice(0,50) || 'Someone');
 
         const queryString = queryParams.toString();
         const longURL = `/results?${queryString}`;

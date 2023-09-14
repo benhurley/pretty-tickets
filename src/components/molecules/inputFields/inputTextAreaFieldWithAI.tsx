@@ -27,6 +27,7 @@ export const InputTextAreaFieldWithAI = ({ label, value, inputCallbackFn, aiCall
                 rows={4}
                 value={value}
                 onChange={(e) => inputCallbackFn(e.target.value)}
+                maxLength={300}
             />
         </div>
     );

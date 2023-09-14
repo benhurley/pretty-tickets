@@ -18,6 +18,7 @@ export const InputTextAreaField = ({ label, value, callbackFn, required = true, 
                 rows={rows}
                 value={value}
                 onChange={(e) => callbackFn(e.target.value)}
+                maxLength={300}
             />
         </div>
     )
