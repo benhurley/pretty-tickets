@@ -34,7 +34,7 @@ export const Home = () => {
     const [eventRow, setEventRow] = useState('J');
     const [eventSeat, setEventSeat] = useState('7');
 
-    const [imgUrl, setImgUrl] = useState('https://tinyurl.com/example-img')
+    const [imgUrl, setImgUrl] = useState('/example.png')
     const [ticketColor, setTicketColor] = useState('#F5F5F5')
     const [ticketTexture, setTicketTexture] = useState(VerticalLines)
     const [textColor, setTextColor] = useState('#000000')
