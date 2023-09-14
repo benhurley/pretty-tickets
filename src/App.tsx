@@ -15,10 +15,10 @@ function App() {
   return (
     <>
       <Helmet>
-        <title>Pretty Tickets | Transform purchases into beautiful ticket replicas made for gifting digitally</title>
+        <title>Pretty Tickets | Turn ordinary purchases into beautiful commemorative tickets</title>
         <meta
           name="description"
-          content="From Purchase to Presentation, We've Got You Covered."
+          content="Turn ordinary purchases into beautiful commemorative tickets."
         />
       </Helmet>
       <Router>

@@ -41,8 +41,7 @@ const Ticket = ({
     ticketTexture,
     font,
 }: TicketProps) => {
-  const eventDateConverted = new Date(eventDate || "");
-
+    const eventDateConverted = eventDate && new Date(eventDate || "");
     return (
         <div className="flex flex-col items-center justify-center">
             <div className="absolute bg-green-500 z-0"></div>
@@ -72,20 +71,20 @@ const Ticket = ({
                                 {isValidInput(eventDescription) && <p style={{ color: textColor || "#000000" }} className="text-gray-600">{eventDescription}</p>}
                             </div>
                             <div style={{ color: textColor || "#000000" }} className="flex flex-row justify-between mt-4 mb-2">
-                                <div>
+                                {eventDateConverted && <div>
                                     <span className="text-sm">Date</span>
-                                    <div className="font-semibold">{eventDateConverted?.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric'})}</div>
-                                </div>
+                                    <div className="font-semibold">{eventDateConverted.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}</div>
+                                </div>}
                                 {isValidInput(eventStartTime) && <div className="ml-8 min-w-[100px]">
                                     <span className="text-sm">Start Time</span>
                                     {eventStartTime && <div className="font-semibold">{formatTime(eventStartTime)}</div>}
                                 </div>}
                             </div>
                             <div style={{ color: textColor || "#000000" }} className="flex flex-row justify-between mt-3 mb-6">
-                                <div>
+                                {isValidInput(eventVenue) && <div>
                                     <span className="text-sm">Venue</span>
                                     <div className="font-semibold">{eventVenue}</div>
-                                </div>
+                                </div>}
                                 {isValidInput(eventEndTime) && <div className="ml-8 min-w-[100px]">
                                     <span className="text-sm">End Time</span>
                                     {eventEndTime && <div className="font-semibold">{formatTime(eventEndTime)}</div>}

@@ -24,7 +24,7 @@ export const Home = () => {
     const [eventName, setEventName] = useState('2023 US Open Tennis');
     const [eventSubtitle, setEventSubtitle] = useState('VIP ENTRY');
     const [eventDescription, setEventDescription] = useState(`Session 24: Women's Final / Mixed Doubles Final`);
-    const [eventDate, setEventDate] = useState("2023-09-09");
+    const [eventDate, setEventDate] = useState<string | undefined>("2023-09-09");
     const [eventStartTime, setEventStartTime] = useState("12:00");
     const [eventEndTime, setEventEndTime] = useState("17:00");
     const [eventVenue, setEventVenue] = useState('Arthur Ashe Stadium');
@@ -86,6 +86,20 @@ export const Home = () => {
         setShowConfetti(isChecked);
     };
 
+    const handleClearFields = () => {
+        setEventName("")
+        setEventSubtitle("")
+        setEventDescription("")
+        setEventDate(undefined)
+        setEventStartTime("")
+        setEventEndTime("")
+        setEventVenue("")
+        setEventSection("")
+        setEventRow("")
+        setEventSeat("")
+        setImgUrl("")
+    }
+
     const handleSubmit = () => {
         const formData = {
             eventName,
@@ -107,6 +121,7 @@ export const Home = () => {
             gifterName,
             showConfetti,
         };
+
         sessionStorage.setItem('formData', JSON.stringify(formData));
 
         const queryParams = new URLSearchParams();
@@ -178,12 +193,18 @@ export const Home = () => {
                 <div className="flex-1 md:w-1/2 px-4 lg:ml-10 mt-2 sm:mt-6 max-w-full w-full">
                     <div className="bg-green-100 p-4 rounded-lg shadow-md text-center sm:flex-grow max-w-[350px] w-full mx-auto mb-8">
                         <h3 className="text-lg font-semibold mb-1 text-left">Add Details</h3>
-                        <p className="text-sm text-gray-600 text-left">NEW: Auto-fill details with Generative AI.</p>
+                        <p className="text-sm text-gray-600 text-left">Auto-fill event details using Generative AI.</p>
                     </div>
                     <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[420px] md:max-h-none overflow-y-scroll pb-4 bg-white bg-opacity-30 px-4 pt-3 mx-2 sm:px-6 sm:pt-4 min-w-[250px] md:max-w-[500px]">
                         <div className="flex-grow overflow-y-scroll">
                             <div className="mt-2">
-                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800">Event Information</h3>
+                                <div className="flex justify-between align-center mb-3">
+                                    <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Event Information</h3>
+                                    <div className="flex gap-2">
+                                        <button className="bg-orange-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={() => window.location.reload()}>Reset Fields</button>
+                                        <button className="bg-purple-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleClearFields}>Clear Fields</button>
+                                    </div>
+                                </div>
                                 <InputTextField
                                     label="Title*"
                                     value={eventName}
@@ -203,7 +224,7 @@ export const Home = () => {
                                 />
                                 <InputDateField
                                     label="Date*"
-                                    value={eventDate}
+                                    value={eventDate || ""}
                                     callbackFn={setEventDate}
                                 />
                                 <InputTimeField
@@ -241,8 +262,8 @@ export const Home = () => {
                                 />
                             </div>
                             <div className="my-8">
-                                <div className="flex justify-center mt-3 mb-2">
-                                    <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800 mr-4">Ticket Design</h3>
+                                <div className="flex mt-3 mb-2">
+                                    <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-left text-gray-800 mr-4 ml-2">Ticket Design</h3>
                                     <GenerateWithAIButton
                                         isLoading={isLoadingTicketDesignWithAI}
                                         aiCallbackFn={handleDesignTicketWithAI}
@@ -281,7 +302,7 @@ export const Home = () => {
                             </div>
 
                             <div className="mb-2">
-                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-center text-gray-800">Gift Message (Optional)</h3>
+                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Gift Message (Optional)</h3>
                                 <InputTextField
                                     label="Your Name"
                                     required={false}
@@ -308,8 +329,8 @@ export const Home = () => {
                 <div className="flex-1 md:w-1/2 px-4 mt-4 sm:mt-0 mb-auto sticky top-16">
                     <div className="mt-4 mx-2 sm:mt-6 mb-10">
                         <div className="bg-green-100 p-4 rounded-lg shadow-md text-center sm:flex-grow max-w-[350px] w-full mx-auto mb-8">
-                            <h3 className="text-lg font-semibold mb-1 text-left">Preview</h3>
-                            <p className="text-sm text-gray-600 text-left">Take a real-time look at your gift design below.</p>
+                            <h3 className="text-lg font-semibold mb-1 text-left">Design</h3>
+                            <p className="text-sm text-gray-600 text-left">Preview your commemorative ticket below:</p>
                         </div>
                         <Ticket
                             eventName={eventName}

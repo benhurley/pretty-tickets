@@ -4,7 +4,7 @@
 
 ## From Purchase to Presentation, We've Got You Covered
 
-Transform purchases into beautiful ticket replicas made for gifting digitally.
+Turn ordinary purchases into beautiful commemorative tickets.
 
 ![Homepage](./public/screenshot.png)
 

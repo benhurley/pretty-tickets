@@ -7,8 +7,7 @@ export const IntroHero = () => {
             </h1>
             <img className="hidden sm:inline-block ml-4 -mt-10 animate-in spin-in-90 ease-in-out duration-1000" width={75} src="/logo128.png" alt="ticket" />
             <img className="absolute inline-block top-[80px] sm:hidden ml-4 animate-in spin-in-90 ease-in-out duration-1000 -mt-4" width={50} src="/logo128.png" alt="ticket" />
-            <h2 className="text-lg text-gray-800 font-bold italic">From Purchase to Presentation, We've Got You Covered.</h2>
-            <p className="text-md mt-4">Transform purchases into beautiful ticket replicas made for gifting digitally.</p>
+            <h2 className="text-md mt-2 font-semibold italic">Turn ordinary purchases into beautiful commemorative tickets</h2>
         </div>
     )
 }
