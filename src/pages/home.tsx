@@ -106,6 +106,11 @@ export const Home = () => {
         setGiftMessage("")
     }
 
+    const handleReset = () => {
+        sessionStorage.removeItem('formData');
+        window.location.reload();
+    }
+
     const handleSubmit = () => {
         const formData = {
             eventName,
@@ -207,7 +212,7 @@ export const Home = () => {
                                 <div className="flex justify-between align-center mb-3">
                                     <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Event Information</h3>
                                     <div className="flex gap-2 mr-2">
-                                        <Button className="bg-orange-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={() => window.location.reload()}>Reset</Button>
+                                        <Button className="bg-orange-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleReset}>Reset</Button>
                                         <Button className="bg-purple-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleClearEventFields}>Clear</Button>
                                     </div>
                                 </div>
