@@ -59,16 +59,6 @@ export const Results = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    useEffect(() => {
-        const isSharedLink = () => {
-          return window.location.href.includes('tinyurl') || window.location.search.includes('recipientMode');
-        };
-    
-        if (isSharedLink()) {
-          document.title = recipientPageTitle;
-        }
-      }, []);
-
     const ShareCTA = () => {
         return (
             <div className='flex mx-auto my-2 pb-3 min-w-[250px]'>
