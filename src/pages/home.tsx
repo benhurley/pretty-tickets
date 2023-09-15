@@ -241,7 +241,7 @@ export const Home = () => {
                                         <Button className="bg-orange-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleClearEventFields}>Clear</Button>
                                     </div>
                                 </div>
-                                <p className="text-sm mx-2 my-4"><span className="text-sm font-semibold italic">Recommended:</span> Paste your email confirmation or any raw purchase details below and let Generative AI fill out the fields automatically.</p>
+                                <p className="text-xs mx-2 mt-4 mb-2"><span className="text-sx font-semibold italic">Recommended:</span> Paste your email confirmation or any raw purchase details below and let Generative AI fill out the event fields automatically.</p>
                                 <InputTextAreaFieldWithAI
                                     label="Raw Ticket Data"
                                     value={purchaseData}
