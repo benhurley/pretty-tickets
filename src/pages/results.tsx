@@ -12,8 +12,6 @@ export const Results = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
 
-    const recipientPageTitle = 'Someone gifted you a Pretty Ticket! Check it out now to prepare for your upcoming event.';
-
     const mode = queryParams.get('mode');
     const showConfetti = queryParams.get('showConfetti');
     const eventName = queryParams.get('eventName');
@@ -33,6 +31,8 @@ export const Results = () => {
     const font = queryParams.get('font');
     const gifterName = queryParams.get('gifterName');
     const giftMessage = queryParams.get('giftMessage');
+
+    const recipientPageTitle = mode === "creatorMode" ? 'Share your Pretty Ticket with the world!' : `You've received a Pretty Ticket! Check it out now to prepare for your upcoming event.`;
 
     const [shareBtnCopy, setShareBtnCopy] = useState("Share")
     const [tinyURL, setTinyURL] = useState(sessionStorage.getItem('tinyURL'));
