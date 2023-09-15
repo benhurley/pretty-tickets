@@ -18,7 +18,7 @@ function App() {
         <title>Pretty Tickets | Turn ordinary purchases into beautiful, digitally-sharable commemorative tickets</title>
         <meta
           name="description"
-          content="Turn ordinary purchases into beautiful, digitally-sharable commemorative tickets."
+          content="Pretty Tickets | Turn ordinary purchases into beautiful, digitally-sharable commemorative tickets."
         />
       </Helmet>
       <Router>
