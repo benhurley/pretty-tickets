@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <Helmet>
-        <title>Pretty Tickets | Turn ordinary purchases into beautiful, digitally-sharable commemorative tickets</title>
+        <title>Pretty Tickets</title>
         <meta
           name="description"
           content="Pretty Tickets | Turn ordinary purchases into beautiful, digitally-sharable commemorative tickets."
