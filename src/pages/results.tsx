@@ -32,7 +32,7 @@ export const Results = () => {
     const gifterName = queryParams.get('gifterName');
     const giftMessage = queryParams.get('giftMessage');
 
-    const recipientPageTitle = mode === "creatorMode" ? 'Share your Pretty Ticket with the world!' : `You've received a Pretty Ticket! Check it out now to prepare for your upcoming event.`;
+    const recipientPageTitle = mode === "creatorMode" ? 'Share your Pretty Ticket!' : `You've received a Pretty Ticket! Check it out now to prepare for your event.`;
 
     const [shareBtnCopy, setShareBtnCopy] = useState("Share")
     const [tinyURL, setTinyURL] = useState(sessionStorage.getItem('tinyURL'));
@@ -101,7 +101,7 @@ export const Results = () => {
                 <meta property="og:description" content={recipientPageTitle} />
             </Helmet>
             <div className='min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 pb-20'>
-                <Confetti run={showConfetti === "true"} width={window.innerWidth} height={window.innerHeight} numberOfPieces={150} />
+                <Confetti run={showConfetti === "true"} width={window.innerWidth} height={window.innerHeight} numberOfPieces={200} />
                 <div className="flex flex-col md:flex-row items-center justify-center px-2 py-[10%] sm:py-[6%] lg:px-10 lg:max-w-[1440px] lg:mx-auto mt-2 sm:mt-0">
                     <div className="flex-1 md:w-1/2 flex flex-col items-center md:items-start justify-center px-4 py-6 sm:py-20 md:pt-0 z-10">
                         <p className="absolute top-16 md:top-20 left-6 sm:left-10 text-sm mr-auto text-gray-800 font-bold"><Link className="hover:underline" to="/">{`Back to Homepage`}</Link></p>
@@ -159,9 +159,6 @@ export const Results = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <p className="text-xs px-6 pt-12 italic max-w-[1200px] mx-auto">Disclaimer: Pretty Tickets creates decorative online ticket replicas intended for gifting and sharing. These replicas are not valid for event entry. They hold no actual event admission value. Always refer to your official electronic ticket for event access. Pretty Tickets are designed solely to enhance the presentation of your gift and share event details in a creative way.</p>
                 </div>
             </div>
         </div>

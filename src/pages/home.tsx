@@ -222,7 +222,7 @@ export const Home = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50 lg:p-10">
+        <div className="lg:p-10">
             <div className="grid justify-center mt-6 mb-4">
                 <IntroHero />
             </div>
@@ -246,7 +246,7 @@ export const Home = () => {
                                     isLoading={isLoadingAIEventInfo}
                                     aiButtonCopy="Parse with AI"
                                     rows={2}
-                                    instructions="In a rush? Copy and paste your email confirmation or any other details below to have Generative AI populate the event fields automatically."
+                                    instructions="In a rush? Copy and paste your email confirmation below to have Generative AI populate the event fields automatically."
                                 />
                             </div>
                             <div className="flex justify-between align-center mb-3">
@@ -418,9 +418,6 @@ export const Home = () => {
                         Create Ticket
                     </Button>
                 </div>
-            </div>
-            <div>
-                <p className="text-xs pb-20 px-6 pt-12 italic max-w-[1200px] mx-auto">Disclaimer: Pretty Tickets creates decorative online ticket replicas intended for gifting and sharing. These replicas are not valid for event entry. They hold no actual event admission value. Always refer to your official electronic ticket for event access. Pretty Tickets are designed solely to enhance the presentation of your gift and share event details in a creative way.</p>
             </div>
         </div>
     );
