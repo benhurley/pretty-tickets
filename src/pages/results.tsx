@@ -97,7 +97,6 @@ export const Results = () => {
         <div>
             <Helmet>
                 <title>{recipientPageTitle}</title>
-                <meta property="title" content={recipientPageTitle} />
                 <meta property="og:title" content={recipientPageTitle} />
                 <meta property="og:description" content={recipientPageTitle} />
             </Helmet>
