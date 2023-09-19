@@ -9,9 +9,10 @@ type InputTextFieldProps = {
         required ?: boolean,
         value: string,
     rows?: number,
+    instructions?: string
 };
 
-export const InputTextAreaFieldWithAI = ({ label, value, inputCallbackFn, aiCallbackFn, isLoading = false, required = true, aiButtonCopy = undefined, rows = 4 }: InputTextFieldProps) => {
+export const InputTextAreaFieldWithAI = ({ label, value, inputCallbackFn, aiCallbackFn, isLoading = false, required = true, aiButtonCopy = undefined, rows = 4, instructions = undefined}: InputTextFieldProps) => {
     return (
         <div className="mb-2 pt-2 px-2">
             <div className="flex items-center justify-between">
@@ -22,6 +23,7 @@ export const InputTextAreaFieldWithAI = ({ label, value, inputCallbackFn, aiCall
                     aiCallbackFn={aiCallbackFn}
                 />
             </div>
+            {instructions && <p className="text-xs mt-3 font-semibold">{instructions}</p>}
             <textarea
                 required={required}
                 className="py-2 px-3 rounded shadow w-full mt-2"

@@ -234,150 +234,155 @@ export const Home = () => {
                     </div>
                     <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[420px] md:max-h-none overflow-y-scroll bg-white bg-opacity-30 mx-2 min-w-[250px] md:max-w-[500px]">
                         <div className="flex-grow overflow-y-scroll overflow-x-hidden px-4 py-6">
-                                <div className="flex justify-between align-center mb-3">
-                                    <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Event Details</h3>
-                                    <div className="flex gap-2 mr-2">
-                                        <Button className="bg-red-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleReset}>Reset</Button>
-                                        <Button className="bg-orange-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleClearEventFields}>Clear</Button>
-                                    </div>
-                                </div>
-                                <p className="text-xs mx-2 mt-4 mb-2"><span className="text-sx font-semibold italic">Recommended:</span> Paste your email confirmation or any raw purchase details below and let Generative AI fill out the event fields automatically.</p>
+                            <div className="flex justify-between align-center mb-1">
+                                <h3 className="text-md lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Event Details</h3>
+                            </div>
+                            <div className="mb-6">
                                 <InputTextAreaFieldWithAI
-                                    label="Raw Ticket Data"
+                                    label="Email Confirmation"
                                     value={purchaseData}
                                     inputCallbackFn={setPurchaseData}
                                     aiCallbackFn={handleFillEventFieldsWithAI}
                                     isLoading={isLoadingAIEventInfo}
                                     aiButtonCopy="Parse with AI"
                                     rows={2}
-                                />
-                                <InputTextField
-                                    label="Title*"
-                                    value={eventName}
-                                    callbackFn={setEventName}
-                                />
-                                <InputTextField
-                                    label="Subtitle"
-                                    required={false}
-                                    value={eventSubtitle}
-                                    callbackFn={setEventSubtitle}
-                                />
-                                <InputTextField
-                                    label="Description"
-                                    required={false}
-                                    value={eventDescription}
-                                    callbackFn={setEventDescription}
-                                />
-                                <InputDateField
-                                    label="Date*"
-                                    value={eventDate || ""}
-                                    callbackFn={setEventDate}
-                                />
-                                <InputTimeField
-                                    label="Start Time*"
-                                    value={eventStartTime}
-                                    callbackFn={setEventStartTime}
-                                />
-                                <InputTimeField
-                                    label="End Time*"
-                                    value={eventEndTime}
-                                    callbackFn={setEventEndTime}
-                                />
-                                <InputTextField
-                                    label="Venue*"
-                                    value={eventVenue}
-                                    callbackFn={setEventVenue}
-                                />
-                                <InputTextField
-                                    label="Section"
-                                    required={false}
-                                    value={eventSection}
-                                    callbackFn={setEventSection}
-                                />
-                                <InputTextField
-                                    label="Row"
-                                    required={false}
-                                    value={eventRow}
-                                    callbackFn={setEventRow}
-                                />
-                                <InputTextField
-                                    label="Seat(s)"
-                                    required={false}
-                                    value={eventSeat}
-                                    callbackFn={setEventSeat}
+                                    instructions="In a rush? Copy and paste your email confirmation or any other details below to have Generative AI populate the event fields automatically."
                                 />
                             </div>
-                    </div>
-                    <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[420px] md:max-h-none overflow-y-scroll bg-white bg-opacity-30 mt-8 mx-2 min-w-[250px] md:max-w-[500px]">
-                        <div className="flex-grow overflow-y-scroll overflow-x-hidden px-4 py-6">
-                                <div className="flex justify-between mb-2 mr-2">
-                                    <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Ticket Design</h3>
-                                    <GenerateWithAIButton
-                                        isLoading={isLoadingTicketDesignWithAI}
-                                        aiCallbackFn={handleDesignTicketWithAI}
-                                    />
+                            <div className="flex justify-between align-center mb-3">
+                                <h3 className="text-sm lg:text-lg font-semibold leading-tight text-left text-gray-800 ml-2">Pre-Populated Example</h3>
+                                <div className="flex gap-2">
+                                    <Button className="bg-red-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleReset}>Reset</Button>
+                                    <Button className="bg-orange-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleClearEventFields}>Clear</Button>
                                 </div>
-                                <div className="flex justify-left gap-5 w-[100%] mt-4 mb-2 ml-2 ">
-                                    <InputColorField
-                                        label="Background"
-                                        value={ticketColor}
-                                        callbackFn={setTicketColor}
-                                    />
-                                    <InputColorField
-                                        label="Font"
-                                        value={textColor}
-                                        callbackFn={setTextColor}
-                                    />
-                                </div>
-                                <InputDropdownField
-                                    label="Texture"
-                                    value={ticketTexture}
-                                    callbackFn={setTicketTexture}
-                                    inputList={getTextures()}
-                                />
-                                <InputDropdownField
-                                    label="Font"
-                                    value={font}
-                                    callbackFn={setFont}
-                                    inputList={getFonts()}
-                                />
-                                <InputTextAreaField
-                                    label="Image URL"
-                                    required={false}
-                                    value={imgUrl}
-                                    callbackFn={setImgUrl}
-                                />
                             </div>
-                    </div>
-                    <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[420px] md:max-h-none overflow-y-scroll bg-white bg-opacity-30 mt-8 mx-2 min-w-[250px] md:max-w-[500px]">
-                        <div className="flex-grow overflow-y-scroll overflow-x-hidden px-4 py-6">
-                                <div className="flex justify-between align-center mb-2">
-                                    <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Gift Message</h3>
-                                    <div className="flex gap-2">
-                                        <Button className="bg-orange-100 text-xs mr-2" onClick={handleClearGiftFields}>Clear</Button>
-                                    </div>
-                                </div>
-                                <InputTextField
-                                    label="Your Name"
-                                    required={false}
-                                    value={gifterName}
-                                    callbackFn={setGifterName}
-                                />
-                                <InputTextAreaFieldWithAI
-                                    label="Gift Message"
-                                    required={false}
-                                    value={giftMessage}
-                                    inputCallbackFn={setGiftMessage}
-                                    aiCallbackFn={handleGenerateMessageWithAI}
-                                    isLoading={isLoadingAIGiftMessage}
-                                />
-                                <InputCheckboxField
-                                    checked={showConfetti}
-                                    label="Show Confetti?"
-                                    onChangeFn={handleRadioChange}
-                                />
-                            </div>
+                            <InputTextField
+                                label="Title*"
+                                value={eventName}
+                                callbackFn={setEventName}
+                            />
+                            <InputTextField
+                                label="Subtitle"
+                                required={false}
+                                value={eventSubtitle}
+                                callbackFn={setEventSubtitle}
+                            />
+                            <InputTextField
+                                label="Description"
+                                required={false}
+                                value={eventDescription}
+                                callbackFn={setEventDescription}
+                            />
+                            <InputDateField
+                                label="Date*"
+                                value={eventDate || ""}
+                                callbackFn={setEventDate}
+                            />
+                            <InputTimeField
+                                label="Start Time*"
+                                value={eventStartTime}
+                                callbackFn={setEventStartTime}
+                            />
+                            <InputTimeField
+                                label="End Time*"
+                                value={eventEndTime}
+                                callbackFn={setEventEndTime}
+                            />
+                            <InputTextField
+                                label="Venue*"
+                                value={eventVenue}
+                                callbackFn={setEventVenue}
+                            />
+                            <InputTextField
+                                label="Section"
+                                required={false}
+                                value={eventSection}
+                                callbackFn={setEventSection}
+                            />
+                            <InputTextField
+                                label="Row"
+                                required={false}
+                                value={eventRow}
+                                callbackFn={setEventRow}
+                            />
+                            <InputTextField
+                                label="Seat(s)"
+                                required={false}
+                                value={eventSeat}
+                                callbackFn={setEventSeat}
+                            />
                         </div>
+                    </div>
+                    <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[420px] md:max-h-none overflow-y-scroll bg-white bg-opacity-30 mt-8 mx-2 min-w-[250px] md:max-w-[500px]">
+                        <div className="flex-grow overflow-y-scroll overflow-x-hidden px-4 py-6">
+                            <div className="flex justify-between mb-2 mr-2">
+                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Ticket Design</h3>
+                                <GenerateWithAIButton
+                                    isLoading={isLoadingTicketDesignWithAI}
+                                    aiCallbackFn={handleDesignTicketWithAI}
+                                />
+                            </div>
+                            <div className="flex justify-left gap-5 w-[100%] mt-4 mb-2 ml-2 ">
+                                <InputColorField
+                                    label="Background"
+                                    value={ticketColor}
+                                    callbackFn={setTicketColor}
+                                />
+                                <InputColorField
+                                    label="Font"
+                                    value={textColor}
+                                    callbackFn={setTextColor}
+                                />
+                            </div>
+                            <InputDropdownField
+                                label="Texture"
+                                value={ticketTexture}
+                                callbackFn={setTicketTexture}
+                                inputList={getTextures()}
+                            />
+                            <InputDropdownField
+                                label="Font"
+                                value={font}
+                                callbackFn={setFont}
+                                inputList={getFonts()}
+                            />
+                            <InputTextAreaField
+                                label="Image URL"
+                                required={false}
+                                value={imgUrl}
+                                callbackFn={setImgUrl}
+                            />
+                        </div>
+                    </div>
+                    <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[420px] md:max-h-none overflow-y-scroll bg-white bg-opacity-30 mt-8 mx-2 min-w-[250px] md:max-w-[500px]">
+                        <div className="flex-grow overflow-y-scroll overflow-x-hidden px-4 py-6">
+                            <div className="flex justify-between align-center mb-2">
+                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Gift Message</h3>
+                                <div className="flex gap-2">
+                                    <Button className="bg-orange-100 text-xs mr-2" onClick={handleClearGiftFields}>Clear</Button>
+                                </div>
+                            </div>
+                            <InputTextField
+                                label="Your Name"
+                                required={false}
+                                value={gifterName}
+                                callbackFn={setGifterName}
+                            />
+                            <InputTextAreaFieldWithAI
+                                label="Gift Message"
+                                required={false}
+                                value={giftMessage}
+                                inputCallbackFn={setGiftMessage}
+                                aiCallbackFn={handleGenerateMessageWithAI}
+                                isLoading={isLoadingAIGiftMessage}
+                            />
+                            <InputCheckboxField
+                                checked={showConfetti}
+                                label="Show Confetti?"
+                                onChangeFn={handleRadioChange}
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div className="flex-1 md:w-1/2 px-4 mt-4 sm:mt-0 mb-auto sticky top-16">
                     <div className="mt-4 mx-2 sm:mt-6 mb-10">
