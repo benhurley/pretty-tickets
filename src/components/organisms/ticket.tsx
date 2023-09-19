@@ -42,6 +42,8 @@ const Ticket = ({
     font,
 }: TicketProps) => {
     const eventDateConverted = eventDate && new Date(eventDate || "");
+    const eventDateString = eventDateConverted && eventDateConverted?.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })
+
     return (
         <div className="flex flex-col items-center justify-center">
             <div className="absolute bg-green-500 z-0"></div>
@@ -61,7 +63,7 @@ const Ticket = ({
                             <div className="absolute rounded-full w-9 h-9 bg-white -mt-11 -left-4"></div>
                             <div className="absolute rounded-full w-9 h-9 bg-white -mt-11 -right-4"></div>
                             <div className="flex items-center justify-between mt-2 mb-4">
-                                <div style={{ color: textColor || "#000000" }} className="text-2xl font-bold">{eventName}</div>
+                                {isValidInput(eventName) && <div style={{ color: textColor || "#000000" }} className="text-2xl font-bold">{eventName}</div>}
                                 {isValidInput(eventSubtitle) && <div style={{ color: textColor || "#000000" }} className="text-sm text-gray-500 text-right">{eventSubtitle}</div>}
                             </div>
                             <div className="top --flex-column mb-4">
@@ -71,9 +73,9 @@ const Ticket = ({
                                 {isValidInput(eventDescription) && <p style={{ color: textColor || "#000000" }} className="text-gray-600">{eventDescription}</p>}
                             </div>
                             <div style={{ color: textColor || "#000000" }} className="flex flex-row justify-between mt-4 mb-2">
-                                {eventDateConverted && <div>
+                                {eventDateConverted && eventDateString !== 'Invalid Date' && <div>
                                     <span className="text-sm">Date</span>
-                                    <div className="font-semibold">{eventDateConverted.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}</div>
+                                    <div className="font-semibold">{eventDateString}</div>
                                 </div>}
                                 {isValidInput(eventStartTime) && <div className="ml-8 min-w-[100px]">
                                     <span className="text-sm">Start Time</span>

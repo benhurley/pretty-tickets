@@ -257,7 +257,7 @@ export const Home = () => {
                                 </div>
                             </div>
                             <InputTextField
-                                label="Title*"
+                                label="Title"
                                 value={eventName}
                                 callbackFn={setEventName}
                             />
@@ -274,22 +274,22 @@ export const Home = () => {
                                 callbackFn={setEventDescription}
                             />
                             <InputDateField
-                                label="Date*"
+                                label="Date"
                                 value={eventDate || ""}
                                 callbackFn={setEventDate}
                             />
                             <InputTimeField
-                                label="Start Time*"
+                                label="Start Time"
                                 value={eventStartTime}
                                 callbackFn={setEventStartTime}
                             />
                             <InputTimeField
-                                label="End Time*"
+                                label="End Time"
                                 value={eventEndTime}
                                 callbackFn={setEventEndTime}
                             />
                             <InputTextField
-                                label="Venue*"
+                                label="Venue"
                                 value={eventVenue}
                                 callbackFn={setEventVenue}
                             />

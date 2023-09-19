@@ -17,10 +17,10 @@ export const Results = () => {
     const eventName = queryParams.get('eventName');
     const eventSubtitle = queryParams.get('eventSubtitle');
     const eventDescription = queryParams.get('eventDescription');
-    const eventDate = queryParams.get('eventDate');
-    const eventStartTime = queryParams.get('eventStartTime');
-    const eventEndTime = queryParams.get('eventEndTime');
-    const eventVenue = queryParams.get('eventVenue');
+    const eventDate = queryParams.get('eventDate') || undefined;
+    const eventStartTime = queryParams.get('eventStartTime') || undefined;
+    const eventEndTime = queryParams.get('eventEndTime') || undefined;
+    const eventVenue = queryParams.get('eventVenue') || undefined;
     const eventSection = queryParams.get('eventSection');
     const eventRow = queryParams.get('eventRow');
     const eventSeat = queryParams.get('eventSeat');
@@ -143,19 +143,19 @@ export const Results = () => {
                                 font={font}
                             />
                             <div className="flex justify-center mt-6">
-                                <AddToCalendarButton
-                                    name={eventName || undefined}
-                                    description={`${eventDescription} [url]${window.location}|URL Text[/url]` || undefined}
+                                {isValidInput(eventDate) && <AddToCalendarButton
+                                    name={eventName || "Event from prettytickets.com"}
+                                    description={isValidInput(eventDescription) ? `${eventDescription} [url]${window.location}|URL Text[/url]` : undefined}
                                     options={['Apple', 'Google', 'Microsoft365', 'MicrosoftTeams', 'Outlook.com', 'Yahoo']}
-                                    location={eventVenue || undefined}
-                                    startDate={eventDate || undefined}
-                                    startTime={eventStartTime || undefined}
-                                    endTime={eventEndTime || undefined}
+                                    location={isValidInput(eventVenue) ? eventVenue : undefined}
+                                    startDate={eventDate}
+                                    startTime={isValidInput(eventStartTime) ? eventStartTime : "00:00"}
+                                    endTime={isValidInput(eventEndTime) ? eventEndTime : "23:59"}
                                     timeZone="currentBrowser"
                                     buttonStyle='round'
                                     listStyle='overlay'
                                     styleLight="--btn-text: #000;"
-                                />
+                                />}
                             </div>
                         </div>
                     </div>
