@@ -252,8 +252,8 @@ export const Home = () => {
                             <div className="flex justify-between align-center mb-3">
                                 <h3 className="text-sm lg:text-lg font-semibold leading-tight text-left text-gray-800 ml-2">Pre-Populated Example</h3>
                                 <div className="flex gap-2">
-                                    <Button className="bg-red-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleReset}>Reset</Button>
                                     <Button className="bg-orange-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleClearEventFields}>Clear</Button>
+                                    <Button className="bg-red-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleReset}>Reset</Button>
                                 </div>
                             </div>
                             <InputTextField
