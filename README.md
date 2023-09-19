@@ -2,9 +2,7 @@
 
 # Pretty Tickets™
 
-## From Purchase to Presentation, We've Got You Covered
-
-Use AI to transform purchases into beautiful commemorative tickets.
+## Use AI to transform purchases into beautiful commemorative tickets.
 
 ![Homepage](./public/screenshot.png)
 
