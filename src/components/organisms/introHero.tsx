@@ -1,6 +1,6 @@
 export const IntroHero = () => {
     return (
-        <div className="text-center sm:text-left max-w-[900px] px-6 pt-12 sm:pt-16 lg:pt-4">
+        <div className="max-w-[900px] px-6 pt-12 sm:pt-16 lg:pt-4">
             <h1 className="text-4xl lg:text-6xl font-extrabold leading-tight text-center text-gray-800 mb-2 inline-block">
                 Pretty Tickets
                 <span className="text-xs absolute">™</span>
