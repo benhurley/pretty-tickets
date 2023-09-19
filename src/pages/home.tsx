@@ -23,6 +23,7 @@ export const Home = () => {
     const navigate = useNavigate();
 
     const [purchaseData, setPurchaseData] = useState("");
+    const [exampleTitle, setExampleTitle] = useState("Example Ticket")
     const [eventName, setEventName] = useState('2023 US Open Tennis');
     const [eventSubtitle, setEventSubtitle] = useState('VIP ENTRY');
     const [eventDescription, setEventDescription] = useState(`Session 24: Women's Final / Mixed Doubles Final`);
@@ -125,6 +126,7 @@ export const Home = () => {
         setEventRow("")
         setEventSeat("")
         setImgUrl("")
+        setExampleTitle("")
     }
 
     const handleClearGiftFields = () => {
@@ -250,7 +252,7 @@ export const Home = () => {
                                 />
                             </div>
                             <div className="flex justify-between align-center mb-3">
-                                <h3 className="text-sm lg:text-lg font-bold leading-tight text-left text-gray-800 ml-2">Example Ticket</h3>
+                                <h3 className="text-sm lg:text-lg font-bold leading-tight text-left text-gray-800 ml-2">{exampleTitle}</h3>
                                 <div className="flex gap-2">
                                     <Button className="bg-orange-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleClearEventFields}>Clear</Button>
                                     <Button className="bg-red-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleReset}>Reset</Button>
