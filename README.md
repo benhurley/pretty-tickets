@@ -4,7 +4,7 @@
 
 ## From Purchase to Presentation, We've Got You Covered
 
-Turn ordinary purchases into beautiful, digitally-sharable commemorative tickets.
+Use AI to transform purchases into beautiful commemorative tickets.
 
 ![Homepage](./public/screenshot.png)
 

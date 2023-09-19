@@ -16,8 +16,8 @@ function App() {
     <>
       <Helmet>
         <title>Pretty Tickets</title>
-        <meta property="og:title" content="Pretty Tickets | Turn ordinary purchases into beautiful, digitally-sharable commemorative tickets" />
-        <meta property="og:description" content="Pretty Tickets | Turn ordinary purchases into beautiful, digitally-sharable commemorative tickets" />
+        <meta property="og:title" content="Pretty Tickets | Use AI to transform purchases into beautiful commemorative tickets." />
+        <meta property="og:description" content="Pretty Tickets | Use AI to transform purchases into beautiful commemorative tickets." />
       </Helmet>
       <Router>
         <Header />
