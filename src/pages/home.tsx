@@ -229,8 +229,8 @@ export const Home = () => {
             <div className="flex flex-col md:flex-row items-center max-w-[1200px] mx-auto">
                 <div className="flex-1 md:w-1/2 px-4 lg:ml-10 mt-2 sm:mt-6 max-w-full w-full">
                     <div className="bg-green-100 p-4 rounded-lg shadow-md text-center sm:flex-grow max-w-[350px] w-full mx-auto mb-8">
-                        <h3 className="text-lg font-semibold mb-1 text-left">Add Details</h3>
-                        <p className="text-sm text-gray-600 text-left">Auto-fill event details using Generative AI.</p>
+                        <h3 className="text-lg font-semibold mb-1 text-left">Create The Perfect Ticket</h3>
+                        <p className="text-sm text-gray-600 text-left">Fill out the event fields you need, apply styles, and include a message for your lucky recipient.</p>
                     </div>
                     <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[420px] md:max-h-none overflow-y-scroll bg-white bg-opacity-30 mx-2 min-w-[250px] md:max-w-[500px]">
                         <div className="flex-grow overflow-y-scroll overflow-x-hidden px-4 py-6">
@@ -250,7 +250,7 @@ export const Home = () => {
                                 />
                             </div>
                             <div className="flex justify-between align-center mb-3">
-                                <h3 className="text-sm lg:text-lg font-semibold leading-tight text-left text-gray-800 ml-2">Example Ticket</h3>
+                                <h3 className="text-sm lg:text-lg font-bold leading-tight text-left text-gray-800 ml-2">Example Ticket</h3>
                                 <div className="flex gap-2">
                                     <Button className="bg-orange-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleClearEventFields}>Clear</Button>
                                     <Button className="bg-red-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleReset}>Reset</Button>
@@ -316,7 +316,7 @@ export const Home = () => {
                     <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[420px] md:max-h-none overflow-y-scroll bg-white bg-opacity-30 mt-8 mx-2 min-w-[250px] md:max-w-[500px]">
                         <div className="flex-grow overflow-y-scroll overflow-x-hidden px-4 py-6">
                             <div className="flex justify-between mb-2 mr-2">
-                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Ticket Design</h3>
+                                <h3 className="text-md lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Ticket Design</h3>
                                 <GenerateWithAIButton
                                     isLoading={isLoadingTicketDesignWithAI}
                                     aiCallbackFn={handleDesignTicketWithAI}
@@ -357,7 +357,7 @@ export const Home = () => {
                     <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[420px] md:max-h-none overflow-y-scroll bg-white bg-opacity-30 mt-8 mx-2 min-w-[250px] md:max-w-[500px]">
                         <div className="flex-grow overflow-y-scroll overflow-x-hidden px-4 py-6">
                             <div className="flex justify-between align-center mb-2">
-                                <h3 className="text-mg lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Gift Message</h3>
+                                <h3 className="text-md lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Gift Message (Optional)</h3>
                                 <div className="flex gap-2">
                                     <Button className="bg-orange-100 text-xs mr-2" onClick={handleClearGiftFields}>Clear</Button>
                                 </div>
@@ -385,11 +385,7 @@ export const Home = () => {
                     </div>
                 </div>
                 <div className="flex-1 md:w-1/2 px-4 mt-4 sm:mt-0 mb-auto sticky top-16">
-                    <div className="mt-4 mx-2 sm:mt-6 mb-10">
-                        <div className="bg-green-100 p-4 rounded-lg shadow-md text-center sm:flex-grow max-w-[350px] w-full mx-auto mb-8">
-                            <h3 className="text-lg font-semibold mb-1 text-left">Design</h3>
-                            <p className="text-sm text-gray-600 text-left">Preview your commemorative ticket below</p>
-                        </div>
+                    <div className="mt-12 sm:mt-6 mx-2 sm:mt-6 mb-10">
                         <Ticket
                             eventName={eventName}
                             eventSubtitle={eventSubtitle}
@@ -407,7 +403,7 @@ export const Home = () => {
                             textColor={textColor}
                             font={font}
                         />
-                        {isValidInput(gifterName) && <div className='rounded-xl shadow-2xl bg-white p-6 mx-auto max-w-[575px] mt-12'>
+                        {isValidInput(gifterName) && <div className='rounded-xl shadow-2xl bg-white p-6 mx-auto max-w-[575px] mt-6'>
                             <h3 className="text-xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-gray-800 mx-auto text-center">{gifterName} sent you a ticket!</h3>
                             {isValidInput(giftMessage) && <div className='md:px-6 mt-6 mb-2'>
                                 <p>{giftMessage}</p>
