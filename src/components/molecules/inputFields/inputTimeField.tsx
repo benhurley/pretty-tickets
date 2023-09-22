@@ -1,8 +1,8 @@
 type InputTimeFieldProps = {
-    callbackFn: (value: React.SetStateAction<string>) => void,
-    label: string,
-    required?: boolean,
-    value: string,
+    callbackFn: (value: React.SetStateAction<string>) => void;
+    label: string;
+    required?: boolean;
+    value: string;
 }
 
 export const InputTimeField = ({ label, value, callbackFn, required = true }: InputTimeFieldProps) => {
@@ -18,6 +18,8 @@ export const InputTimeField = ({ label, value, callbackFn, required = true }: In
                 type="time"
                 value={value}
                 onChange={(e) => callbackFn(e.target.value)}
+                aria-required={required}
+                id={label}
             />
         </div>
     )

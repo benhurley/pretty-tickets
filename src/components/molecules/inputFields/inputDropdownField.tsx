@@ -1,16 +1,16 @@
 import React from 'react';
 
 export type DropdownItem = {
-    name: string,
-    value: string,
+    name: string;
+    value: string;
 }
 
 type InputDropdownFieldProps = {
-    callbackFn: (value: string) => void,
-    label: string,
-    required?: boolean,
-    value: string,
-    inputList: DropdownItem[]
+    callbackFn: (value: string) => void;
+    label: string;
+    required?: boolean;
+    value: string;
+    inputList: DropdownItem[];
 }
 
 export const InputDropdownField = ({ label, value, callbackFn, required = true, inputList }: InputDropdownFieldProps) => {
@@ -24,8 +24,9 @@ export const InputDropdownField = ({ label, value, callbackFn, required = true, 
             <label htmlFor={label}>{label}</label>
             <select
                 aria-labelledby={label}
+                aria-required={required}
                 name="dropdown"
-                id="dropdown"
+                id={label}
                 className="bg-white py-1 px-2 lg:p-2 rounded shadow-xl w-[100%]"
                 value={value}
                 onChange={handleOptionChange}
