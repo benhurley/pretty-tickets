@@ -11,7 +11,7 @@ export const InputColorField = ({ label, value, callbackFn, required = true }: I
     return (
         <div className="mb-2 text-center inline-flex">
             <div>
-                <label htmlFor={label} className="pr-2">{label}</label>
+                <label htmlFor={label} className="pr-2 text-xs sm:text-sm">{label}</label>
             </div>
             <input
                 aria-labelledby={label}

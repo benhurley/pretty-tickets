@@ -326,12 +326,12 @@ export const Home = () => {
                             </div>
                             <div className="flex justify-left gap-5 w-[100%] mt-4 mb-2 ml-2 ">
                                 <InputColorField
-                                    label="Background"
+                                    label="Ticket Color"
                                     value={ticketColor}
                                     callbackFn={setTicketColor}
                                 />
                                 <InputColorField
-                                    label="Font"
+                                    label="Font Color"
                                     value={textColor}
                                     callbackFn={setTextColor}
                                 />
@@ -379,6 +379,7 @@ export const Home = () => {
                                 isLoading={isLoadingAIGiftMessage}
                             />
                             <InputCheckboxField
+                                id="confettii"
                                 checked={showConfetti}
                                 label="Show Confetti?"
                                 onChangeFn={handleRadioChange}
