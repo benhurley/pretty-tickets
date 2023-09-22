@@ -7,10 +7,12 @@ import { useEffect } from 'react';
 import { preloadImages } from './helpers/prefetch';
 import { Helmet } from 'react-helmet-async';
 import { Disclaimer } from './components/molecules/disclaimer';
+import ReactGA from 'react-ga4';
 
 function App() {
   useEffect(() => {
     preloadImages();
+    ReactGA.initialize("G-FHTP63HHFY");
   }, []);
 
   return (
