@@ -9,9 +9,10 @@ export const InputColorField = ({ label, value, callbackFn, required = true }: I
     return (
         <div className="mb-2 text-center inline-flex">
             <div>
-                <label className="pr-2">{label}</label>
+                <label htmlFor={label} className="pr-2">{label}</label>
             </div>
             <input
+                aria-labelledby={label}
                 required={required}
                 className="py-0.5 px-1 rounded shadow-xl hover:cursor-pointer"
                 type="color"

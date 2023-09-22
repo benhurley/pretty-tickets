@@ -10,9 +10,10 @@ export const InputTextAreaField = ({ label, value, callbackFn, required = true, 
     return (
         <div className="mb-2 px-2">
             <div>
-                <label className="pr-2">{label}</label>
+                <label htmlFor={label} className="pr-2">{label}</label>
             </div>
             <textarea
+                aria-labelledby={label}
                 required={required}
                 className="py-1 px-2 lg:p-2 rounded shadow-xl w-[100%]"
                 rows={rows}
