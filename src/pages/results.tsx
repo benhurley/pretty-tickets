@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { fetchTinyURL } from '../helpers/fetchTinyURL';
 import { isValidInput } from '../helpers/isValidInput';
-import ShareIcon from '../components/atoms/shareIcon.png';
+import ShareIcon from '../components/atoms/shareIcon.webp';
 import { AddToCalendarButton } from 'add-to-calendar-button-react';
 import { Helmet } from 'react-helmet-async';
 

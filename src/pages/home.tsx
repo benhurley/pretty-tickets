@@ -9,7 +9,7 @@ import { fetchEventInfo, fetchGiftMessage, fetchTicketDesign } from "../helpers/
 import { InputColorField } from "../components/molecules/inputFields/inputColorField";
 import { InputTextAreaField } from "../components/molecules/inputFields/inputTextAreaField";
 import { isValidInput } from "../helpers/isValidInput";
-import VerticalLines from "../components/atoms/ticketTextures/vertical.png";
+import VerticalLines from "../components/atoms/ticketTextures/vertical.webp";
 import { InputDropdownField } from "../components/molecules/inputFields/inputDropdownField";
 import { getTextures } from "../helpers/textures";
 import { getFonts } from "../helpers/fonts";
@@ -35,7 +35,7 @@ export const Home = () => {
     const [eventRow, setEventRow] = useState('J');
     const [eventSeat, setEventSeat] = useState('7');
 
-    const [imgUrl, setImgUrl] = useState('/example.png')
+    const [imgUrl, setImgUrl] = useState('/example.webp')
     const [ticketColor, setTicketColor] = useState('#F5F5F5')
     const [ticketTexture, setTicketTexture] = useState(VerticalLines)
     const [textColor, setTextColor] = useState('#000000')

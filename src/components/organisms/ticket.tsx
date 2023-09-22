@@ -1,6 +1,6 @@
 import { formatTime } from "../../helpers/formatTime";
 import { isValidInput } from "../../helpers/isValidInput";
-import Linen from "../atoms/ticketTextures/linen.png";
+import Linen from "../atoms/ticketTextures/linen.webp";
 
 type TicketData = {
     eventName: string;
@@ -67,7 +67,7 @@ const Ticket = ({
                                 {isValidInput(eventSubtitle) && <div style={{ color: textColor || "#000000" }} className="text-sm text-gray-500 text-right">{eventSubtitle}</div>}
                             </div>
                             <div className="top --flex-column mb-4">
-                                {isValidInput(imgUrl) && <img className="rounded-md shadow-2xl border-4 border-white" src={imgUrl || ""} alt="venue" />}
+                                {isValidInput(imgUrl) && <img className="rounded-md shadow-2xl border-4 border-white w-[400px]" src={imgUrl || ""} alt="venue" />}
                             </div>
                             <div className="flex flex-col lg:flex-row md:space-y-0 md:justify-between">
                                 {isValidInput(eventDescription) && <p style={{ color: textColor || "#000000" }} className="text-gray-600">{eventDescription}</p>}

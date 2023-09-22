@@ -4,7 +4,7 @@
 
 ## Use AI to transform purchases into beautiful commemorative tickets.
 
-![Homepage](./public/screenshot.png)
+![Homepage](./public/screenshot.webp)
 
 ## Tools
 

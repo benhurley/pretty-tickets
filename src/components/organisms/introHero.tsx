@@ -5,8 +5,8 @@ export const IntroHero = () => {
                 Pretty Tickets
                 <span className="text-xs absolute">™</span>
             </h1>
-            <img className="hidden sm:inline-block ml-4 -mt-10 animate-in spin-in-90 ease-in-out duration-1000" width={75} src="/logo128.png" alt="ticket" />
-            <img className="absolute inline-block top-[80px] sm:hidden ml-4 animate-in spin-in-90 ease-in-out duration-1000 -mt-4" width={50} src="/logo128.png" alt="ticket" />
+            <img className="hidden sm:inline-block ml-4 -mt-10 animate-in spin-in-90 ease-in-out duration-1000" width={75} src="/logo128.webp" alt="ticket" />
+            <img className="absolute inline-block top-[80px] sm:hidden ml-4 animate-in spin-in-90 ease-in-out duration-1000 -mt-4" width={50} src="/logo128.webp" alt="ticket" />
             <h2 className="text-md mt-2 font-semibold italic">Use AI to transform purchases into beautiful commemorative tickets.</h2>
         </div>
     )

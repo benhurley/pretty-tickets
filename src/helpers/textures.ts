@@ -1,11 +1,11 @@
-import Linen from "../components/atoms/ticketTextures/linen.png";
-import Vertical from "../components/atoms/ticketTextures/vertical.png";
-import Recycled from "../components/atoms/ticketTextures/recycled.png";
-import Weathered from "../components/atoms/ticketTextures/weathered.png";
-import Wrinkled from "../components/atoms/ticketTextures/wrinkled.png";
-import Horizontal from "../components/atoms/ticketTextures/horizontal.png";
-import Marble from "../components/atoms/ticketTextures/marbled.png";
-import Wood from "../components/atoms/ticketTextures/wood.png";
+import Linen from "../components/atoms/ticketTextures/linen.webp";
+import Vertical from "../components/atoms/ticketTextures/vertical.webp";
+import Recycled from "../components/atoms/ticketTextures/recycled.webp";
+import Weathered from "../components/atoms/ticketTextures/weathered.webp";
+import Wrinkled from "../components/atoms/ticketTextures/wrinkled.webp";
+import Horizontal from "../components/atoms/ticketTextures/horizontal.webp";
+import Marble from "../components/atoms/ticketTextures/marbled.webp";
+import Wood from "../components/atoms/ticketTextures/wood.webp";
 const textures = [
     { name: "Linen", value: Linen },
     { name: "Horizontal Lines", value: Horizontal },
