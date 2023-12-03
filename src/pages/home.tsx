@@ -18,11 +18,13 @@ import { GenerateWithAIButton } from "../components/molecules/buttons/generateWi
 import { InputDateField } from "../components/molecules/inputFields/inputDateField";
 import { InputTimeField } from "../components/molecules/inputFields/inputTimeField";
 import { Button } from "../components/molecules/buttons/button";
+import { fetchImageURL } from "../helpers/fetchImageURL";
 
 export const Home = () => {
     const navigate = useNavigate();
 
     const [purchaseData, setPurchaseData] = useState("");
+    const [eventType, setEventType] = useState("Tennis Match")
     const [exampleTitle, setExampleTitle] = useState("Example Ticket")
     const [eventName, setEventName] = useState('2023 US Open Tennis');
     const [eventSubtitle, setEventSubtitle] = useState('VIP ENTRY');
@@ -52,6 +54,7 @@ export const Home = () => {
     const handleDesignTicketWithAI = async (e: React.ChangeEvent<HTMLInputElement>) => {
         setIsLoadingTicketDesignWithAI(true)
         const design = await fetchTicketDesign({
+            eventType,
             eventName,
             eventSubtitle,
             eventDescription,
@@ -66,6 +69,12 @@ export const Home = () => {
             setFont(design.font)
             setTextColor(design.font_color)
             setTicketTexture(textures.find(t => t.name === design.texture)?.value || "");
+        }
+
+        const image = await fetchImageURL(eventType);
+
+        if (image?.hits && image.hits?.length > 0) {
+            setImgUrl(image.hits[0].webformatURL)
         }
     }
 
@@ -95,6 +104,7 @@ export const Home = () => {
         setIsLoadingAIEventInfo(false)
 
         if (!!result) {
+            setEventType(result.type || "");
             setEventName(result.title || "");
             setEventSubtitle(result.subtitle || "");
             setEventDescription(result.description || "");
@@ -106,6 +116,7 @@ export const Home = () => {
             setEventRow(result.row || "");
             setEventSeat(result.seats || "");
             setImgUrl("")
+            setGiftMessage("")
         }
     }
 
@@ -258,6 +269,11 @@ export const Home = () => {
                                     <Button className="bg-red-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleReset}>Reset</Button>
                                 </div>
                             </div>
+                            <InputTextField
+                                label="Event Type"
+                                value={eventType}
+                                callbackFn={setEventType}
+                            />
                             <InputTextField
                                 label="Title"
                                 value={eventName}

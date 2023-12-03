@@ -1,4 +1,5 @@
 type queryParams = {
+    eventType: string,
     eventName: string,
     eventSubtitle: string,
     eventDescription: string,
@@ -51,6 +52,7 @@ export type TicketDesignResponse = {
 }
 
 export async function fetchTicketDesign({
+    eventType,
     eventName,
     eventSubtitle,
     eventDescription,
@@ -60,6 +62,7 @@ export async function fetchTicketDesign({
     const baseURL = `${window.location.origin}/.netlify/functions/${functionName}`;
 
     const queryParams = new URLSearchParams();
+    queryParams.set('eventType', eventType || "");
     queryParams.set('eventName', eventName || "");
     queryParams.set('eventSubtitle', eventSubtitle || "");
     queryParams.set('eventDescription', eventDescription || "");
@@ -82,6 +85,7 @@ export async function fetchTicketDesign({
 }
 
 export type EventInfoResponse = {
+    type?: string,
     title?: string,
     subtitle?: string,
     description?: string,
