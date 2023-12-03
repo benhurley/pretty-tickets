@@ -10,6 +10,7 @@
 
 1. [OpenAI](https://openai.com) Chat Completions API to generate gift message
 2. [TinyURL](https://tinyurl.com) API to create short links to share
+3. [Pixabay](https://pixabay.com/) API to pull image based on ticket context
 
 ## Architecture
 
