@@ -80,15 +80,9 @@ export const Results = () => {
     const ThankYouModule = () => {
         return (<>
             <p className="text-md lg:text-lg font-extrabold leading-tight text-gray-800 mt-4 mx-auto text-center">Thanks for using Pretty Tickets<span className="text-[10px] absolute -mt-1">™</span></p>
-            <div className="inline-flex items-center justify-center md:col-span-2 pt-1 mt-2 mb-4 font-bold">
-                <a className="bg-purple-100 px-4 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/benhurley/fancy-tickets" target="_blank" rel="noreferrer">
-                    Contribute
-                </a>
-                <a className="bg-blue-100 px-4 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/sponsors/benhurley" target="_blank" rel="noreferrer">
-                    Donate
-                </a>
-                <a className="bg-pink-100 px-4 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 ml-2" href="https://github.com/sponsors/benhurley" target="_blank" rel="noreferrer">
-                    Sponsor
+            <div className="flex items-center justify-center md:col-span-2 pt-1 mt-2 mb-4 font-bold">
+                <a className="bg-blue-100 px-4 py-1 rounded-2xl text-md shadow-xl transform hover:scale-105 transition-transform duration-300 mx-auto" href="https://pay.prettytickets.com" target="_blank" rel="noreferrer">
+                    Buy coffee for the dev ☕ 
                 </a>
             </div>
         </>)
