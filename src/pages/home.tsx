@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, type ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import Ticket from "../components/organisms/ticket";
 import { InputTextField } from "../components/molecules/inputFields/inputTextField";
@@ -25,7 +25,6 @@ export const Home = () => {
 
     const [purchaseData, setPurchaseData] = useState("");
     const [eventType, setEventType] = useState("Tennis Match")
-    const [exampleTitle, setExampleTitle] = useState("Example Ticket")
     const [eventName, setEventName] = useState('2023 US Open Tennis');
     const [eventSubtitle, setEventSubtitle] = useState('VIP ENTRY');
     const [eventDescription, setEventDescription] = useState(`Session 24: Women's Final / Mixed Doubles Final`);
@@ -50,6 +49,7 @@ export const Home = () => {
     const [isLoadingAIGiftMessage, setIsLoadingAIGiftMessage] = useState(false);
     const [isLoadingTicketDesignWithAI, setIsLoadingTicketDesignWithAI] = useState(false);
     const [isLoadingAIEventInfo, setIsLoadingAIEventInfo] = useState(false);
+    const [shouldKickOffAIDesign, setShouldKickOffAIDesign] = useState<ChangeEvent<HTMLInputElement> | null>(null);
 
     const handleDesignTicketWithAI = async (e: React.ChangeEvent<HTMLInputElement>) => {
         setIsLoadingTicketDesignWithAI(true)
@@ -96,27 +96,31 @@ export const Home = () => {
     }
 
     const handleFillEventFieldsWithAI = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        setIsLoadingAIEventInfo(true)
-        const result = await fetchEventInfo({
-            purchaseData
-        })
+        if (purchaseData.length > 0) {
+            setIsLoadingAIEventInfo(true)
 
-        setIsLoadingAIEventInfo(false)
-
-        if (!!result) {
-            setEventType(result.type || "");
-            setEventName(result.title || "");
-            setEventSubtitle(result.subtitle || "");
-            setEventDescription(result.description || "");
-            setEventDate(result.date || "");
-            setEventStartTime(result.start_time || "");
-            setEventEndTime(result.end_time || "");
-            setEventVenue(result.venue || "");
-            setEventSection(result.section || "");
-            setEventRow(result.row || "");
-            setEventSeat(result.seats || "");
-            setImgUrl("")
-            setGiftMessage("")
+            const result = await fetchEventInfo({
+                purchaseData
+            })
+    
+            setIsLoadingAIEventInfo(false)
+    
+            if (!!result) {
+                setEventType(result.type || "");
+                setEventName(result.title || "");
+                setEventSubtitle(result.subtitle || "");
+                setEventDescription(result.description || "");
+                setEventDate(result.date || "");
+                setEventStartTime(result.start_time || "");
+                setEventEndTime(result.end_time || "");
+                setEventVenue(result.venue || "");
+                setEventSection(result.section || "");
+                setEventRow(result.row || "");
+                setEventSeat(result.seats || "");
+                setImgUrl("")
+                setGiftMessage("")
+                setShouldKickOffAIDesign(e);
+            }
         }
     }
 
@@ -137,7 +141,6 @@ export const Home = () => {
         setEventRow("")
         setEventSeat("")
         setImgUrl("")
-        setExampleTitle("")
     }
 
     const handleClearGiftFields = () => {
@@ -234,6 +237,14 @@ export const Home = () => {
         }
     }, []);
 
+    useEffect(() => {
+        if (!!shouldKickOffAIDesign) {
+            handleDesignTicketWithAI(shouldKickOffAIDesign)
+            setShouldKickOffAIDesign(null)
+        }
+    // eslint-disable-next-line
+    }, [shouldKickOffAIDesign])
+
     return (
         <div className="lg:p-10">
             <div className="grid justify-center mt-6 mb-4">
@@ -241,29 +252,32 @@ export const Home = () => {
             </div>
             <div className="flex flex-col md:flex-row items-center max-w-[1200px] mx-auto">
                 <div className="flex-1 md:w-1/2 px-4 lg:ml-10 mt-2 sm:mt-6 max-w-full w-full">
-                    <div className="bg-green-100 p-4 rounded-lg shadow-md text-center sm:flex-grow max-w-[350px] w-full mx-auto mb-8">
+                    {/* Test hiding description block 4-21-24 */}
+                    {/* <div className="bg-green-100 p-4 rounded-lg shadow-md text-center sm:flex-grow max-w-[350px] w-full mx-auto mb-8">
                         <h3 className="text-lg font-semibold mb-1 text-left">Create The Perfect Ticket</h3>
                         <p className="text-sm text-gray-600 text-left">Fill out the event fields you need, apply styles, and include a message for your lucky recipient.</p>
-                    </div>
+                    </div> */}
                     <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[420px] md:max-h-none overflow-y-scroll bg-white bg-opacity-30 mx-2 min-w-[250px] md:max-w-[500px]">
                         <div className="flex-grow overflow-y-scroll overflow-x-hidden px-4 py-6">
                             <div className="flex justify-between align-center mb-1">
-                                <h3 className="text-md lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Event Details</h3>
+                                <h3 className="text-md lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Option 1: Create with AI</h3>
                             </div>
                             <div className="mb-6">
                                 <InputTextAreaFieldWithAI
-                                    label="Email Confirmation"
+                                    label="Event Details:"
                                     value={purchaseData}
                                     inputCallbackFn={setPurchaseData}
                                     aiCallbackFn={handleFillEventFieldsWithAI}
                                     isLoading={isLoadingAIEventInfo}
-                                    aiButtonCopy="Parse with AI"
-                                    rows={2}
-                                    instructions="In a rush? Copy and paste your email confirmation below to have Generative AI populate the event fields automatically."
+                                    aiButtonCopy="Use AI Assistant"
+                                    rows={5}
                                 />
                             </div>
+                            <div className="flex justify-between align-center mt-3 mb-5">
+                                <h3 className="text-md lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Option 2: Create Manually</h3>
+                            </div>
                             <div className="flex justify-between align-center mb-3">
-                                <h3 className="text-sm lg:text-lg font-bold leading-tight text-left text-gray-800 ml-2">{exampleTitle}</h3>
+                                <h3 className="text-sm lg:text-lg font-bold leading-tight text-left text-gray-800 ml-2">Event Details</h3>
                                 <div className="flex gap-2">
                                     <Button className="bg-orange-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleClearEventFields}>Clear</Button>
                                     <Button className="bg-red-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleReset}>Reset</Button>
@@ -337,6 +351,7 @@ export const Home = () => {
                                 <h3 className="text-md lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Ticket Design</h3>
                                 <GenerateWithAIButton
                                     isLoading={isLoadingTicketDesignWithAI}
+                                    copy="Use AI Design"
                                     aiCallbackFn={handleDesignTicketWithAI}
                                 />
                             </div>
@@ -391,6 +406,7 @@ export const Home = () => {
                                 required={false}
                                 value={giftMessage}
                                 inputCallbackFn={setGiftMessage}
+                                aiButtonCopy="Use AI Gift Message"
                                 aiCallbackFn={handleGenerateMessageWithAI}
                                 isLoading={isLoadingAIGiftMessage}
                             />

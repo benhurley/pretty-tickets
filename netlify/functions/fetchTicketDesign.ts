@@ -22,7 +22,7 @@ const handler: Handler = async (event: HandlerEvent) => {
         messages: [
             {
                 role: "system",
-                content: "You are designing a digital ticket for an upcoming event in the form of an api response. The ticket will be gifted virtually to a friend and can include a small gift message as part of it. Use event data to return neutral and asthetically pleasing styles for the virtual ticket (think light pastel colors like pastels for the ticket color background and at least 85% contrast between ticket color and font color). You will always answer in the form of a json object containing ticket_color (hex), font_color (hex), texture (Linen, Horizontal Lines, Vertical Lines, Recycled, Weathered, Wrinkled, Marble, or Wood) and font (native browser-supported fonts only).",
+                content: "You are designing a digital ticket for an upcoming event in the form of an api response. The ticket will be gifted virtually to a friend and can include a small gift message as part of it. Use event data to return neutral and asthetically pleasing styles for the virtual ticket (think light pastel colors like pastels for the ticket color background and at least 85% contrast between ticket color and font color). You will always answer in the form of a json object containing ticket_color (hex), font_color (hex), texture (Linen, Horizontal Lines, Vertical Lines, Recycled, Weathered, Marble, or Wood) and font (native browser-supported fonts only).",
             },
             // Use "slice" to limit the length of the input to 500 characters
             { role: "user", content: prompt.slice(0, 500) },
