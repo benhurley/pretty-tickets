@@ -271,6 +271,7 @@ export const Home = () => {
                                     isLoading={isLoadingAIEventInfo}
                                     aiButtonCopy="Use AI Assistant"
                                     rows={5}
+                                    placeholder="e.g. Nets vs Pacers 7PM at Barlays Center. Section B25, Row 1, Seats 1-2."
                                 />
                             </div>
                             <div className="flex justify-between align-center mt-3 mb-5">
