@@ -22,10 +22,14 @@
 
 1. [Download Netlify CLI](https://docs.netlify.com/cli/get-started/)
 
-2. Install Packages:
+2. Install Packages and Netlify CLI:
 
     ```bash
     npm i
+    ```
+
+    ```
+    npm install netlify-cli -g
     ```
 
 3. Run website and serverless backend locally (will be hosted on port 8888):

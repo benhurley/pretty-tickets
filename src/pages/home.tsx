@@ -19,6 +19,7 @@ import { InputDateField } from "../components/molecules/inputFields/inputDateFie
 import { InputTimeField } from "../components/molecules/inputFields/inputTimeField";
 import { Button } from "../components/molecules/buttons/button";
 import { fetchImageURL } from "../helpers/fetchImageURL";
+import ShowHideContent from "../components/molecules/showHideContent";
 
 export const Home = () => {
     const navigate = useNavigate();
@@ -102,9 +103,9 @@ export const Home = () => {
             const result = await fetchEventInfo({
                 purchaseData
             })
-    
+
             setIsLoadingAIEventInfo(false)
-    
+
             if (!!result) {
                 setEventType(result.type || "");
                 setEventName(result.title || "");
@@ -242,7 +243,7 @@ export const Home = () => {
             handleDesignTicketWithAI(shouldKickOffAIDesign)
             setShouldKickOffAIDesign(null)
         }
-    // eslint-disable-next-line
+        // eslint-disable-next-line
     }, [shouldKickOffAIDesign])
 
     return (
@@ -260,96 +261,95 @@ export const Home = () => {
                     <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[420px] md:max-h-none overflow-y-scroll bg-white bg-opacity-30 mx-2 min-w-[250px] md:max-w-[500px]">
                         <div className="flex-grow overflow-y-scroll overflow-x-hidden px-4 py-6">
                             <div className="flex justify-between align-center mb-1">
-                                <h3 className="text-md lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Option 1: Create with AI</h3>
+                                <h3 className="text-md lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Event Details</h3>
                             </div>
+                            <p className="mx-2">Recommended: Paste unformatted details from a confirmation email below and let us do the heavy lifting.</p>
                             <div className="mb-6">
                                 <InputTextAreaFieldWithAI
-                                    label="Event Details:"
                                     value={purchaseData}
                                     inputCallbackFn={setPurchaseData}
                                     aiCallbackFn={handleFillEventFieldsWithAI}
                                     isLoading={isLoadingAIEventInfo}
-                                    aiButtonCopy="Use AI Assistant"
+                                    aiButtonCopy="Use AI Details"
                                     rows={5}
-                                    placeholder="e.g. Nets vs Pacers 7PM at Barlays Center. Section B25, Row 1, Seats 1-2."
+                                    placeholder="e.g. Nets Pacers 7PM. Barlays Center. Section B25, Row 1, Seat 1 Seat 2."
                                 />
                             </div>
-                            <div className="flex justify-between align-center mt-3 mb-5">
-                                <h3 className="text-md lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Option 2: Create Manually</h3>
-                            </div>
-                            <div className="flex justify-between align-center mb-3">
-                                <h3 className="text-sm lg:text-lg font-bold leading-tight text-left text-gray-800 ml-2">Event Details</h3>
-                                <div className="flex gap-2">
-                                    <Button className="bg-orange-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleClearEventFields}>Clear</Button>
-                                    <Button className="bg-red-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleReset}>Reset</Button>
+                            <ShowHideContent title="Add Details Manually" >
+                                <div className="flex justify-between align-center mb-3">
+                                    <h3 className="text-sm lg:text-lg font-bold leading-tight text-left text-gray-800 ml-2">Event Form</h3>
+                                    <div className="flex gap-2">
+                                        <Button className="bg-orange-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleClearEventFields}>Clear</Button>
+                                        <Button className="bg-red-100 text-xs border rounded-full px-4 py-1 font-semibold" onClick={handleReset}>Reset</Button>
+                                    </div>
                                 </div>
-                            </div>
-                            <InputTextField
-                                label="Event Type"
-                                value={eventType}
-                                callbackFn={setEventType}
-                            />
-                            <InputTextField
-                                label="Title"
-                                value={eventName}
-                                callbackFn={setEventName}
-                            />
-                            <InputTextField
-                                label="Subtitle"
-                                required={false}
-                                value={eventSubtitle}
-                                callbackFn={setEventSubtitle}
-                            />
-                            <InputTextField
-                                label="Description"
-                                required={false}
-                                value={eventDescription}
-                                callbackFn={setEventDescription}
-                            />
-                            <InputDateField
-                                label="Date"
-                                value={eventDate || ""}
-                                callbackFn={setEventDate}
-                            />
-                            <InputTimeField
-                                label="Start Time"
-                                value={eventStartTime}
-                                callbackFn={setEventStartTime}
-                            />
-                            <InputTimeField
-                                label="End Time"
-                                value={eventEndTime}
-                                callbackFn={setEventEndTime}
-                            />
-                            <InputTextField
-                                label="Venue"
-                                value={eventVenue}
-                                callbackFn={setEventVenue}
-                            />
-                            <InputTextField
-                                label="Section"
-                                required={false}
-                                value={eventSection}
-                                callbackFn={setEventSection}
-                            />
-                            <InputTextField
-                                label="Row"
-                                required={false}
-                                value={eventRow}
-                                callbackFn={setEventRow}
-                            />
-                            <InputTextField
-                                label="Seat(s)"
-                                required={false}
-                                value={eventSeat}
-                                callbackFn={setEventSeat}
-                            />
+                                <InputTextField
+                                    label="Event Type"
+                                    value={eventType}
+                                    callbackFn={setEventType}
+                                />
+                                <InputTextField
+                                    label="Title"
+                                    value={eventName}
+                                    callbackFn={setEventName}
+                                />
+                                <InputTextField
+                                    label="Subtitle"
+                                    required={false}
+                                    value={eventSubtitle}
+                                    callbackFn={setEventSubtitle}
+                                />
+                                <InputTextField
+                                    label="Description"
+                                    required={false}
+                                    value={eventDescription}
+                                    callbackFn={setEventDescription}
+                                />
+                                <InputDateField
+                                    label="Date"
+                                    value={eventDate || ""}
+                                    callbackFn={setEventDate}
+                                />
+                                <InputTimeField
+                                    label="Start Time"
+                                    value={eventStartTime}
+                                    callbackFn={setEventStartTime}
+                                />
+                                <InputTimeField
+                                    label="End Time"
+                                    value={eventEndTime}
+                                    callbackFn={setEventEndTime}
+                                />
+                                <InputTextField
+                                    label="Venue"
+                                    value={eventVenue}
+                                    callbackFn={setEventVenue}
+                                />
+                                <InputTextField
+                                    label="Section"
+                                    required={false}
+                                    value={eventSection}
+                                    callbackFn={setEventSection}
+                                />
+                                <InputTextField
+                                    label="Row"
+                                    required={false}
+                                    value={eventRow}
+                                    callbackFn={setEventRow}
+                                />
+                                <InputTextField
+                                    label="Seat(s)"
+                                    required={false}
+                                    value={eventSeat}
+                                    callbackFn={setEventSeat}
+                                />
+                            </ShowHideContent>
                         </div>
                     </div>
                     <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[420px] md:max-h-none overflow-y-scroll bg-white bg-opacity-30 mt-8 mx-2 min-w-[250px] md:max-w-[500px]">
                         <div className="flex-grow overflow-y-scroll overflow-x-hidden px-4 py-6">
                             <div className="flex justify-between mb-2 mr-2">
-                                <h3 className="text-md lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Ticket Design</h3>
+                                <h3 className="text-md lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Design</h3>
                                 <GenerateWithAIButton
                                     isLoading={isLoadingTicketDesignWithAI}
                                     copy="Use AI Design"

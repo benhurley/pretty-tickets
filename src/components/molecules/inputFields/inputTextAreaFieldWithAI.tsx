@@ -5,7 +5,7 @@ type InputTextFieldProps = {
     inputCallbackFn: (value: React.SetStateAction<string>) => void | null;
     aiCallbackFn: (e: any) => void;
     aiButtonCopy?: string | undefined;
-    label: string;
+    label?: string;
     required?: boolean;
     value: string;
     rows?: number;
@@ -15,9 +15,9 @@ type InputTextFieldProps = {
 
 export const InputTextAreaFieldWithAI = ({ label, value, inputCallbackFn, aiCallbackFn, isLoading = false, required = true, aiButtonCopy = undefined, rows = 4, instructions = undefined, placeholder = undefined }: InputTextFieldProps) => {
     return (
-        <div className="mb-2 pt-2 px-2">
+        <div className="mb-2 pt-4 px-2">
             <div className="flex items-center justify-between">
-                <label htmlFor={label} className="pr-3">{label}</label>
+                {label ? <label htmlFor={label} className="pr-3">{label}</label> : "Details"}
                 <GenerateWithAIButton
                     copy={aiButtonCopy}
                     isLoading={isLoading}
