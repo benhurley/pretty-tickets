@@ -258,12 +258,12 @@ export const Home = () => {
                         <h3 className="text-lg font-semibold mb-1 text-left">Create The Perfect Ticket</h3>
                         <p className="text-sm text-gray-600 text-left">Fill out the event fields you need, apply styles, and include a message for your lucky recipient.</p>
                     </div> */}
-                    <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between max-h-[420px] md:max-h-none overflow-y-scroll bg-white bg-opacity-30 mx-2 min-w-[250px] md:max-w-[500px]">
+                    <div className="rounded-xl shadow-xl border border-white flex flex-col justify-between md:max-h-none bg-white bg-opacity-30 mx-2 min-w-[250px] md:max-w-[500px]">
                         <div className="flex-grow overflow-y-scroll overflow-x-hidden px-4 py-6">
                             <div className="flex justify-between align-center mb-1">
                                 <h3 className="text-md lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Event Details</h3>
                             </div>
-                            <p className="mx-2">Recommended: Paste unformatted details from a confirmation email below and let us do the heavy lifting.</p>
+                            <p className="mx-2">Recommended: Paste details from a confirmation email below and let us do the heavy lifting.</p>
                             <div className="mb-6">
                                 <InputTextAreaFieldWithAI
                                     value={purchaseData}
