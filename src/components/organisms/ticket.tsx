@@ -73,21 +73,21 @@ const Ticket = ({
                                 {isValidInput(eventDescription) && <p style={{ color: textColor || "#000000" }} className="text-gray-600">{eventDescription}</p>}
                             </div>
                             <div style={{ color: textColor || "#000000" }} className="flex flex-row justify-between mt-4 mb-2">
-                                {eventDateConverted && eventDateString !== 'Invalid Date' && <div>
+                                {eventDateConverted && eventDateString !== 'Invalid Date' && <div className="mr-8">
                                     <span className="text-sm">Date</span>
                                     <div className="font-semibold">{eventDateString}</div>
                                 </div>}
-                                {isValidInput(eventStartTime) && <div className="ml-8 min-w-[100px]">
+                                {isValidInput(eventStartTime) && <div className="min-w-[100px]">
                                     <span className="text-sm">Start Time</span>
                                     {eventStartTime && <div className="font-semibold">{formatTime(eventStartTime)}</div>}
                                 </div>}
                             </div>
                             <div style={{ color: textColor || "#000000" }} className="flex flex-row justify-between mt-3 mb-6">
-                                {isValidInput(eventVenue) && <div>
+                                {isValidInput(eventVenue) && <div className="mr-8">
                                     <span className="text-sm">Venue</span>
                                     <div className="font-semibold">{eventVenue}</div>
                                 </div>}
-                                {isValidInput(eventEndTime) && <div className="ml-8 min-w-[100px]">
+                                {isValidInput(eventEndTime) && <div className="min-w-[100px]">
                                     <span className="text-sm">End Time</span>
                                     {eventEndTime && <div className="font-semibold">{formatTime(eventEndTime)}</div>}
                                 </div>}
