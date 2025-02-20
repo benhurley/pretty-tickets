@@ -9,9 +9,8 @@ export const Footer = () => {
                 <div
                     className="flex place-items-center gap-1 py-2 pr-10"
                 >
-                    By
                     <a
-                        className="hover:underline mr-1"
+                        className="hover:underline mr-2"
                         href='https://justben.fyi'
                         target="_blank"
                         rel="noopener noreferrer"
@@ -21,13 +20,12 @@ export const Footer = () => {
                     <img
                         src={Me}
                         alt="justben.fyi logo"
-                        width={65}
-                        height={15}
+                        width={40}
                     />
                     <div>
                     </div>
                     <a
-                        className="underline"
+                        className="underline ml-2"
                         href='https://pay.justben.fyi'
                         target="_blank"
                         rel="noopener noreferrer"
