@@ -26,10 +26,10 @@ export const Home = () => {
 
     const [purchaseData, setPurchaseData] = useState("");
     const [eventType, setEventType] = useState("Tennis Match")
-    const [eventName, setEventName] = useState('2023 US Open Tennis');
+    const [eventName, setEventName] = useState('2025 US Open Tennis');
     const [eventSubtitle, setEventSubtitle] = useState('VIP ENTRY');
     const [eventDescription, setEventDescription] = useState(`Session 24: Women's Final / Mixed Doubles Final`);
-    const [eventDate, setEventDate] = useState<string | undefined>("2023-09-09");
+    const [eventDate, setEventDate] = useState<string | undefined>("2025-09-09");
     const [eventStartTime, setEventStartTime] = useState("12:00");
     const [eventEndTime, setEventEndTime] = useState("17:00");
     const [eventVenue, setEventVenue] = useState('Arthur Ashe Stadium');
