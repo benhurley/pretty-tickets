@@ -19,8 +19,8 @@ function App() {
     <>
       <Helmet>
         <title>Pretty Tickets</title>
-        <meta property="og:title" content="Pretty Tickets | Use AI to transform purchases into beautiful commemorative tickets." />
-        <meta property="og:description" content="Pretty Tickets | Use AI to transform purchases into beautiful commemorative tickets." />
+        <meta property="og:title" content="Pretty Tickets | Transform purchases into beautiful commemorative tickets." />
+        <meta property="og:description" content="Pretty Tickets | Transform purchases into beautiful commemorative tickets." />
       </Helmet>
       <div className='min-h-screen bg-gradient-to-br from-blue-300 to-pink-200 bg-opacity-50'>
         <Router>

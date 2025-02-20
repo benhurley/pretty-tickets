@@ -263,7 +263,7 @@ export const Home = () => {
                             <div className="flex justify-between align-center mb-1">
                                 <h3 className="text-md lg:text-xl font-extrabold leading-tight text-left text-gray-800 ml-2">Event Details</h3>
                             </div>
-                            <p className="mx-2">Recommended: Paste details from a confirmation email below and let us do the heavy lifting.</p>
+                            <p className="mx-2">Recommended: Paste details from a confirmation email below and let AI do the heavy lifting.</p>
                             <div className="mb-6">
                                 <InputTextAreaFieldWithAI
                                     value={purchaseData}

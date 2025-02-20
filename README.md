@@ -2,7 +2,7 @@
 
 # Pretty Tickets™
 
-## Use AI to transform purchases into beautiful commemorative tickets.
+## Transform purchases into beautiful commemorative tickets.
 
 ![Homepage](./public/screenshot.webp)
 
