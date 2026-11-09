@@ -37,3 +37,10 @@
     ```bash
     netlify dev
     ```
+
+### Environment variables
+
+Set these in Netlify (Site configuration → Environment variables) or a local `.env` for `netlify dev`:
+
+- `OPENAI_API_KEY` (required): used by the functions in `netlify/functions` via the OpenAI Responses API.
+- `OPENAI_MODEL` (optional): overrides the default model (`gpt-6-luna`) without a code change.
