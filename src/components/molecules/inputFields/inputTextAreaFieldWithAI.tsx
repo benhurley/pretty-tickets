@@ -2,7 +2,7 @@ import { GenerateWithAIButton } from '../buttons/generateWithAIButton';
 
 type InputTextFieldProps = {
     isLoading: boolean;
-    inputCallbackFn: (value: React.SetStateAction<string>) => void | null;
+    inputCallbackFn: (value: string) => void;
     aiCallbackFn: (e: any) => void;
     aiButtonCopy?: string | undefined;
     label?: string;
