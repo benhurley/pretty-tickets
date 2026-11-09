@@ -1,12 +1,12 @@
 import type { Handler, HandlerEvent } from "@netlify/functions";
+import { generateText, withOpenAIErrors } from "../lib/openai";
+
+const INSTRUCTIONS =
+    "You are designing a digital ticket for an upcoming event. The ticket will be gifted virtually to a friend and can include a small gift message as part of it. Use event data to draft a message that the gift giver can use. Rules: Keep it to around 50 words, voice the message as if you are casually talking to a close friend, don't use salutations or signatures in the message, and don't restate all of the event info. Reply with the message text only.";
 
 const handler: Handler = async (event: HandlerEvent) => {
-    const apiKey = process.env.OPENAI_API_KEY;
-    const eventName = event.queryStringParameters?.eventName
-    const eventSubtitle = event.queryStringParameters?.subTitle || ""
-    const eventDescription = event.queryStringParameters?.eventDescription || ""
-    const eventDate = event.queryStringParameters?.eventDate || ""
-    const eventVenue = event.queryStringParameters?.eventVenue || ""
+    const params = event.queryStringParameters ?? {};
+    const eventName = params.eventName;
 
     if (!eventName) {
         return {
@@ -15,38 +15,22 @@ const handler: Handler = async (event: HandlerEvent) => {
         };
     }
 
-    const prompt = `Event Details: ${eventName} ${eventSubtitle} ${eventDescription} ${eventDate} ${eventVenue}`
+    const details = [eventName, params.eventSubtitle, params.eventDescription, params.eventDate, params.eventVenue]
+        .filter(Boolean)
+        .join(" ");
 
-    const requestBody = {
-        model: "gpt-3.5-turbo",
-        messages: [
-            {
-                role: "system",
-                content: "You are designing a digital ticket for an upcoming event. The ticket will be gifted virtually to a friend and can include a small gift message as part of it. Use event data to draft a message that the gift giver can use. Rules: Keep it to around 50 words, voice the message as if you are casually talking to a close friend, dont use salutations or signatures in the message, and dont restate all of the event info).",
-            },
-            // Use "slice" to limit the length of the input to 500 characters
-            { role: "user", content: prompt.slice(0, 500) },
-        ],
-        temperature: 1, // Scale 0-1 with 1 being most variable between submissions
-    };
+    return withOpenAIErrors(async () => {
+        const message = await generateText({
+            instructions: INSTRUCTIONS,
+            // Limit user-controlled input length
+            input: `Event Details: ${details}`.slice(0, 500),
+        });
 
-    // Call OpenAI's chat completions API
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify(requestBody),
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ message: message.trim() }),
+        };
     });
-
-    const data = await response.json();
-    const generatedMessage = data.choices[0].message.content;
-
-    return {
-        statusCode: 200,
-        body: JSON.stringify({ "message": generatedMessage }),
-    };
 };
 
 export { handler };

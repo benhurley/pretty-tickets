@@ -1,7 +1,34 @@
 import type { Handler, HandlerEvent } from "@netlify/functions";
+import { generateText, withOpenAIErrors } from "../lib/openai";
+
+const INSTRUCTIONS =
+    "You are extracting data from a purchase receipt for an upcoming event. The input is raw text; parse it and return the event fields. Use an empty string for any field you can't determine.";
+
+const field = (description: string) => ({ type: "string", description });
+
+const SCHEMA = {
+    name: "event_info",
+    schema: {
+        type: "object",
+        properties: {
+            type: field("The type of event based on context, e.g. tennis match, baseball game, concert"),
+            title: field("The main event, e.g. US OPEN"),
+            subtitle: field("e.g. VIP or the confirmation number"),
+            description: field("e.g. Session 24 - Women's Final"),
+            date: field("Event date in yyyy-mm-dd format"),
+            start_time: field("Start time in strict 24-hour HH:MM format, no AM/PM"),
+            end_time: field("End time in strict 24-hour HH:MM format, no AM/PM"),
+            venue: field("Venue name"),
+            section: field("Seating section"),
+            row: field("Seating row"),
+            seats: field("Seat number(s)"),
+        },
+        required: ["type", "title", "subtitle", "description", "date", "start_time", "end_time", "venue", "section", "row", "seats"],
+        additionalProperties: false,
+    },
+};
 
 const handler: Handler = async (event: HandlerEvent) => {
-    const apiKey = process.env.OPENAI_API_KEY;
     const purchaseData = event.queryStringParameters?.purchaseData;
 
     if (!purchaseData) {
@@ -11,38 +38,19 @@ const handler: Handler = async (event: HandlerEvent) => {
         };
     }
 
-    const prompt = `Purchase Data: ${purchaseData}`
+    return withOpenAIErrors(async () => {
+        const eventInfo = await generateText({
+            instructions: INSTRUCTIONS,
+            // Limit user-controlled input length
+            input: `Purchase Data: ${purchaseData}`.slice(0, 1000),
+            schema: SCHEMA,
+        });
 
-    const requestBody = {
-        model: "gpt-3.5-turbo",
-        messages: [
-            {
-                role: "system",
-                content: "You are extracting data from a purchase receipt for an upcoming event. The input is raw, and you must parse it to extract and return specific string values. The fields in the event schema that we need are: type (the type of event based on context e.g. tennis match, baseball game, concert), title (the main event e.g. US OPEN), subtitle (e.g. VIP or the confirmation number), description (e.g. Session 24 - Women's Final), date (yyyy-mm-dd), start_time (strict hh:mm format, military time with no AM/PM), end_time (strict hh:mm format, military time with no AM/PM), venue, section, row, and seats. You must always return as onject, as plan text responses will break the API schema. Even if you dont have what you need, return an empty object instead of an I'm Sorry meassage.",
-            },
-            // Use "slice" to limit the length of the input to 1000 characters
-            { role: "user", content: prompt.slice(0, 1000) },
-        ],
-        temperature: 1, // Scale 0-1 with 1 being most variable between submissions
-    };
-
-    // Call OpenAI's chat completions API
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify(requestBody),
+        return {
+            statusCode: 200,
+            body: eventInfo,
+        };
     });
-
-    const data = await response.json();
-    const generatedMessage = data.choices[0].message.content;
-
-    return {
-        statusCode: 200,
-        body: generatedMessage,
-    };
 };
 
 export { handler };

@@ -1,12 +1,32 @@
 import type { Handler, HandlerEvent } from "@netlify/functions";
+import { generateText, withOpenAIErrors } from "../lib/openai";
+import { getFonts } from "../../src/helpers/fonts";
+
+// Must match the `name` values in src/helpers/textures.ts (that file imports images, so it can't be bundled here).
+const TEXTURES = ["Linen", "Horizontal Lines", "Vertical Lines", "Recycled", "Weathered", "Wrinkled", "Marble", "Wood"];
+const FONTS = getFonts().map((f) => f.value);
+
+const INSTRUCTIONS =
+    "You are designing a digital ticket for an upcoming event. The ticket will be gifted virtually to a friend. Use the event data to choose neutral and aesthetically pleasing styles for the virtual ticket: light pastel colors for the ticket background, and a font color with strong contrast against it (at least a WCAG AA 4.5:1 contrast ratio). Pick a texture and font that suit the event.";
+
+const SCHEMA = {
+    name: "ticket_design",
+    schema: {
+        type: "object",
+        properties: {
+            ticket_color: { type: "string", description: "Ticket background color as a 6-digit hex code, e.g. #F6E7D8" },
+            font_color: { type: "string", description: "Font color as a 6-digit hex code, e.g. #2B2B2B" },
+            texture: { type: "string", enum: TEXTURES },
+            font: { type: "string", enum: FONTS },
+        },
+        required: ["ticket_color", "font_color", "texture", "font"],
+        additionalProperties: false,
+    },
+};
 
 const handler: Handler = async (event: HandlerEvent) => {
-    const apiKey = process.env.OPENAI_API_KEY;
-    const eventType = event.queryStringParameters?.eventType || ""
-    const eventName = event.queryStringParameters?.eventName
-    const eventSubtitle = event.queryStringParameters?.subTitle || ""
-    const eventDescription = event.queryStringParameters?.eventDescription || ""
-    const eventVenue = event.queryStringParameters?.eventVenue || ""
+    const params = event.queryStringParameters ?? {};
+    const eventName = params.eventName;
 
     if (!eventName) {
         return {
@@ -15,38 +35,23 @@ const handler: Handler = async (event: HandlerEvent) => {
         };
     }
 
-    const prompt = `Event Details: ${eventType} ${eventName} ${eventSubtitle} ${eventDescription} ${eventVenue}`
+    const details = [params.eventType, eventName, params.eventSubtitle, params.eventDescription, params.eventVenue]
+        .filter(Boolean)
+        .join(" ");
 
-    const requestBody = {
-        model: "gpt-3.5-turbo",
-        messages: [
-            {
-                role: "system",
-                content: "You are designing a digital ticket for an upcoming event in the form of an api response. The ticket will be gifted virtually to a friend and can include a small gift message as part of it. Use event data to return neutral and asthetically pleasing styles for the virtual ticket (think light pastel colors like pastels for the ticket color background and at least 85% contrast between ticket color and font color). You will always answer in the form of a json object containing ticket_color (hex), font_color (hex), texture (Linen, Horizontal Lines, Vertical Lines, Recycled, Weathered, Marble, or Wood) and font (native browser-supported fonts only).",
-            },
-            // Use "slice" to limit the length of the input to 500 characters
-            { role: "user", content: prompt.slice(0, 500) },
-        ],
-        temperature: 0.5, // Scale 0-1 with 1 being most variable between submissions
-    };
+    return withOpenAIErrors(async () => {
+        const design = await generateText({
+            instructions: INSTRUCTIONS,
+            // Limit user-controlled input length
+            input: `Event Details: ${details}`.slice(0, 500),
+            schema: SCHEMA,
+        });
 
-    // Call OpenAI's chat completions API
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify(requestBody),
+        return {
+            statusCode: 200,
+            body: design,
+        };
     });
-
-    const data = await response.json();
-    const generatedMessage = data.choices[0].message.content;
-
-    return {
-        statusCode: 200,
-        body: generatedMessage,
-    };
 };
 
 export { handler };
