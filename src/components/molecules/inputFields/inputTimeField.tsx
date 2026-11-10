@@ -1,5 +1,5 @@
 type InputTimeFieldProps = {
-    callbackFn: (value: React.SetStateAction<string>) => void;
+    callbackFn: (value: string) => void;
     label: string;
     required?: boolean;
     value: string;

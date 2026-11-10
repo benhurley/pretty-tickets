@@ -1,4 +1,4 @@
-import React, { useEffect, useState, type ChangeEvent } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Ticket from "../components/organisms/ticket";
 import { InputTextField } from "../components/molecules/inputFields/inputTextField";
@@ -21,82 +21,112 @@ import { Button } from "../components/molecules/buttons/button";
 import { fetchImageURL } from "../helpers/fetchImageURL";
 import ShowHideContent from "../components/molecules/showHideContent";
 
+const FORM_STORAGE_KEY = 'formData';
+
+const defaultFormData = {
+    eventType: "Tennis Match",
+    eventName: '2025 US Open Tennis',
+    eventSubtitle: 'VIP ENTRY',
+    eventDescription: `Session 24: Women's Final / Mixed Doubles Final`,
+    eventDate: "2025-09-09",
+    eventStartTime: "12:00",
+    eventEndTime: "17:00",
+    eventVenue: 'Arthur Ashe Stadium',
+    eventSection: '415',
+    eventRow: 'J',
+    eventSeat: '7',
+
+    imgUrl: '/example.webp',
+    ticketColor: '#F5F5F5',
+    ticketTexture: VerticalLines,
+    textColor: '#000000',
+    font: 'sans-serif',
+
+    showConfetti: true,
+    gifterName: "Someone",
+    giftMessage: `"Happy Birthday! Can't wait to celebrate with you and finally see the pros face-off at The US Open."`,
+};
+
+type FormData = typeof defaultFormData;
+type StringField = { [K in keyof FormData]: FormData[K] extends string ? K : never }[keyof FormData];
+
+const loadFormData = (): FormData => {
+    try {
+        const stored = sessionStorage.getItem(FORM_STORAGE_KEY);
+        return stored ? { ...defaultFormData, ...JSON.parse(stored) } : defaultFormData;
+    } catch {
+        return defaultFormData;
+    }
+};
+
 export const Home = () => {
     const navigate = useNavigate();
 
+    // Ticket data lives in one object so it can be restored, cleared, filled by AI and submitted as a unit.
+    // Lazy init restores the previous session before first paint instead of in an effect.
+    const [form, setForm] = useState<FormData>(loadFormData);
     const [purchaseData, setPurchaseData] = useState("");
-    const [eventType, setEventType] = useState("Tennis Match")
-    const [eventName, setEventName] = useState('2025 US Open Tennis');
-    const [eventSubtitle, setEventSubtitle] = useState('VIP ENTRY');
-    const [eventDescription, setEventDescription] = useState(`Session 24: Women's Final / Mixed Doubles Final`);
-    const [eventDate, setEventDate] = useState<string | undefined>("2025-09-09");
-    const [eventStartTime, setEventStartTime] = useState("12:00");
-    const [eventEndTime, setEventEndTime] = useState("17:00");
-    const [eventVenue, setEventVenue] = useState('Arthur Ashe Stadium');
-    const [eventSection, setEventSection] = useState('415');
-    const [eventRow, setEventRow] = useState('J');
-    const [eventSeat, setEventSeat] = useState('7');
-
-    const [imgUrl, setImgUrl] = useState('/example.webp')
-    const [ticketColor, setTicketColor] = useState('#F5F5F5')
-    const [ticketTexture, setTicketTexture] = useState(VerticalLines)
-    const [textColor, setTextColor] = useState('#000000')
-    const [font, setFont] = useState('sans-serif')
-
-    const [showConfetti, setShowConfetti] = useState(true);
-    const [gifterName, setGifterName] = useState("Someone");
-    const [giftMessage, setGiftMessage] = useState(`"Happy Birthday! Can't wait to celebrate with you and finally see the pros face-off at The US Open."`);
 
     const [isLoadingAIGiftMessage, setIsLoadingAIGiftMessage] = useState(false);
     const [isLoadingTicketDesignWithAI, setIsLoadingTicketDesignWithAI] = useState(false);
     const [isLoadingAIEventInfo, setIsLoadingAIEventInfo] = useState(false);
-    const [shouldKickOffAIDesign, setShouldKickOffAIDesign] = useState<ChangeEvent<HTMLInputElement> | null>(null);
 
-    const handleDesignTicketWithAI = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const updateForm = (patch: Partial<FormData>) => setForm(prev => ({ ...prev, ...patch }));
+    const bind = (name: StringField) => ({
+        value: form[name],
+        callbackFn: (value: string) => updateForm({ [name]: value }),
+    });
+
+    // Takes the event details explicitly so it can run straight after an AI fill, before state has re-rendered.
+    const designTicketWithAI = async (details: FormData) => {
         setIsLoadingTicketDesignWithAI(true)
         const design = await fetchTicketDesign({
-            eventType,
-            eventName,
-            eventSubtitle,
-            eventDescription,
-            eventVenue,
+            eventType: details.eventType,
+            eventName: details.eventName,
+            eventSubtitle: details.eventSubtitle,
+            eventDescription: details.eventDescription,
+            eventVenue: details.eventVenue,
         })
 
         setIsLoadingTicketDesignWithAI(false)
 
         if (!!design) {
             const textures = getTextures();
-            setTicketColor(design.ticket_color)
-            setFont(design.font)
-            setTextColor(design.font_color)
-            setTicketTexture(textures.find(t => t.name === design.texture)?.value || "");
+            updateForm({
+                ticketColor: design.ticket_color,
+                font: design.font,
+                textColor: design.font_color,
+                ticketTexture: textures.find(t => t.name === design.texture)?.value || "",
+            });
         }
 
-        const image = await fetchImageURL(eventType);
+        const image = await fetchImageURL(details.eventType);
 
         if (image?.hits && image.hits?.length > 0) {
-            setImgUrl(image.hits[0].webformatURL)
+            updateForm({ imgUrl: image.hits[0].webformatURL })
         }
     }
 
-    const handleGenerateMessageWithAI = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleDesignTicketWithAI = () => designTicketWithAI(form);
+
+    const handleGenerateMessageWithAI = async () => {
         setIsLoadingAIGiftMessage(true)
         const message = await fetchGiftMessage({
-            eventName,
-            eventSubtitle,
-            eventDescription,
-            eventDate,
-            eventVenue,
+            eventName: form.eventName,
+            eventSubtitle: form.eventSubtitle,
+            eventDescription: form.eventDescription,
+            eventDate: form.eventDate,
+            eventVenue: form.eventVenue,
         })
 
         setIsLoadingAIGiftMessage(false)
 
         if (!!message) {
-            setGiftMessage(message)
+            updateForm({ giftMessage: message })
         }
     }
 
-    const handleFillEventFieldsWithAI = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFillEventFieldsWithAI = async () => {
         if (purchaseData.length > 0) {
             setIsLoadingAIEventInfo(true)
 
@@ -107,99 +137,82 @@ export const Home = () => {
             setIsLoadingAIEventInfo(false)
 
             if (!!result) {
-                setEventType(result.type || "");
-                setEventName(result.title || "");
-                setEventSubtitle(result.subtitle || "");
-                setEventDescription(result.description || "");
-                setEventDate(result.date || "");
-                setEventStartTime(result.start_time || "");
-                setEventEndTime(result.end_time || "");
-                setEventVenue(result.venue || "");
-                setEventSection(result.section || "");
-                setEventRow(result.row || "");
-                setEventSeat(result.seats || "");
-                setImgUrl("")
-                setGiftMessage("")
-                setShouldKickOffAIDesign(e);
+                const filled: FormData = {
+                    ...form,
+                    eventType: result.type || "",
+                    eventName: result.title || "",
+                    eventSubtitle: result.subtitle || "",
+                    eventDescription: result.description || "",
+                    eventDate: result.date || "",
+                    eventStartTime: result.start_time || "",
+                    eventEndTime: result.end_time || "",
+                    eventVenue: result.venue || "",
+                    eventSection: result.section || "",
+                    eventRow: result.row || "",
+                    eventSeat: result.seats || "",
+                    imgUrl: "",
+                    giftMessage: "",
+                };
+                setForm(filled);
+                designTicketWithAI(filled);
             }
         }
     }
 
-    const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const isChecked = e.target.checked;
-        setShowConfetti(isChecked);
+    const handleConfettiChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        updateForm({ showConfetti: e.target.checked });
     };
 
     const handleClearEventFields = () => {
-        setEventName("")
-        setEventSubtitle("")
-        setEventDescription("")
-        setEventDate(undefined)
-        setEventStartTime("")
-        setEventEndTime("")
-        setEventVenue("")
-        setEventSection("")
-        setEventRow("")
-        setEventSeat("")
-        setImgUrl("")
+        updateForm({
+            eventName: "",
+            eventSubtitle: "",
+            eventDescription: "",
+            eventDate: "",
+            eventStartTime: "",
+            eventEndTime: "",
+            eventVenue: "",
+            eventSection: "",
+            eventRow: "",
+            eventSeat: "",
+            imgUrl: "",
+        })
     }
 
     const handleClearGiftFields = () => {
-        setGifterName("")
-        setGiftMessage("")
+        updateForm({ gifterName: "", giftMessage: "" })
     }
 
     const handleReset = () => {
-        sessionStorage.removeItem('formData');
+        sessionStorage.removeItem(FORM_STORAGE_KEY);
         window.location.reload();
     }
 
     const handleSubmit = () => {
-        const formData = {
-            eventName,
-            eventSubtitle,
-            eventDescription,
-            eventDate,
-            eventStartTime,
-            eventEndTime,
-            eventVenue,
-            eventSection,
-            eventRow,
-            eventSeat,
-            imgUrl,
-            ticketColor,
-            ticketTexture,
-            textColor,
-            font,
-            giftMessage,
-            gifterName,
-            showConfetti,
-        };
-
-        sessionStorage.setItem('formData', JSON.stringify(formData));
+        sessionStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(form));
 
         const queryParams = new URLSearchParams();
         queryParams.set('mode', 'creatorMode'); // default to creator mode on submit
-        queryParams.set('showConfetti', showConfetti.toString());
+        queryParams.set('showConfetti', form.showConfetti.toString());
 
-        queryParams.set('eventName', eventName.slice(0, 50) || emptyValue);
-        queryParams.set('eventSubtitle', eventSubtitle.slice(0, 50) || emptyValue);
-        queryParams.set('eventDescription', eventDescription.slice(0, 200) || emptyValue);
-        queryParams.set('eventDate', eventDate || emptyValue);
-        queryParams.set('eventStartTime', eventStartTime || emptyValue);
-        queryParams.set('eventEndTime', eventEndTime || emptyValue);
-        queryParams.set('eventVenue', eventVenue.slice(0, 50) || emptyValue);
-        queryParams.set('eventSection', eventSection.slice(0, 10) || emptyValue);
-        queryParams.set('eventRow', eventRow.slice(0, 10) || emptyValue);
-        queryParams.set('eventSeat', eventSeat.slice(0, 10) || emptyValue);
+        queryParams.set('eventName', form.eventName.slice(0, 50) || emptyValue);
+        queryParams.set('eventSubtitle', form.eventSubtitle.slice(0, 50) || emptyValue);
+        queryParams.set('eventDescription', form.eventDescription.slice(0, 200) || emptyValue);
+        queryParams.set('eventDate', form.eventDate || emptyValue);
+        queryParams.set('eventStartTime', form.eventStartTime || emptyValue);
+        queryParams.set('eventEndTime', form.eventEndTime || emptyValue);
+        queryParams.set('eventVenue', form.eventVenue.slice(0, 50) || emptyValue);
+        queryParams.set('eventSection', form.eventSection.slice(0, 10) || emptyValue);
+        queryParams.set('eventRow', form.eventRow.slice(0, 10) || emptyValue);
+        queryParams.set('eventSeat', form.eventSeat.slice(0, 10) || emptyValue);
 
-        queryParams.set('imgUrl', imgUrl || emptyValue);
-        queryParams.set('ticketColor', ticketColor || emptyValue);
-        queryParams.set('ticketTexture', ticketTexture || emptyValue);
-        queryParams.set('textColor', textColor || emptyValue);
-        queryParams.set('font', font || emptyValue);
-        queryParams.set('giftMessage', giftMessage || emptyValue);
-        queryParams.set('gifterName', gifterName.slice(0, 50) || 'Someone');
+        queryParams.set('imgUrl', form.imgUrl || emptyValue);
+        queryParams.set('ticketColor', form.ticketColor || emptyValue);
+        queryParams.set('ticketTexture', form.ticketTexture || emptyValue);
+        queryParams.set('textColor', form.textColor || emptyValue);
+        queryParams.set('font', form.font || emptyValue);
+        queryParams.set('giftMessage', form.giftMessage || emptyValue);
+        queryParams.set('gifterName', form.gifterName.slice(0, 50) || 'Someone');
 
         const queryString = queryParams.toString();
         const longURL = `/results?${queryString}`;
@@ -210,41 +223,6 @@ export const Home = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
-
-    useEffect(() => {
-        // Retrieve stored form data from sessionStorage
-        const storedFormData = sessionStorage.getItem('formData');
-
-        if (storedFormData) {
-            const parsedFormData = JSON.parse(storedFormData);
-            setEventName(parsedFormData.eventName);
-            setEventSubtitle(parsedFormData.eventSubtitle);
-            setEventDescription(parsedFormData.eventDescription);
-            setEventDate(parsedFormData.eventDate);
-            setEventStartTime(parsedFormData.eventStartTime);
-            setEventEndTime(parsedFormData.eventEndTime);
-            setEventVenue(parsedFormData.eventVenue);
-            setEventSection(parsedFormData.eventSection);
-            setEventRow(parsedFormData.eventRow);
-            setEventSeat(parsedFormData.eventSeat);
-            setImgUrl(parsedFormData.imgUrl);
-            setTicketColor(parsedFormData.ticketColor);
-            setTicketTexture(parsedFormData.ticketTexture);
-            setTextColor(parsedFormData.textColor);
-            setFont(parsedFormData.font);
-            setGiftMessage(parsedFormData.giftMessage);
-            setGifterName(parsedFormData.gifterName);
-            setShowConfetti(parsedFormData.showConfetti);
-        }
-    }, []);
-
-    useEffect(() => {
-        if (!!shouldKickOffAIDesign) {
-            handleDesignTicketWithAI(shouldKickOffAIDesign)
-            setShouldKickOffAIDesign(null)
-        }
-        // eslint-disable-next-line
-    }, [shouldKickOffAIDesign])
 
     return (
         <div className="lg:p-10">
@@ -285,63 +263,52 @@ export const Home = () => {
                                 </div>
                                 <InputTextField
                                     label="Event Type"
-                                    value={eventType}
-                                    callbackFn={setEventType}
+                                    {...bind("eventType")}
                                 />
                                 <InputTextField
                                     label="Title"
-                                    value={eventName}
-                                    callbackFn={setEventName}
+                                    {...bind("eventName")}
                                 />
                                 <InputTextField
                                     label="Subtitle"
                                     required={false}
-                                    value={eventSubtitle}
-                                    callbackFn={setEventSubtitle}
+                                    {...bind("eventSubtitle")}
                                 />
                                 <InputTextField
                                     label="Description"
                                     required={false}
-                                    value={eventDescription}
-                                    callbackFn={setEventDescription}
+                                    {...bind("eventDescription")}
                                 />
                                 <InputDateField
                                     label="Date"
-                                    value={eventDate || ""}
-                                    callbackFn={setEventDate}
+                                    {...bind("eventDate")}
                                 />
                                 <InputTimeField
                                     label="Start Time"
-                                    value={eventStartTime}
-                                    callbackFn={setEventStartTime}
+                                    {...bind("eventStartTime")}
                                 />
                                 <InputTimeField
                                     label="End Time"
-                                    value={eventEndTime}
-                                    callbackFn={setEventEndTime}
+                                    {...bind("eventEndTime")}
                                 />
                                 <InputTextField
                                     label="Venue"
-                                    value={eventVenue}
-                                    callbackFn={setEventVenue}
+                                    {...bind("eventVenue")}
                                 />
                                 <InputTextField
                                     label="Section"
                                     required={false}
-                                    value={eventSection}
-                                    callbackFn={setEventSection}
+                                    {...bind("eventSection")}
                                 />
                                 <InputTextField
                                     label="Row"
                                     required={false}
-                                    value={eventRow}
-                                    callbackFn={setEventRow}
+                                    {...bind("eventRow")}
                                 />
                                 <InputTextField
                                     label="Seat(s)"
                                     required={false}
-                                    value={eventSeat}
-                                    callbackFn={setEventSeat}
+                                    {...bind("eventSeat")}
                                 />
                             </ShowHideContent>
                         </div>
@@ -359,32 +326,27 @@ export const Home = () => {
                             <div className="flex justify-left gap-5 w-[100%] mt-4 mb-2 ml-2 ">
                                 <InputColorField
                                     label="Ticket Color"
-                                    value={ticketColor}
-                                    callbackFn={setTicketColor}
+                                    {...bind("ticketColor")}
                                 />
                                 <InputColorField
                                     label="Font Color"
-                                    value={textColor}
-                                    callbackFn={setTextColor}
+                                    {...bind("textColor")}
                                 />
                             </div>
                             <InputDropdownField
                                 label="Texture"
-                                value={ticketTexture}
-                                callbackFn={setTicketTexture}
+                                {...bind("ticketTexture")}
                                 inputList={getTextures()}
                             />
                             <InputDropdownField
                                 label="Font"
-                                value={font}
-                                callbackFn={setFont}
+                                {...bind("font")}
                                 inputList={getFonts()}
                             />
                             <InputTextAreaField
                                 label="Image URL"
                                 required={false}
-                                value={imgUrl}
-                                callbackFn={setImgUrl}
+                                {...bind("imgUrl")}
                             />
                         </div>
                     </div>
@@ -399,50 +361,33 @@ export const Home = () => {
                             <InputTextField
                                 label="Your Name"
                                 required={false}
-                                value={gifterName}
-                                callbackFn={setGifterName}
+                                {...bind("gifterName")}
                             />
                             <InputTextAreaFieldWithAI
                                 label="Gift Message"
                                 required={false}
-                                value={giftMessage}
-                                inputCallbackFn={setGiftMessage}
+                                value={form.giftMessage}
+                                inputCallbackFn={(value) => updateForm({ giftMessage: value })}
                                 aiButtonCopy="Use AI Gift Message"
                                 aiCallbackFn={handleGenerateMessageWithAI}
                                 isLoading={isLoadingAIGiftMessage}
                             />
                             <InputCheckboxField
                                 id="confettii"
-                                checked={showConfetti}
+                                checked={form.showConfetti}
                                 label="Show Confetti?"
-                                onChangeFn={handleRadioChange}
+                                onChangeFn={handleConfettiChange}
                             />
                         </div>
                     </div>
                 </div>
                 <div className="flex-1 md:w-1/2 px-4 mt-4 sm:mt-0 mb-auto sticky top-16">
                     <div className="mt-12 sm:mt-6 mx-2 sm:mt-6 mb-10">
-                        <Ticket
-                            eventName={eventName}
-                            eventSubtitle={eventSubtitle}
-                            eventDescription={eventDescription}
-                            eventDate={eventDate}
-                            eventStartTime={eventStartTime}
-                            eventEndTime={eventEndTime}
-                            eventVenue={eventVenue}
-                            eventSection={eventSection}
-                            eventRow={eventRow}
-                            eventSeat={eventSeat}
-                            imgUrl={imgUrl}
-                            ticketColor={ticketColor}
-                            ticketTexture={ticketTexture}
-                            textColor={textColor}
-                            font={font}
-                        />
-                        {isValidInput(gifterName) && <div className='rounded-xl shadow-2xl bg-white p-6 mx-auto max-w-[575px] mt-6'>
-                            <h3 className="text-xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-gray-800 mx-auto text-center">{gifterName} sent you a ticket!</h3>
-                            {isValidInput(giftMessage) && <div className='md:px-6 mt-6 mb-2'>
-                                <p>{giftMessage}</p>
+                        <Ticket {...form} />
+                        {isValidInput(form.gifterName) && <div className='rounded-xl shadow-2xl bg-white p-6 mx-auto max-w-[575px] mt-6'>
+                            <h3 className="text-xl md:text-2xl lg:text-3xl font-extrabold leading-tight text-gray-800 mx-auto text-center">{form.gifterName} sent you a ticket!</h3>
+                            {isValidInput(form.giftMessage) && <div className='md:px-6 mt-6 mb-2'>
+                                <p>{form.giftMessage}</p>
                             </div>}
                         </div>}
                     </div>

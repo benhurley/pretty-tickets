@@ -1,7 +1,7 @@
 import React from 'react';
 
 type InputDateFieldProps = {
-    callbackFn: (value: React.SetStateAction<string | undefined>) => void;
+    callbackFn: (value: string) => void;
     label: string;
     required?: boolean;
     value: string;
